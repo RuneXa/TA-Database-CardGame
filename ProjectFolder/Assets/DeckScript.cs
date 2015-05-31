@@ -30,9 +30,11 @@ public class DeckScript : MonoBehaviour {
 		for (int i=0; i<www.bytesDownloaded; i++) {
 			jsonString+=(char)www.bytes [i]; //append char ke jsonString
 		}
-		//JSONNode jsonNode = JSON.Parse (jsonString); //parsing JSON
-		//Debug.Log (jsonNode[0]["one"]); //coba print element yang namanya "one"
-		Debug.Log (jsonString);
+		JSONNode jsonNode = JSON.Parse (jsonString); //parsing JSON
+		foreach (JSONNode N in jsonNode.Children)
+		{
+			Debug.Log("Kode Kartu: " + N["kode_kartu"] + "\n" + "Efek: " + N["efek"]);
+		}
 
 	}
 

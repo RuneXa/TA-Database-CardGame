@@ -1,7 +1,4 @@
 <?php
-$_POST["username"]="root";
-$_POST["password"]="";
-$_POST["query"]="select * from tb_kartu";
 
 $link=mysqli_connect("127.0.0.1",$_POST["username"],$_POST["password"],"db_tcg") or die("Cannot connect to mysql server.");
 
