@@ -1,6 +1,8 @@
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2008
 
+Project("{5356BF1A-0126-40DD-8D1F-3F2CD0D0F9E0}") = "ProjectFolder", "Assembly-CSharp-firstpass-vs.csproj", "{F77ADED4-3271-1CF3-9274-0AFCF193EF7B}"
+EndProject
 Project("{5356BF1A-0126-40DD-8D1F-3F2CD0D0F9E0}") = "ProjectFolder", "Assembly-CSharp-vs.csproj", "{2130BA36-12CA-4156-D717-C5306A45BB89}"
 EndProject
 Global
@@ -9,6 +11,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F77ADED4-3271-1CF3-9274-0AFCF193EF7B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F77ADED4-3271-1CF3-9274-0AFCF193EF7B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F77ADED4-3271-1CF3-9274-0AFCF193EF7B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F77ADED4-3271-1CF3-9274-0AFCF193EF7B}.Release|Any CPU.Build.0 = Release|Any CPU
 		{2130BA36-12CA-4156-D717-C5306A45BB89}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{2130BA36-12CA-4156-D717-C5306A45BB89}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2130BA36-12CA-4156-D717-C5306A45BB89}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -17,7 +23,7 @@ Global
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
-		GlobalSection(MonoDevelopProperties) = preSolution
+					GlobalSection(MonoDevelopProperties) = preSolution
 		StartupItem = Assembly-CSharp.csproj
 		Policies = $0
 		$0.TextStylePolicy = $1
@@ -29,10 +35,9 @@ Global
 		$2.scope = text/x-csharp
 		$0.TextStylePolicy = $3
 		$3.FileWidth = 120
-		$3.TabWidth = 4
-		$3.IndentWidth = 4
+		$3.TabsToSpaces = False
 		$3.EolMarker = Unix
-		$3.inheritsSet = Mono
+		$3.inheritsSet = VisualStudio
 		$3.inheritsScope = text/plain
 		$3.scope = text/plain
 	EndGlobalSection

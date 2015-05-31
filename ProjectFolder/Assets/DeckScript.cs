@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using SimpleJSON;
 
 public class DeckScript : MonoBehaviour {
 
@@ -15,20 +16,28 @@ public class DeckScript : MonoBehaviour {
 	}
 	
 
-<<<<<<< HEAD
+
 	IEnumerator fetchUrl()
 	{
-		WWW www = new WWW("http://localhost/card.php");
+		string jsonString="";
+		WWWForm postData= new WWWForm();
+		postData.AddField ("username", "root");
+		postData.AddField ("password", "");
+		postData.AddField ("query", "select * from tb_kartu");
+		
+		WWW www = new WWW ("http://localhost/card.php",postData);
 		yield return www.isDone;
 		for (int i=0; i<www.bytesDownloaded; i++) {
-			Debug.Log((char)www.bytes[i]);
+			jsonString+=(char)www.bytes [i]; //append char ke jsonString
 		}
-=======
+		//JSONNode jsonNode = JSON.Parse (jsonString); //parsing JSON
+		//Debug.Log (jsonNode[0]["one"]); //coba print element yang namanya "one"
+		Debug.Log (jsonString);
+
+	}
+
 	Color RandomColor() {
 		return new Color(Random.value, Random.value, Random.value);
 	}
 
->>>>>>> origin/master
-
-	}
 }
