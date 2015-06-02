@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 01, 2015 at 01:56 AM
+-- Generation Time: Jun 02, 2015 at 08:05 AM
 -- Server version: 5.6.21
 -- PHP Version: 5.6.3
 
@@ -69,15 +69,17 @@ INSERT INTO `tb_deck` (`id`, `id_user`, `kode_kartu`) VALUES
 CREATE TABLE IF NOT EXISTS `tb_kartu` (
   `kode_kartu` int(11) NOT NULL,
   `efek` text NOT NULL,
-  `warna` varchar(20) NOT NULL
+  `warna` varchar(20) NOT NULL,
+  `att` int(11) NOT NULL,
+  `cost` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tb_kartu`
 --
 
-INSERT INTO `tb_kartu` (`kode_kartu`, `efek`, `warna`) VALUES
-(111, '1 Hit K.O', 'Merah');
+INSERT INTO `tb_kartu` (`kode_kartu`, `efek`, `warna`, `att`, `cost`) VALUES
+(111, '1 Hit K.O', 'Merah', 0, 0);
 
 -- --------------------------------------------------------
 
