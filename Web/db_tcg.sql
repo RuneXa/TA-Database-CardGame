@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 02, 2015 at 08:05 AM
+-- Generation Time: Jun 02, 2015 at 11:32 AM
 -- Server version: 5.6.21
 -- PHP Version: 5.6.3
 
@@ -70,7 +70,7 @@ CREATE TABLE IF NOT EXISTS `tb_kartu` (
   `kode_kartu` int(11) NOT NULL,
   `efek` text NOT NULL,
   `warna` varchar(20) NOT NULL,
-  `att` int(11) NOT NULL,
+  `attack` int(11) NOT NULL,
   `cost` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -78,7 +78,7 @@ CREATE TABLE IF NOT EXISTS `tb_kartu` (
 -- Dumping data for table `tb_kartu`
 --
 
-INSERT INTO `tb_kartu` (`kode_kartu`, `efek`, `warna`, `att`, `cost`) VALUES
+INSERT INTO `tb_kartu` (`kode_kartu`, `efek`, `warna`, `attack`, `cost`) VALUES
 (111, '1 Hit K.O', 'Merah', 0, 0);
 
 -- --------------------------------------------------------
@@ -89,7 +89,7 @@ INSERT INTO `tb_kartu` (`kode_kartu`, `efek`, `warna`, `att`, `cost`) VALUES
 
 CREATE TABLE IF NOT EXISTS `tb_user` (
   `id_user` int(11) NOT NULL,
-  `passworrd` varchar(16) NOT NULL,
+  `password` varchar(16) NOT NULL,
   `nama` varchar(40) NOT NULL,
   `exp` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -98,7 +98,7 @@ CREATE TABLE IF NOT EXISTS `tb_user` (
 -- Dumping data for table `tb_user`
 --
 
-INSERT INTO `tb_user` (`id_user`, `passworrd`, `nama`, `exp`) VALUES
+INSERT INTO `tb_user` (`id_user`, `password`, `nama`, `exp`) VALUES
 (123, '123456', 'Coklat', 10);
 
 -- --------------------------------------------------------
@@ -147,7 +147,7 @@ ALTER TABLE `tb_kartu`
 -- Indexes for table `tb_user`
 --
 ALTER TABLE `tb_user`
- ADD UNIQUE KEY `id_user` (`id_user`), ADD UNIQUE KEY `passworrd` (`passworrd`);
+ ADD UNIQUE KEY `id_user` (`id_user`), ADD UNIQUE KEY `passworrd` (`password`);
 
 --
 -- Indexes for table `tb_winrate`
