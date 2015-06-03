@@ -54,6 +54,7 @@
      <Compile Include="Assets\Script\LoginScript.cs" />
      <Compile Include="Assets\Script\ResolveScript.cs" />
      <Compile Include="Assets\Script\SimpleJSON.cs" />
+     <Compile Include="Assets\Script\SubmitScript.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
