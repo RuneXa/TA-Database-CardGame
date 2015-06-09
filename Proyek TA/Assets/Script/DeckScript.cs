@@ -6,38 +6,36 @@ using System.Collections.Generic;
 
 public class DeckScript : MonoBehaviour {
 
-	[SerializeField] public List<GameObject> card = new List<GameObject>(); //bikin list kartu apa aja yang ada berdasarkan prefab kartu di asset
+	public GameObject card;
 	GameObject cardCpy;
-	string randomPick;
+	UserDataScript userManager;
 	JSONNode jsonNode;
+	int drawIndex;
 
 	public void Start(){
+		drawIndex = 0;
+		userManager = GameObject.Find("UserManager").GetComponent("UserDataScript") as UserDataScript;
 		StartCoroutine (fetchUrl());
 	}
 
 	
 	public void Draw () {
-		/*tadinya mau dipake kalo misalnya random query hasilnya nama, maka kartu yang keambil adalah kartu dengan nama yang sama
-		for(int i=0; card.Count > i; i++)
-		{
-			if(card[i].name == randomPick) {
-				cardCpy = Transform.Instantiate(card[i],new Vector3(Input.mousePosition.x,Input.mousePosition.y,Input.mousePosition.z),card[i].transform.rotation) as GameObject; 
-				cardCpy.transform.SetParent(this.transform.parent.parent.FindChild("Hand"));
-			}
-		}*/
 
-		//ini metode ambil kartu tanpa database
-		int randomNum = (int)Random.Range(1,card.Count+1); //ambil kartu random dari list card
-		cardCpy = Transform.Instantiate(card[randomNum-1],new Vector3(Input.mousePosition.x,Input.mousePosition.y,Input.mousePosition.z),card[randomNum-1].transform.rotation) as GameObject; 
-		cardCpy.transform.SetParent(this.transform.parent.parent.FindChild("Hand"));
+		if(drawIndex < jsonNode.Count){
+			cardCpy = Transform.Instantiate(card,new Vector3(Input.mousePosition.x,Input.mousePosition.y,Input.mousePosition.z),card.transform.rotation) as GameObject; 
+			cardCpy.transform.SetParent(this.transform.parent.parent.FindChild("Hand"));
 
-		// pasang atribut kartu ke script yang ada di kartu yang baru di spawn
-		CardScript scriptCard = cardCpy.GetComponent("CardScript") as CardScript;
-		scriptCard.kode = jsonNode[0]["kode_kartu"];
-		scriptCard.warna = jsonNode[0]["warna"];
-		scriptCard.attack = jsonNode[0]["att"].AsInt;
-		scriptCard.cost = jsonNode[0]["cost"].AsInt;
+			// pasang atribut kartu ke script yang ada di kartu yang baru di spawn
+			CardScript scriptCard = cardCpy.GetComponent("CardScript") as CardScript;
+			scriptCard.kode = jsonNode[drawIndex]["kode_kartu"];
+			scriptCard.nama = jsonNode[drawIndex]["nama"];
+			scriptCard.attack = jsonNode[drawIndex]["attack"].AsInt;
+			scriptCard.cost = jsonNode[drawIndex]["cost"].AsInt;
+			scriptCard.warna = jsonNode[drawIndex]["warna"];
+			scriptCard.card_init();
 
+			drawIndex++;
+		}
 	}
 
 	IEnumerator fetchUrl()
@@ -46,7 +44,9 @@ public class DeckScript : MonoBehaviour {
 		WWWForm postData= new WWWForm();
 		postData.AddField ("username", "root");
 		postData.AddField ("password", "");
-		postData.AddField ("query", "select * from tb_kartu");
+		//postData.AddField ("query", "select * from tb_kartu");
+		postData.AddField ("query", "select * from tb_deck natural join tb_kartu where id_user = " + userManager.idUser + " order by rand()");
+
 
 		string phpPath = "http://localhost/Xrune/TA_database/card.php";
 		WWW www = new WWW (phpPath,postData); //ganti path ke php-nya kalo perlu

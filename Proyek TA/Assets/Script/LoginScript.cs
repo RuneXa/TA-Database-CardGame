@@ -5,20 +5,22 @@ using UnityEngine.UI;
 
 public class  LoginScript : MonoBehaviour {
 
-	public string idUser;
-	public string password;
+	UserDataScript userData; 
+
+	void Start(){
+		userData = GameObject.Find ("UserManager").GetComponent<UserDataScript>() as UserDataScript;
+	}
 
 	public void login()
 	{
+		userData.idUser = GameObject.Find("UserName").GetComponent<InputField>().text;
+		userData.password = GameObject.Find("Password").GetComponent<InputField>().text;
 
-		idUser = this.transform.parent.Find("UserName").FindChild("Text").GetComponent<Text>().text;
-		password = this.transform.parent.Find("Password").FindChild("Text").GetComponent<Text>().text;
-
-		Debug.Log ("Id : " + idUser + "\n Password : " + password);
+		Debug.Log ("Id : " + userData.idUser + "\n Password : " + userData.password);
 
 		StartCoroutine(fetchUrlLogin());
-
 	}
+
 
 	IEnumerator fetchUrlLogin()
 	{
@@ -26,7 +28,7 @@ public class  LoginScript : MonoBehaviour {
 		WWWForm postData= new WWWForm();
 		postData.AddField ("username", "root");
 		postData.AddField ("password", "");
-		postData.AddField ("query", "select * from tb_user where id_user = '" + idUser + "' and passworrd = '" + password + "'");
+		postData.AddField ("query", "select * from tb_user where id_user = '" + userData.idUser + "' and password = '" + userData.password + "'");
 		
 		string phpPath = "http://localhost/Xrune/TA_database/card.php";
 		WWW www = new WWW (phpPath,postData); //ganti path ke php-nya kalo perlu
@@ -38,11 +40,13 @@ public class  LoginScript : MonoBehaviour {
 		
 		if (jsonNode[0]["id_user"] != null)
 		{
-			Application.LoadLevel("test");
+			userData.nama_user = jsonNode[0]["nama"];
+			userData.exp = jsonNode[0]["exp"].AsInt;
+			Application.LoadLevel("MainMenu");
 		}
 		else
 		{
-			this.transform.parent.FindChild("TextLoginGagal").gameObject.SetActive(true);
+			GameObject.Find("TextLoginGagal").gameObject.SetActive(true);
 		}
 	}
 }

@@ -9,8 +9,7 @@ public class DragScript : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
 	public Transform placeholderParent = null;
 
 	GameObject placeholder = null;
-
-
+	
 	public void OnBeginDrag(PointerEventData eventData) {
 
 		//Bikin object baru di hirarki untuk layout element
@@ -30,46 +29,24 @@ public class DragScript : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
 		
 		GetComponent<CanvasGroup>().blocksRaycasts = false;
 
-		//Method lain yang ingin dipanggil saat mulai di drag //
-
-
-
-
-
-
-
-
-
 	}
 	
 	public void OnDrag(PointerEventData eventData) {
 
 		//set posisi object = posisi cursor dan urutkan posisinya
 		this.transform.position = eventData.position;
-
 		if(placeholder.transform.parent != placeholderParent)
 			placeholder.transform.SetParent(placeholderParent);
-
 		int newSiblingIndex = placeholderParent.childCount;
-
 		for(int i=0; i < placeholderParent.childCount; i++) {
 			if(this.transform.position.x < placeholderParent.GetChild(i).position.x) {
-
 				newSiblingIndex = i;
-
 				if(placeholder.transform.GetSiblingIndex() < newSiblingIndex)
 					newSiblingIndex--;
-
 				break;
 			}
 		}
-
 		placeholder.transform.SetSiblingIndex(newSiblingIndex);
-
-
-		//Method lain yang ingin dipanggil saat di drag //
-
-
 
 
 	}
@@ -82,22 +59,14 @@ public class DragScript : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
 		GetComponent<CanvasGroup>().blocksRaycasts = true;
 
 		Destroy(placeholder);
-	
-
-		//Method lain yang ingin dipanggil saat mulai udah drag / mau di drop //
 
 
-	
-	
-	
-	
-	
+		//ini dijalanin kalau kartunya lagi di Deck Editor
+		if(this.transform.parent.name == "TrunkZone" )
+		{
+			GameObject.Destroy(this.gameObject);
+		}
+
 	}
-
-
-
-
-	
-	
 	
 }

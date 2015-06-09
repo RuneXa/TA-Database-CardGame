@@ -29,7 +29,6 @@ public class DropZone : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
 	
 	public void OnDrop(PointerEventData eventData) {
 
-
 		DragScript d = eventData.pointerDrag.GetComponent<DragScript>();
 		if(d != null) {
 			d.parentToReturnTo = this.transform;
