@@ -1,13 +1,14 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Script\DeckZoneScript.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Script\SubmitScript.cs">
     <Files>
-      <File FileName="Assets\ExitScript.cs" Line="7" Column="22" />
-      <File FileName="Assets\Script\SubmitScript.cs" Line="11" Column="3" />
-      <File FileName="Assets\Script\TrunkScript.cs" Line="1" Column="1" />
-      <File FileName="Assets\Script\DeckZoneScript.cs" Line="25" Column="76" />
-      <File FileName="Assets\Script\CardInEditorScript.cs" Line="1" Column="1" />
-      <File FileName="Assets\Script\MainMenuScript.cs" Line="11" Column="31" />
+      <File FileName="Assets\Script\DeckScript.cs" Line="1" Column="1" />
+      <File FileName="Assets\ExitScript.cs" Line="1" Column="1" />
+      <File FileName="Assets\Script\SubmitScript.cs" Line="11" Column="97" />
+      <File FileName="Assets\Script\TrunkScript.cs" Line="59" Column="1" />
+      <File FileName="Assets\Script\DeckZoneScript.cs" Line="51" Column="1" />
+      <File FileName="Assets\Script\CardInEditorScript.cs" Line="36" Column="4" />
+      <File FileName="Assets\Script\MainMenuScript.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

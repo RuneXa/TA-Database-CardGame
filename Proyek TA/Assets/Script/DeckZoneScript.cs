@@ -48,9 +48,9 @@ public class DeckZoneScript : MonoBehaviour {
 
 			cardCpy.transform.SetParent(GameObject.Find("Canvas").transform.Find("DeckCanvas").Find("DeckZone"),false);
 			
-			if(this.transform.FindChild("DeckZone").childCount % 15 == 0 && this.transform.FindChild("DeckZone").childCount != 0)
+			if(this.transform.Find("MaskDeck").FindChild("DeckZone").childCount % 15 == 0 && this.transform.Find("MaskDeck").FindChild("DeckZone").childCount != 0)
 			{
-				this.transform.Find("DeckZone").GetComponent<RectTransform>().sizeDelta = new Vector2(this.transform.FindChild("DeckZone").GetComponent<RectTransform>().sizeDelta.x ,this.transform.FindChild("DeckZone").GetComponent<RectTransform>().sizeDelta.y + 350);
+				this.transform.Find("MaskDeck").Find("DeckZone").GetComponent<RectTransform>().sizeDelta = new Vector2(this.transform.Find("MaskDeck").FindChild("DeckZone").GetComponent<RectTransform>().sizeDelta.x ,this.transform.Find("MaskDeck").FindChild("DeckZone").GetComponent<RectTransform>().sizeDelta.y + 350);
 			}
 			
 		}

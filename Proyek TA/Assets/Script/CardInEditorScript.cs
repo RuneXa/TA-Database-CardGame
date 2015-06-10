@@ -27,9 +27,9 @@ public class CardInEditorScript : MonoBehaviour, IPointerClickHandler {
 
 	void cekSizeDeckZone(){
 
-		if(this.transform.parent.parent.parent.Find("DeckCanvas").Find("DeckZone").childCount % 15 == 0 && this.transform.parent.parent.parent.Find("DeckCanvas").Find("DeckZone").childCount !=0)
+		if(this.transform.parent.parent.parent.parent.Find("DeckCanvas").Find("MaskDeck").Find("DeckZone").childCount % 15 == 0 && this.transform.parent.parent.parent.parent.Find("DeckCanvas").Find("MaskDeck").Find("DeckZone").childCount !=0)
 		{
-			this.transform.parent.parent.parent.Find("DeckCanvas").Find("DeckZone").GetComponent<RectTransform>().sizeDelta = new Vector2(this.transform.parent.parent.parent.Find("DeckCanvas").Find("DeckZone").GetComponent<RectTransform>().sizeDelta.x ,this.transform.parent.parent.parent.Find("DeckCanvas").Find("DeckZone").GetComponent<RectTransform>().sizeDelta.y + 350);
+			this.transform.parent.parent.parent.parent.Find("DeckCanvas").Find("MaskDeck").Find("DeckZone").GetComponent<RectTransform>().sizeDelta = new Vector2(this.transform.parent.parent.parent.parent.Find("DeckCanvas").Find("MaskDeck").Find("DeckZone").GetComponent<RectTransform>().sizeDelta.x ,this.transform.parent.parent.parent.parent.Find("DeckCanvas").Find("MaskDeck").Find("DeckZone").GetComponent<RectTransform>().sizeDelta.y + 350);
 		}
 		/*
 		else if(this.transform.parent.parent.parent.Find("DeckCanvas").Find("DeckZone").childCount == 14)

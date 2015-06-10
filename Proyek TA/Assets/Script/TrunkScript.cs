@@ -45,11 +45,11 @@ public class TrunkScript : MonoBehaviour  {
 			scriptCard.card_init();
 
 			cardCpy.AddComponent<CardInEditorScript>();
-			cardCpy.transform.SetParent(GameObject.Find("Canvas").transform.Find("TrunkCanvas").Find("TrunkZone"),false);
+			cardCpy.transform.SetParent(GameObject.Find("Canvas").transform.Find("TrunkCanvas").Find("MaskTrunk").Find("TrunkZone"),false);
 		
-			if(this.transform.FindChild("TrunkZone").childCount % 9 == 0 && this.transform.FindChild("TrunkZone").childCount != 0)
+			if(this.transform.Find("MaskTrunk").FindChild("TrunkZone").childCount % 9 == 0 && this.transform.Find("MaskTrunk").FindChild("TrunkZone").childCount != 0)
 			{
-				this.transform.Find("TrunkZone").GetComponent<RectTransform>().sizeDelta = new Vector2(this.transform.FindChild("TrunkZone").GetComponent<RectTransform>().sizeDelta.x ,this.transform.FindChild("TrunkZone").GetComponent<RectTransform>().sizeDelta.y + 350);
+				this.transform.Find("MaskTrunk").Find("TrunkZone").GetComponent<RectTransform>().sizeDelta = new Vector2(this.transform.Find("MaskTrunk").FindChild("TrunkZone").GetComponent<RectTransform>().sizeDelta.x ,this.transform.Find("MaskTrunk").FindChild("TrunkZone").GetComponent<RectTransform>().sizeDelta.y + 350);
 			}
 
 		}

@@ -1,13 +1,18 @@
 ﻿using UnityEngine;
 using System.Collections;
 using SimpleJSON;
+using UnityEngine.UI;
 
 public class SubmitScript : MonoBehaviour {
 
 	UserDataScript userManager;
 
-	public void submitDeck() {
+	void Start(){
 		userManager = GameObject.Find("UserManager").GetComponent<UserDataScript>() as UserDataScript;
+		this.transform.parent.Find ("profile").GetComponent<Text>().text = userManager.nama_user + "'s Deck";
+	}
+
+	public void submitDeck() {
 		StartCoroutine("fetchUrlSubmitKartu");
 	}
 	
