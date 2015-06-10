@@ -3,13 +3,14 @@ using UnityEngine.UI;
 using System.Collections;
 using UnityEngine.EventSystems;
 
-public class DragScript : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler {
+public class DragScript : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerClickHandler {
 	
 	public Transform parentToReturnTo = null;
 	public Transform placeholderParent = null;
 
 	GameObject placeholder = null;
-	
+
+
 	public void OnBeginDrag(PointerEventData eventData) {
 
 		//Bikin object baru di hirarki untuk layout element
@@ -69,4 +70,16 @@ public class DragScript : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
 
 	}
 	
+	#region IPointerClickHandler implementation
+	public void OnPointerClick (PointerEventData eventData)
+	{
+		if (eventData.button == PointerEventData.InputButton.Right) {
+			if(Application.loadedLevelName=="DeckEditor")
+			{
+				Destroy(this.gameObject);
+			}
+				}
+	}
+	#endregion
+
 }
