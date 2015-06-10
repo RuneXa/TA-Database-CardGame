@@ -23,8 +23,7 @@ public class DeckZoneScript : MonoBehaviour {
 		postData.AddField ("username", "root");
 		postData.AddField ("password", "");
 		postData.AddField ("query", "select * from tb_deck natural join tb_kartu where id_user = " + userManager.idUser);
-		
-		
+
 		string phpPath = "http://localhost/Xrune/TA_database/card.php";
 		WWW www = new WWW (phpPath,postData); //ganti path ke php-nya kalo perlu
 		yield return www.isDone;
@@ -46,7 +45,7 @@ public class DeckZoneScript : MonoBehaviour {
 			scriptCard.warna = N["warna"];
 			scriptCard.card_init();
 
-			cardCpy.transform.SetParent(GameObject.Find("Canvas").transform.Find("DeckCanvas").Find("DeckZone"),false);
+			cardCpy.transform.SetParent(GameObject.Find("Canvas").transform.Find("DeckCanvas").Find ("MaskDeck").Find("DeckZone"),false);
 			
 			if(this.transform.Find("MaskDeck").FindChild("DeckZone").childCount % 15 == 0 && this.transform.Find("MaskDeck").FindChild("DeckZone").childCount != 0)
 			{

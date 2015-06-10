@@ -29,7 +29,7 @@ public class SubmitScript : MonoBehaviour {
 		query = "delete from tb_deck where id_user = '" + userManager.idUser + "';";
 		//-----
 
-		Transform deckZone = this.transform.parent.Find("DeckCanvas").Find ("DeckZone").transform;
+		Transform deckZone = this.transform.parent.Find("DeckCanvas").Find ("MaskDeck").Find ("DeckZone").transform;
 		foreach(Transform kartu in deckZone)
 		{
 			CardScript cardScript = kartu.GetComponent<CardScript>() as CardScript;
