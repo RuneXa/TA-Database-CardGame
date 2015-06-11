@@ -3,14 +3,10 @@ using System.Collections;
 
 public class ResolveScript : MonoBehaviour {
 
-	public void putCardtoGrave(){
+	public void resolveCard(){
 
-		Transform field = this.transform.parent.parent.FindChild("Field");
-
-			while(field.childCount > 0){
-				field.GetChild(0).SetParent(field.parent.FindChild("Graveyard"));
-			}
-
+		GameObject.Find("TurnManager").GetComponent<TurnHandlerScript>().turnPhase = TurnHandlerScript.Turn.RESOLVEPLAYER;
+		GameObject.Find("TurnManager").GetComponent<TurnHandlerScript>().resolvePhase();
 
 	}
 }

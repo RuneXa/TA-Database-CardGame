@@ -12,7 +12,7 @@ public class MainMenuScript : MonoBehaviour {
 	}
 
 	public void b_play() {
-		Application.LoadLevel ("test");
+		Application.LoadLevel ("PlayScene");
 	}
 
 	public void b_deckEdit() {
