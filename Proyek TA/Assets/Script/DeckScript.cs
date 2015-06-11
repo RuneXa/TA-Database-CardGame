@@ -22,8 +22,8 @@ public class DeckScript : MonoBehaviour {
 	public void Draw () {
 
 		if(drawIndex < jsonNode.Count){
-			cardCpy = Transform.Instantiate(card,new Vector3(Input.mousePosition.x,Input.mousePosition.y,Input.mousePosition.z),card.transform.rotation) as GameObject; 
-			cardCpy.transform.SetParent(this.transform.parent.parent.FindChild("Hand"));
+			cardCpy = GameObject.Instantiate(card,new Vector3(Input.mousePosition.x,Input.mousePosition.y,Input.mousePosition.z),card.transform.rotation) as GameObject;
+			cardCpy.transform.SetParent(this.transform.parent.parent.FindChild("Hand"),false);
 
 			// pasang atribut kartu ke script yang ada di kartu yang baru di spawn
 			CardScript scriptCard = cardCpy.GetComponent("CardScript") as CardScript;
@@ -47,9 +47,7 @@ public class DeckScript : MonoBehaviour {
 		//postData.AddField ("query", "select * from tb_kartu");
 		postData.AddField ("query", "select * from tb_deck natural join tb_kartu where id_user = " + userManager.idUser + " order by rand()");
 
-
-		string phpPath = "http://localhost/Xrune/TA_database/card.php";
-		WWW www = new WWW (phpPath,postData); //ganti path ke php-nya kalo perlu
+		WWW www = new WWW (userManager.phpPath,postData); //ganti path ke php-nya kalo perlu
 		yield return www.isDone;
 		for (int i=0; i<www.bytesDownloaded; i++) {
 			jsonString+=(char)www.bytes [i]; //append char ke jsonString

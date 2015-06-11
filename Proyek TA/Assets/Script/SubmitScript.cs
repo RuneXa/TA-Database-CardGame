@@ -36,8 +36,8 @@ public class SubmitScript : MonoBehaviour {
 			query = query + "insert into tb_deck(`id_user`,`kode_kartu`) values " + "('" + userManager.idUser + "','" + cardScript.kode + "'); ";
 		}
 		postData.AddField ("query",query);
-		string phpPath = "http://localhost/Xrune/TA_database/card.php";
-		WWW www = new WWW (phpPath,postData); //ganti path ke php-nya kalo perlu
+		
+		WWW www = new WWW (userManager.phpPath,postData); //ganti path ke php-nya kalo perlu
 		yield return www.isDone;
 		Application.LoadLevel("MainMenu");
 	}

@@ -17,6 +17,8 @@ public class  LoginScript : MonoBehaviour {
 		userData.password = GameObject.Find("Password").GetComponent<InputField>().text;
 
 		Debug.Log ("Id : " + userData.idUser + "\n Password : " + userData.password);
+		char[] escape = new char[3] {'\'','"','#'};
+		userData.idUser = userData.idUser.Split(escape)[0];
 
 		StartCoroutine(fetchUrlLogin());
 	}
@@ -30,8 +32,7 @@ public class  LoginScript : MonoBehaviour {
 		postData.AddField ("password", "");
 		postData.AddField ("query", "select * from tb_user where id_user = '" + userData.idUser + "' and password = '" + userData.password + "'");
 		
-		string phpPath = "http://localhost/Xrune/TA_database/card.php";
-		WWW www = new WWW (phpPath,postData); //ganti path ke php-nya kalo perlu
+		WWW www = new WWW (userData.phpPath,postData); //ganti path ke php-nya kalo perlu
 		yield return www.isDone;
 		for (int i=0; i<www.bytesDownloaded; i++) {
 			jsonString+=(char)www.bytes [i]; //append char ke jsonString

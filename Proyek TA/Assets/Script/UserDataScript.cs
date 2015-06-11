@@ -7,10 +7,12 @@ public class UserDataScript : MonoBehaviour {
 	public string password;
 	public string nama_user;
 	public int exp;
+	public string phpPath;
 
-	// Use this for initialization
 	void Start () {
+		phpPath = "http://localhost/card.php";
 		DontDestroyOnLoad(this.gameObject);
 	}
 
 }
+

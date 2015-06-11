@@ -24,8 +24,8 @@ public class DeckZoneScript : MonoBehaviour {
 		postData.AddField ("password", "");
 		postData.AddField ("query", "select * from tb_deck natural join tb_kartu where id_user = " + userManager.idUser);
 
-		string phpPath = "http://localhost/Xrune/TA_database/card.php";
-		WWW www = new WWW (phpPath,postData); //ganti path ke php-nya kalo perlu
+		
+		WWW www = new WWW (userManager.phpPath,postData); //ganti path ke php-nya kalo perlu
 		yield return www.isDone;
 		for (int i=0; i<www.bytesDownloaded; i++) {
 			jsonString+=(char)www.bytes [i]; //append char ke jsonString

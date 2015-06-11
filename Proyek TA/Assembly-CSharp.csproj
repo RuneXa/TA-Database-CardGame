@@ -46,13 +46,13 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\ExitScript.cs" />
      <Compile Include="Assets\Script\CardInEditorScript.cs" />
      <Compile Include="Assets\Script\CardScript.cs" />
      <Compile Include="Assets\Script\DeckScript.cs" />
      <Compile Include="Assets\Script\DeckZoneScript.cs" />
      <Compile Include="Assets\Script\DragScript.cs" />
      <Compile Include="Assets\Script\DropZone.cs" />
+     <Compile Include="Assets\Script\ExitScript.cs" />
      <Compile Include="Assets\Script\GraveScript.cs" />
      <Compile Include="Assets\Script\LoginScript.cs" />
      <Compile Include="Assets\Script\MainMenuScript.cs" />
@@ -61,6 +61,7 @@
      <Compile Include="Assets\Script\SimpleJSON.cs" />
      <Compile Include="Assets\Script\SubmitScript.cs" />
      <Compile Include="Assets\Script\TrunkScript.cs" />
+     <Compile Include="Assets\Script\TurnHandlerScript.cs" />
      <Compile Include="Assets\Script\UserDataScript.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files (x86)/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/4.6.1/UnityEngine.UI.dll</HintPath>

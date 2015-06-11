@@ -1,0 +1,1431 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0060)http://answers.unity3d.com/questions/253023/card-game-c.html -->
+<html class=" js no-flexbox flexbox-legacy canvas canvastext webgl no-touch geolocation postmessage websqldatabase indexeddb hashchange history draganddrop websockets rgba hsla multiplebgs backgroundsize borderimage borderradius boxshadow textshadow opacity cssanimations csscolumns cssgradients cssreflections csstransforms csstransforms3d csstransitions fontface generatedcontent video audio localstorage sessionstorage webworkers applicationcache svg inlinesvg smil svgclippaths"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Card Game [C#] - Unity Answers</title>
+    
+    <link rel="shortcut icon" href="http://answers.unity3d.com/themes/osqa/images/favicon.ico">
+
+    <!-- js vars with back end data -->
+
+<script async="" src="./Card Game [C#] - Unity Answers_files/async-ads.js"></script><script async="" src="./Card Game [C#] - Unity Answers_files/async-ads.js"></script><script type="text/javascript" async="" src="./Card Game [C#] - Unity Answers_files/ga.js"></script><script type="text/javascript" async="" src="./Card Game [C#] - Unity Answers_files/cp.js"></script><script type="text/javascript" async="" src="./Card Game [C#] - Unity Answers_files/cse.js"></script><script type="text/javascript">
+    var askFormURL = '/questions/ask.html';
+    var logoutURL = '/users/logout.html';
+    var voteUpJsonURL = '/commands/0/voteup.json';
+    var voteDownJsonURL = '/commands/0/votedown.json';
+    var related_questions_url = '/search.json';
+    var emailCheckerURL = '/users/temporaryLogin/dupsUserEmailCheck.json';
+
+    var flashMessages = [];
+
+    //todo: these user variables don't seem to be used, are they?
+    var currentUser = null;
+
+    /* the profile user */
+
+    var pageContext = {
+        currentUser: {
+            id: '',
+            username: 'Anonymous',
+            url: '#',
+            avatar: ''
+        },
+        i18n: {
+            confirm: "Are you sure?",
+            yes: "Yes",
+            no: "No",
+            save: "Save",
+            cancel: "Cancel",
+            close: "Close",
+            edit: "Edit",
+            ok: "Ok",
+            by: "by",
+            word: "word",
+            words: "words",
+            character: "character",
+            characters: "characters",
+            login: "Login",
+            register: "Register",
+            timeAgo: "{0} ago",
+            timeAt: "at",
+            day: "day",
+            days: "days",
+            hour: "hour",
+            hours: "hours",
+            minute: "min",
+            minutes: "minutes",
+            second: "sec",
+            seconds: "secs",
+            justNow: "just now",
+            retag: "retag",
+            removingTag: "Removing Tag",
+            revision: "Revision ",
+            revisionText: " has been loaded into the form below.",
+
+            uploadDialog: {
+                uploadFile: "Choose a file to upload",
+                doUpload: "Upload"
+            },
+            previewAndCropDialog: {
+                previewAndResize: "Preview and resize",
+                accept: "Accept"
+            },
+            WMDImageDialogText: "Enter image url",
+            WMDLinkDialogText: "Enter url",
+            WMDUploadImage: "upload image",
+            WMDBold: "Strong <strong> Ctrl+B",
+            WMDItalic: "Emphasis <em> Ctrl+I",
+            WMDLink: "Hyperlink <a> Ctrl+L",
+            WMDQuote: "Blockquote <blockquote> Ctrl+Q",
+            WMDCode: "Code Sample <pre><code> Ctrl+K",
+            WMDImage: "Image <img> Ctrl+G",
+            WMDAttachment: "Attachment Ctrl+U",
+            WMDOrderedList: "Numbered List <ol> Ctrl+O",
+            WMDUnorderedList: "Bulleted List <ul> Ctrl+U",
+            WMDHeading: "Heading <h1>/<h2> Ctrl+H",
+            WMDHorizontalRule: "Horizontal Rule <hr> Ctrl+R",
+            WMDUndo: "Undo - Ctrl+Z",
+            WMDRedoWin: "Redo - Ctrl+Y",
+            WMDRedoOther: "Redo - Ctrl+Shift+Z",
+            WMDHelp: "Markdown Help"
+        },
+        url: {
+            login: "/users/login.html",
+            register: "/users/register.html",
+            getRevision: "/revisions/get-revision.json",
+            getComments: "/comments/%25ID%25/list.json",
+            uploadFile: "/uploadFile.html",
+            uploadProgress: "/uploadProgress.json",
+            uploadPreview: "/uploadPreview.html",
+            updateMarkdown: "/commands/updateMarkdown.json",
+            cropUpload: "/cropUpload.json",
+            cancelUpload: "/cancelUpload.json",
+            markdownHelp: "/static/markdown/help.html",
+            profile: "/users/{id}/{plug}.html",
+            extractKeywords: "/extract-keywords.json",
+            trackJs: "/static/trackJs.json"
+        },
+        extraScripts: {
+            jcrop: {
+                js: '/themes/base/scripts/jquery.Jcrop.js',
+                css: '/themes/base/css/jquery.Jcrop.css'
+            }
+        },
+        options: {
+        },
+        additional: {"TH_CSRF":"-61328155468023380"},
+        useRelativeTime: true,
+        userRealName: false
+    };
+
+</script>
+
+
+    <script>(function(){ var cx = '002645370080425984202:i_d7wpkpdzy'; var gcse = document.createElement('script'); gcse.type = 'text/javascript'; gcse.async = true; gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//www.google.com/cse/cse.js?cx=' + cx; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(gcse, s); })();</script>
+    <script src="./Card Game [C#] - Unity Answers_files/jquery.js" type="text/javascript"></script>
+    <script src="./Card Game [C#] - Unity Answers_files/jquery-ui.min.js" type="text/javascript"></script>
+    <script src="./Card Game [C#] - Unity Answers_files/jquery-migrate-1.2.1.js"></script>
+    <script src="./Card Game [C#] - Unity Answers_files/unity.core.js" type="text/javascript"></script><script src="./Card Game [C#] - Unity Answers_files/jsapi" type="text/javascript"></script><script type="text/javascript" src="./Card Game [C#] - Unity Answers_files/saved_resource"></script><script type="text/javascript" src="./Card Game [C#] - Unity Answers_files/saved_resource(1)"></script><link type="text/css" href="./Card Game [C#] - Unity Answers_files/default+en.css" rel="stylesheet"><link type="text/css" href="./Card Game [C#] - Unity Answers_files/default.css" rel="stylesheet"><script type="text/javascript" src="./Card Game [C#] - Unity Answers_files/default+en.I.js"></script>
+    <script src="./Card Game [C#] - Unity Answers_files/unity.header.js" type="text/javascript"></script>
+    <link href="./Card Game [C#] - Unity Answers_files/unity.header.css" media="screen" rel="stylesheet" type="text/css">
+    <!--[if lte IE 8]><link href="http://unity3d.com/profiles/unity3d/themes/unity/resources/community/css/unity.ie.css" media="screen" rel="stylesheet" type="text/css" /><![endif]-->
+
+    <script type="text/javascript">
+    /* <![CDATA[ */
+        var i18nLang = '{{settings.LANGUAGE_CODE}}';
+        var scriptUrl = '/{{settings.FORUM_SCRIPT_ALIAS}}'
+        var osqaSkin = '{{settings.OSQA_SKIN}}';
+
+        var messages = {
+            username: 'Anonymous',
+            confirm: "Are you sure",
+            yes: "Yes",
+            no: "No",
+            message: "Message",
+            cancel: "Cancel",
+            close: "Close",
+            ok: "Ok",
+            matching_tags_url: "matching_tags",
+            word: "word",
+            words: "words",
+            character: "character",
+            characters: "characters"
+        };
+
+        pageContext.options.commentsEditor = "wmd";
+
+    /**$.fn.live = function() {
+        return this.on(arguments);
+    }*/
+    /* ]] */
+    </script>
+
+    <script type="text/javascript">
+      $(function(){
+        $('#login').udnheader({
+          app: 'answers',
+          signinUrl: 'http://answers.unity3d.com/users/login.html',
+          signoutUrl: 'http://answers.unity3d.com/users/sso-logout.html',
+          username: null
+        });
+      });
+    </script>
+
+<script type="text/javascript" src="./Card Game [C#] - Unity Answers_files/combined.js.h-962121680.pack" charset="utf-8"></script>
+
+    <!-- where all style sheets loaded  -->
+    <link rel="stylesheet" href="./Card Game [C#] - Unity Answers_files/jquery-ui.css" type="text/css" media="all">
+<link rel="stylesheet" type="text/css" href="./Card Game [C#] - Unity Answers_files/combined.css.h223912765.pack" charset="utf-8">
+        <style type="text/css">
+            
+        </style>
+
+    
+    
+    
+    <script type="text/javascript">
+        $().ready(function() {
+
+//        $("#nav_questions").attr('className',"on");
+            var answer_sort_tab = "";
+
+            if (answer_sort_tab) {
+                $("#" + answer_sort_tab).attr('className', "on");
+            }
+
+            $('#body').TextAreaResizer();
+
+            //toggle preview of editor
+            var display = true;
+            var txt = "[hide preview]";
+            $('#pre-collapse').text(txt);
+            $('#pre-collapse').bind('click', function() {
+                txt = display ? "[show preview]" : "[hide preview]";
+                display = !display;
+                $('#previewer').toggle();
+                $('#pre-collapse').text(txt);
+            });
+
+
+
+tools.init({
+    q: {
+        e: false, ew: false, eo: false,
+        r: false, ro: false,
+        d: false, dow: false, fv: false,
+        c: false, co: false,
+        p: false, tm: false
+    },
+    n: {
+        f: false, vf: false, vfo: false,
+        vr: false, vro: false,
+        c: false, co: false,
+        vu: false, vd: false,
+        w: false, wo: false,
+        l: false
+    },
+    c: {
+        e: false, eo: false,
+        d: false, dow: false,
+        ta: false, tao: false,
+        mc: false, mco: false,
+        l: false
+    },
+    a: {
+        e: false, ew: false, eo: false,
+        d: false, dow: false,
+        a: false, aoq: false, ao: false,
+        tc: false, tco: false,
+        p: false, tm: false
+    },
+    pc: {
+        u: false, op: false, m: false,
+        og: false, as: false, ag: false
+        }
+    },{
+    tc: false,
+    nsc: false
+});
+            pageContext.url.jsonSearchUrl = '/search/topics.json';
+            pageContext.url.retagUrl = '/commands/253023/editQuestionTopics.json';
+            pageContext.options.commentsAttachmentsEnabled = true;
+
+pageContext.i18n.modTalk = 'moderation talk';
+pageContext.i18n.replyToComment = 'reply';
+pageContext.i18n.modTalkEmpty = 'moderation talk is empty';
+pageContext.url.getModTalk = "/comments/%25ID%25/listModTalk.json";
+pageContext.url.possibleCommentRecipients = "/comments/%ID%/possibleRecipients.json";
+pageContext.url.commentEdit = '/comments/%25ID%25/edit.html';
+
+pageContext.i18n.commentVisibility = {
+'full': 'Viewable by all users',
+'op': 'Viewable by the original poster',
+'mod': 'Viewable by moderators',
+'opAndMod': 'Viewable by moderators and the original poster',
+'other': 'Advanced visibility',
+'dialogTitle': 'Comment visibility',
+'selectGroups': 'Visible to groups',
+'selectOther': 'Other recipients',
+'selectOriginalPoster': 'Original poster',
+'selectModerators': 'Moderators',
+'selectAssignees': 'Asked to answer users'
+};
+
+pageContext.i18n.commentMenuLabels = {
+'comment-edit': 'edit',
+'comment-delete': 'delete',
+'comment-convert': 'convert to answer'
+};
+            tools.rel({"253023":{"score":1,"type":"question"}});
+
+            /**$('.comment').live('mouseover', function() {
+                $(this).find('#comment-' + $(this).attr('nodeid') + '-info').css('opacity', 1);
+            });
+
+            $('.comment').live('mouseout', function() {
+                $(this).find('#comment-' + $(this).attr('nodeid') + '-info').css('opacity', 0.2);
+            });*/
+
+        });
+
+        function submitClicked(e, f) {
+            if (!(browserTester('chrome') || browserTester('safari'))) {
+                $("input.submit")[0].disabled = true;
+            }
+            window.removeEventListener('beforeunload', beforeUnload, true);
+            if (f) {
+                f.submit();
+            }
+        }
+
+        function beforeUnload(e) {
+
+            if ($('#body').length > 0 && $("textarea#body")[0].value != "") {
+                return yourWorkWillBeLost(e);
+            }
+
+            var commentBoxes = $("textarea.commentBox");
+            for (var index = 0; index < commentBoxes.length; index++) {
+                if (commentBoxes[index].value != "") {
+                    return yourWorkWillBeLost(e);
+                }
+            }
+        }
+        window.addEventListener('beforeunload', beforeUnload, true);
+
+    </script>
+
+<script type="text/x-jquery-tmpl" id="post-wiki-mark">
+    <div class="community-wiki">
+        <div class="wiki-icon">&nbsp;</div>
+        <div class="wiki-text">
+            {{if isAnswer }}
+        This answer is marked "community wiki".
+            {{else}}
+        This question is marked "community wiki".
+            {{/if}}
+
+            {{if canEdit }}
+            <br />Feel free to <a href="${editUrl}">edit it</a>.
+            {{/if}}
+        </div>
+    </div>
+</script>
+<script type="text/x-jquery-tmpl" id="new-comment-skeleton">
+    <div class="comment not_top_scorer" id="comment-${comment.id}" activerev="${comment.revisionIds[0]}" nodeid="${comment.id}" authorid="${author.id}">
+        <div id="post-${comment.id}-score" class="comment-score"></div>
+        <div class="comment-text">{{html comment.bodyAsHTML}}</div>
+    <div class="comment-info" id="comment-${comment.id}-info">
+        {{if showTools }}
+        <a href="#" id="comment-${comment.id}-reply" class="comment-reply">reply</a>
+            <a id="comment-${comment.id}-edit" href="/comments/%24%7Bcomment.id%7D/edit.html"
+               title="edit" class="comment-edit" rel="nofollow"> </a>
+    <a id="comment-${comment.id}-delete" href="#" class="ajax-command comment-delete" title="delete" rel="nofollow" command="deleteComment"> </a>
+    <a id="comment-${comment.id}-convert" href="#" class="ajax-command comment-convert"  title="convert to answer" rel="nofollow" command="convertToAnswer"> </a>
+    {{/if}}
+    <span class="comment-age friendly-date" title="${commentDate}">${commentDateFriendly}</span>
+    <a class="comment-user" href="${author.url}">${author.username}</a>
+</div>
+</div>
+</script>
+<script type="text/x-jquery-tmpl" id="retag-form-skeleton">
+    <div id="retag-question-container">
+        <form>
+            <input type="hidden" name="node" value="${nodeId}" />
+            <input id="retag-question-box" type="text" name="topics" />
+            <button class="retag-button save btn btn-small btn-primary">${saveLabel}</button>
+            <button class="retag-button cancel btn btn-small">${cancelLabel}</button>
+        </form>
+    </div>
+</script>
+<script type="text/x-jquery-tmpl" id="question-tags-list">
+    {{each(i, topic) topics }}
+    <a rel="tag" title="see questions tagged '${topic.name}'" href="/questions/topics/single/${topic.id}.html">${topic.name}</a> <span class="tag-number">x${topic.usedCount}</span><br>
+    {{/each}}
+</script>
+<script type="text/x-jquery-tmpl" id="advanced-visibility-dialog">
+    <form>
+        <div>
+            {{if (perm.ag || perm.og) }}
+                <h4>${msg.selectGroups}</h4>
+                {{if groupsCheck }}
+                    {{each(i, group) groups }}
+                        <p><input type="checkbox" name="recipients" value="${group.id}" /> ${group.name}</p>
+                    {{/each}}
+                {{else}}
+                    <input type="text" class="comment-recipients-groups-autocomplete" />
+                    <div class="comment-recipients-groups-container" style="min-height: 50px;"></div>
+                {{/if}}
+            {{/if}}
+            {{if (perm.op || perm.mod || perm.as) }}
+                <h4>${msg.selectOther}</h4>
+                {{if perm.op }}
+                    <input type="checkbox" name="specialRecipients" value="op" /> ${msg.selectOriginalPoster}<br />
+                {{/if}}
+                {{if perm.m }}
+                    <input type="checkbox" name="specialRecipients" value="mod" /> ${msg.selectModerators}<br />
+                {{/if}}
+                {{if perm.as }}
+                    <input type="checkbox" name="specialRecipients" value="asg" /> ${msg.selectAssignees}<br />
+                {{/if}}
+            {{/if}}
+        </div>
+    </form>
+</script>
+
+        <style type="text/css">
+.gsc-control-cse {
+font-family: Arial, sans-serif;
+border-color: #FFFFFF;
+background-color: #FFFFFF;
+}
+.gsc-control-cse .gsc-table-result {
+font-family: Arial, sans-serif;
+}
+input.gsc-input, .gsc-input-box, .gsc-input-box-hover, .gsc-input-box-focus {
+border-color: #D9D9D9;
+}
+input.gsc-search-button, input.gsc-search-button:hover, input.gsc-search-button:focus {
+border-color: #2F5BB7;
+background-color: #357AE8;
+background-image: none;
+filter: none;
+}
+.gsc-tabHeader.gsc-tabhInactive {
+border-color: #CCCCCC;
+background-color: #FFFFFF;
+}
+.gsc-tabHeader.gsc-tabhActive {
+border-color: #CCCCCC;
+border-bottom-color: #FFFFFF;
+background-color: #FFFFFF;
+}
+.gsc-tabsArea {
+border-color: #CCCCCC;
+}
+.gsc-webResult.gsc-result,
+.gsc-results .gsc-imageResult {
+border-color: #FFFFFF;
+background-color: #FFFFFF;
+}
+.gsc-webResult.gsc-result:hover,
+.gsc-imageResult:hover {
+border-color: #FFFFFF;
+background-color: #FFFFFF;
+}
+.gs-webResult.gs-result a.gs-title:link,
+.gs-webResult.gs-result a.gs-title:link b,
+.gs-imageResult a.gs-title:link,
+.gs-imageResult a.gs-title:link b {
+color: #5284BD;
+}
+.gs-webResult.gs-result a.gs-title:visited,
+.gs-webResult.gs-result a.gs-title:visited b,
+.gs-imageResult a.gs-title:visited,
+.gs-imageResult a.gs-title:visited b {
+color: #5284BD;
+}
+.gs-webResult.gs-result a.gs-title:hover,
+.gs-webResult.gs-result a.gs-title:hover b,
+.gs-imageResult a.gs-title:hover,
+.gs-imageResult a.gs-title:hover b {
+color: #5284BD;
+}
+.gs-webResult.gs-result a.gs-title:active,
+.gs-webResult.gs-result a.gs-title:active b,
+.gs-imageResult a.gs-title:active,
+.gs-imageResult a.gs-title:active b {
+color: #5284BD;
+}
+.gsc-cursor-page {
+color: #5284BD;
+}
+a.gsc-trailing-more-results:link {
+color: #5284BD;
+}
+.gs-webResult .gs-snippet,
+.gs-imageResult .gs-snippet,
+.gs-fileFormatType {
+color: #333333;
+}
+.gs-webResult div.gs-visibleUrl,
+.gs-imageResult div.gs-visibleUrl {
+color: #009933;
+}
+.gs-webResult div.gs-visibleUrl-short {
+color: #009933;
+}
+.gs-webResult div.gs-visibleUrl-short {
+display: none;
+}
+.gs-webResult div.gs-visibleUrl-long {
+display: block;
+}
+.gs-promotion div.gs-visibleUrl-short {
+display: none;
+}
+.gs-promotion div.gs-visibleUrl-long {
+display: block;
+}
+.gsc-cursor-box {
+border-color: #FFFFFF;
+}
+.gsc-results .gsc-cursor-box .gsc-cursor-page {
+border-color: #CCCCCC;
+background-color: #FFFFFF;
+color: #5284BD;
+}
+.gsc-results .gsc-cursor-box .gsc-cursor-current-page {
+border-color: #CCCCCC;
+background-color: #FFFFFF;
+color: #5284BD;
+}
+.gsc-webResult.gsc-result.gsc-promotion {
+border-color: #F6F6F6;
+background-color: #F6F6F6;
+}
+.gsc-completion-title {
+color: #5284BD;
+}
+.gsc-completion-snippet {
+color: #333333;
+}
+.gs-promotion a.gs-title:link,
+.gs-promotion a.gs-title:link *,
+.gs-promotion .gs-snippet a:link {
+color: #1155CC;
+}
+.gs-promotion a.gs-title:visited,
+.gs-promotion a.gs-title:visited *,
+.gs-promotion .gs-snippet a:visited {
+color: #1155CC;
+}
+.gs-promotion a.gs-title:hover,
+.gs-promotion a.gs-title:hover *,
+.gs-promotion .gs-snippet a:hover {
+color: #1155CC;
+}
+.gs-promotion a.gs-title:active,
+.gs-promotion a.gs-title:active *,
+.gs-promotion .gs-snippet a:active {
+color: #1155CC;
+}
+.gs-promotion .gs-snippet,
+.gs-promotion .gs-title .gs-promotion-title-right,
+.gs-promotion .gs-title .gs-promotion-title-right * {
+color: #333333;
+}
+.gs-promotion .gs-visibleUrl,
+.gs-promotion .gs-visibleUrl-short {
+color: #009933;
+}
+.gsc-input input.gsc-input {
+background: none repeat scroll 0% 0% white !important;
+}</style><style type="text/css">.gscb_a{display:inline-block;font:27px/13px arial,sans-serif}.gsst_a .gscb_a{color:#a1b9ed;cursor:pointer}.gsst_a:hover .gscb_a,.gsst_a:focus .gscb_a{color:#36c}.gsst_a{display:inline-block}.gsst_a{cursor:pointer;padding:0 4px}.gsst_a:hover{text-decoration:none!important}.gsst_b{font-size:16px;padding:0 2px;position:relative;user-select:none;-webkit-user-select:none;white-space:nowrap}.gsst_e{opacity:0.55;}.gsst_a:hover .gsst_e,.gsst_a:focus .gsst_e{opacity:0.72;}.gsst_a:active .gsst_e{opacity:1;}.gsst_f{background:white;text-align:left}.gsst_g{background-color:white;border:1px solid #ccc;border-top-color:#d9d9d9;box-shadow:0 2px 4px rgba(0,0,0,0.2);-webkit-box-shadow:0 2px 4px rgba(0,0,0,0.2);margin:-1px -3px;padding:0 6px}.gsst_h{background-color:white;height:1px;margin-bottom:-1px;position:relative;top:-1px}.gsib_a{width:100%;padding:4px 6px 0}.gsib_a,.gsib_b{vertical-align:top}.gssb_c{border:0;position:absolute;z-index:989}.gssb_e{border:1px solid #ccc;border-top-color:#d9d9d9;box-shadow:0 2px 4px rgba(0,0,0,0.2);-webkit-box-shadow:0 2px 4px rgba(0,0,0,0.2);cursor:default}.gssb_f{visibility:hidden;white-space:nowrap}.gssb_k{border:0;display:block;position:absolute;top:0;z-index:988}.gsdd_a{border:none!important}.gscsep_a{display:none}.gsq_a{padding:0}.gssb_a{padding:0 7px}.gssb_a,.gssb_a td{white-space:nowrap;overflow:hidden;line-height:22px}#gssb_b{font-size:11px;color:#36c;text-decoration:none}#gssb_b:hover{font-size:11px;color:#36c;text-decoration:underline}.gssb_g{text-align:center;padding:8px 0 7px;position:relative}.gssb_h{font-size:15px;height:28px;margin:0.2em;-webkit-appearance:button}.gssb_i{background:#eee}.gss_ifl{visibility:hidden;padding-left:5px}.gssb_i .gss_ifl{visibility:visible}a.gssb_j{font-size:13px;color:#36c;text-decoration:none;line-height:100%}a.gssb_j:hover{text-decoration:underline}.gssb_l{height:1px;background-color:#e5e5e5}.gssb_m{color:#000;background:#fff}.gsfe_a{border:1px solid #b9b9b9;border-top-color:#a0a0a0;box-shadow:inset 0px 1px 2px rgba(0,0,0,0.1);-moz-box-shadow:inset 0px 1px 2px rgba(0,0,0,0.1);-webkit-box-shadow:inset 0px 1px 2px rgba(0,0,0,0.1);}.gsfe_b{border:1px solid #4d90fe;outline:none;box-shadow:inset 0px 1px 2px rgba(0,0,0,0.3);-moz-box-shadow:inset 0px 1px 2px rgba(0,0,0,0.3);-webkit-box-shadow:inset 0px 1px 2px rgba(0,0,0,0.3);}.gssb_a{padding:0 9px}.gsib_a{padding-right:8px;padding-left:8px}.gsst_a{padding-top:3px}.gssb_e{border:0}.gssb_l{margin:5px 0}.gssb_c .gsc-completion-container{position:static}.gssb_c{z-index:5000}.gsc-completion-container table{background:transparent;font-size:inherit;font-family:inherit}.gssb_c > tbody > tr,.gssb_c > tbody > tr > td,.gssb_d,.gssb_d > tbody > tr,.gssb_d > tbody > tr > td,.gssb_e,.gssb_e > tbody > tr,.gssb_e > tbody > tr > td{padding:0;margin:0;border:0}.gssb_a table,.gssb_a table tr,.gssb_a table tr td{padding:0;margin:0;border:0}</style><style type="text/css">.gscb_a{display:inline-block;font:27px/13px arial,sans-serif}.gsst_a .gscb_a{color:#a1b9ed;cursor:pointer}.gsst_a:hover .gscb_a,.gsst_a:focus .gscb_a{color:#36c}.gsst_a{display:inline-block}.gsst_a{cursor:pointer;padding:0 4px}.gsst_a:hover{text-decoration:none!important}.gsst_b{font-size:16px;padding:0 2px;position:relative;user-select:none;-webkit-user-select:none;white-space:nowrap}.gsst_e{opacity:0.55;}.gsst_a:hover .gsst_e,.gsst_a:focus .gsst_e{opacity:0.72;}.gsst_a:active .gsst_e{opacity:1;}.gsst_f{background:white;text-align:left}.gsst_g{background-color:white;border:1px solid #ccc;border-top-color:#d9d9d9;box-shadow:0 2px 4px rgba(0,0,0,0.2);-webkit-box-shadow:0 2px 4px rgba(0,0,0,0.2);margin:-1px -3px;padding:0 6px}.gsst_h{background-color:white;height:1px;margin-bottom:-1px;position:relative;top:-1px}.gsib_a{width:100%;padding:4px 6px 0}.gsib_a,.gsib_b{vertical-align:top}.gssb_c{border:0;position:absolute;z-index:989}.gssb_e{border:1px solid #ccc;border-top-color:#d9d9d9;box-shadow:0 2px 4px rgba(0,0,0,0.2);-webkit-box-shadow:0 2px 4px rgba(0,0,0,0.2);cursor:default}.gssb_f{visibility:hidden;white-space:nowrap}.gssb_k{border:0;display:block;position:absolute;top:0;z-index:988}.gsdd_a{border:none!important}.gscsep_a{display:none}.gsq_a{padding:0}.gssb_a{padding:0 7px}.gssb_a,.gssb_a td{white-space:nowrap;overflow:hidden;line-height:22px}#gssb_b{font-size:11px;color:#36c;text-decoration:none}#gssb_b:hover{font-size:11px;color:#36c;text-decoration:underline}.gssb_g{text-align:center;padding:8px 0 7px;position:relative}.gssb_h{font-size:15px;height:28px;margin:0.2em;-webkit-appearance:button}.gssb_i{background:#eee}.gss_ifl{visibility:hidden;padding-left:5px}.gssb_i .gss_ifl{visibility:visible}a.gssb_j{font-size:13px;color:#36c;text-decoration:none;line-height:100%}a.gssb_j:hover{text-decoration:underline}.gssb_l{height:1px;background-color:#e5e5e5}.gssb_m{color:#000;background:#fff}.gsfe_a{border:1px solid #b9b9b9;border-top-color:#a0a0a0;box-shadow:inset 0px 1px 2px rgba(0,0,0,0.1);-moz-box-shadow:inset 0px 1px 2px rgba(0,0,0,0.1);-webkit-box-shadow:inset 0px 1px 2px rgba(0,0,0,0.1);}.gsfe_b{border:1px solid #4d90fe;outline:none;box-shadow:inset 0px 1px 2px rgba(0,0,0,0.3);-moz-box-shadow:inset 0px 1px 2px rgba(0,0,0,0.3);-webkit-box-shadow:inset 0px 1px 2px rgba(0,0,0,0.3);}.gssb_a{padding:0 9px}.gsib_a{padding-right:8px;padding-left:8px}.gsst_a{padding-top:3px}.gssb_e{border:0}.gssb_l{margin:5px 0}.gssb_c .gsc-completion-container{position:static}.gssb_c{z-index:5000}.gsc-completion-container table{background:transparent;font-size:inherit;font-family:inherit}.gssb_c > tbody > tr,.gssb_c > tbody > tr > td,.gssb_d,.gssb_d > tbody > tr,.gssb_d > tbody > tr > td,.gssb_e,.gssb_e > tbody > tr,.gssb_e > tbody > tr > td{padding:0;margin:0;border:0}.gssb_a table,.gssb_a table tr,.gssb_a table tr td{padding:0;margin:0;border:0}</style></head><body style="text-align: left; zoom: 1;"><div>
+                <meta name="google-site-verification" content="AGGknmqixVRSGO2oawYFtVcUjaEpzFSp66ObG_tZGMY">
+<script type="text/javascript">
+(function(){
+  var ua = document.createElement('script'); ua.type = 'text/javascript'; ua.async = true;
+  ua.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'unity3d.com/ads/cp.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ua, s);
+})();
+</script>
+
+        </div>
+
+  <link rel="shortcut icon" href="http://unity3d.com/profiles/unity3d/themes/unity/images/assets/favicons/favicon.ico">
+  <link rel="icon" type="image/png" href="http://unity3d.com/profiles/unity3d/themes/unity/images/assets/favicons/favicon.png">
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://unity3d.com/profiles/unity3d/themes/unity/images/assets/favicons/apple-touch-icon-144x144.png">
+  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="http://unity3d.com/profiles/unity3d/themes/unity/images/assets/favicons/apple-touch-icon-114x114.png">
+  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="http://unity3d.com/profiles/unity3d/themes/unity/images/assets/favicons/apple-touch-icon-72x72.png">
+  <link rel="apple-touch-icon-precomposed" href="http://unity3d.com/profiles/unity3d/themes/unity/images/assets/favicons/apple-touch-icon.png">
+
+
+
+<div id="flashMessages" class="notify" style="display: none;">
+    <a id="close-notify" style="z-index:100;" onclick="$(&#39;body&#39;).css(&#39;margin-top&#39;, &#39;0&#39;);$(&#39;.notify&#39;).slideUp(&#39;medium&#39;, function() {});">x</a>
+</div>
+
+<script type="text/javascript">
+    $("#flashMessages").hide();
+    $(document).ready(function() {
+        if(flashMessages.length > 0) {
+            for (var message in flashMessages){
+                $("#flashMessages").prepend(flashMessages[message]);
+            }
+
+            $("body").css("margin-top", "2.3em");
+            $("#flashMessages").slideDown("slow");
+        }
+    });
+</script>
+
+<div class="background"></div>
+<header id="section-header" class="section section-header">
+  <div class="header-wrapper">
+    <div class="lang-switcher">
+      <div class="current toggle" data-target="#lang-list">
+        <div class="lbl"><span>Language: </span><b>English</b></div>
+        <div class="arrow"></div>
+      </div>
+      <div id="lang-list" class="lang-list">
+        <ul>
+          <li><a href="http://china.unity3d.com/" data-lang="cn">中文</a></li>
+          <li><a href="http://spanish.unity3d.com/" data-lang="es">Español</a></li>
+          <li><a href="http://japan.unity3d.com/" data-lang="jp">日本語</a></li>
+          <li><a href="http://www.unity3dkorea.com/" data-lang="kr">한국어</a></li>
+          <li><a href="http://portuguese.unity3d.com/" data-lang="pt">Portugués</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="user">
+      <div id="login" class="lbl"><a href="">Log in</a></div>
+    </div>
+    <div class="clear"></div>
+    <nav class="top-nav">
+      <ul>
+        <li class="tn-icon first"><a href="http://unity3d.com/">Home</a></li>
+        <li class="tn-unity"><a href="http://unity3d.com/unity">Unity</a></li>
+        <li class="tn-unity"><a href="http://unity3d.com/industries">Industries</a></li>
+        <li class="tn-gallery"><a href="http://unity3d.com/showcase">Showcase</a></li>
+        <li class="tn-assetstore"><a href="http://unity3d.com/asset-store">Asset Store</a></li>
+        <li class="tn-learn"><a href="http://unity3d.com/learn">Learn</a></li>
+        <li class="tn-community"><a href="http://unity3d.com/community" class="active-trail">Community</a></li>
+        <li class="tn-download menu-368"><a href="http://unity3d.com/unity/download">Download</a></li>
+        <li class="tn-store last"><a href="https://store.unity3d.com/">Buy</a></li>
+      </ul>
+      <div class="search-icon"></div>
+    </nav>
+    <nav class="sub-nav">
+      <ul id="sn-community">
+        <li><a href="http://forum.unity3d.com/">Forums</a></li>
+        <li><a href="http://answers.unity3d.com/" class="active-trail">Answers</a></li>
+        <li><a href="http://feedback.unity3d.com/">Feedback</a></li>
+        <li><a href="http://issuetracker.unity3d.com/">Issue Tracker</a></li>
+        <li><a href="http://evangelists.unity3d.com/">Evangelists</a></li>
+        <li><a href="http://unity3d.com/community/user-groups">User Groups</a></li>
+      </ul>
+    </nav>
+    <div class="unity-search" style="display: none;">
+      <div class="search-box"><div id="___gcse_0"><div class="gsc-control-searchbox-only gsc-control-searchbox-only-en" dir="ltr"><form class="gsc-search-box gsc-search-box-tools" accept-charset="utf-8"><table cellspacing="0" cellpadding="0" class="gsc-search-box"><tbody><tr><td class="gsc-input"><div class="gsc-input-box" id="gsc-iw-id1"><table cellspacing="0" cellpadding="0" id="gs_id50" class="gstl_50 " style="width: 100%; padding: 0px;"><tbody><tr><td id="gs_tti50" class="gsib_a"><input autocomplete="off" type="text" size="10" class="gsc-input" name="search" title="search" id="gsc-i-id1" dir="ltr" spellcheck="false" style="width: 100%; padding: 0px; border: none; margin: 0px; height: auto; outline: none;"></td><td class="gsib_b"><div class="gsst_b" id="gs_st50" dir="ltr"><a class="gsst_a" href="javascript:void(0)" style="display: none;"><span class="gscb_a" id="gs_cb50">×</span></a></div></td></tr></tbody></table></div><input type="hidden" name="bgresponse" id="bgresponse"></td><td class="gsc-search-button"><input type="image" src="./Card Game [C#] - Unity Answers_files/search_box_icon.png" class="gsc-search-button gsc-search-button-v2" title="search"></td><td class="gsc-clear-button"><div class="gsc-clear-button" title="clear results">&nbsp;</div></td></tr></tbody></table><table cellspacing="0" cellpadding="0" class="gsc-branding"><tbody><tr style="display: none;"><td class="gsc-branding-user-defined"></td><td class="gsc-branding-text"><div class="gsc-branding-text">powered by</div></td><td class="gsc-branding-img"><img src="./Card Game [C#] - Unity Answers_files/small-logo.png" class="gsc-branding-img"></td></tr></tbody></table></form></div></div></div>
+    </div>
+  </div>
+</header> 
+<section id="section-content" class="section section-content">
+  <nav class="section-nav">
+    <div class="g12n clear">
+      <div class="g4 mt5 mb0 site-info tl">
+        <div class="icon answers"><span></span></div>
+        <h2>Answers</h2>
+      </div>
+      <div class="g8 mt0 mb0 tools">
+        <div class="search-wrapper right"><div id="___gcse_1"><div class="gsc-control-searchbox-only gsc-control-searchbox-only-en" dir="ltr"><form class="gsc-search-box gsc-search-box-tools" accept-charset="utf-8"><table cellspacing="0" cellpadding="0" class="gsc-search-box"><tbody><tr><td class="gsc-input"><div class="gsc-input-box" id="gsc-iw-id2"><table cellspacing="0" cellpadding="0" id="gs_id51" class="gstl_51 " style="width: 100%; padding: 0px;"><tbody><tr><td id="gs_tti51" class="gsib_a"><input autocomplete="off" type="text" size="10" class="gsc-input" name="search" title="search" id="gsc-i-id2" dir="ltr" spellcheck="false" style="width: 100%; padding: 0px; border: none; margin: 0px; height: auto; outline: none;"></td><td class="gsib_b"><div class="gsst_b" id="gs_st51" dir="ltr"><a class="gsst_a" href="javascript:void(0)" style="display: none;"><span class="gscb_a" id="gs_cb51">×</span></a></div></td></tr></tbody></table></div><input type="hidden" name="bgresponse" id="bgresponse"></td><td class="gsc-search-button"><input type="image" src="./Card Game [C#] - Unity Answers_files/search_box_icon.png" class="gsc-search-button gsc-search-button-v2" title="search"></td><td class="gsc-clear-button"><div class="gsc-clear-button" title="clear results">&nbsp;</div></td></tr></tbody></table><table cellspacing="0" cellpadding="0" class="gsc-branding"><tbody><tr style="display: none;"><td class="gsc-branding-user-defined"></td><td class="gsc-branding-text"><div class="gsc-branding-text">powered by</div></td><td class="gsc-branding-img"><img src="./Card Game [C#] - Unity Answers_files/small-logo.png" class="gsc-branding-img"></td></tr></tbody></table></form></div></div></div>
+      </div>
+    </div>
+  </nav>
+</section>
+
+
+        <div>
+                
+
+        </div>
+
+<div id="roof">
+
+
+    <div id="top-infobar">
+        <div id="topbarlinks">
+
+        </div>
+        <!--[if lte IE 7]>
+        <script type="text/javascript">
+            var combinedWidth= document.getElementById('searchBar').offsetWidth + document.getElementById('topbarlinks').offsetWidth;
+            document.getElementById('top-infobar').style.width = combinedWidth + 35;
+        </script>
+        <![endif]-->
+    </div>
+
+    <br style="clear:both;">
+<div id="navigation">
+    <div id="nav">
+        <a id="nav_questions" class="on" href="http://answers.unity3d.com/questions/index.html">Questions</a>
+        <a id="nav_tags" href="http://answers.unity3d.com/topics.html">Tags</a>
+        <a id="nav_users" href="http://answers.unity3d.com/users/index.html">Users</a>
+        <a id="nav_badges" href="http://answers.unity3d.com/badge/types.html">Badges</a>
+        <a id="nav_unanswered" href="http://answers.unity3d.com/questions/unanswered.html">Unanswered</a>
+
+        <a id="nav_ask" class="special" href="http://answers.unity3d.com/questions/ask.html">Ask A Question</a>
+    </div>
+</div>                                 
+    <div id="logo">
+        <a href="http://answers.unity3d.com/index.html">
+            <img style="width:250px;" src="./Card Game [C#] - Unity Answers_files/unity-logo.jpeg" title="back to home page">
+        </a>
+    </div>
+
+    <br style="clear:both;">
+</div>
+
+    <div id="wrapper">
+        <div id="room" style="border:none;">
+            <div id="CALeft">
+
+            
+
+
+
+
+
+
+
+
+
+
+<div class="headNormal">
+    <h1>Card Game [C#]</h1>
+</div>
+<div id="main-body" class="">
+
+<table style="width:100%;" id="question-table" nodeid="253023" authorid="26539">
+    <tbody><tr>
+        <td style="width:30px;vertical-align:top">
+<div class="vote-buttons">
+    <a id="post-253023-upvote" class="post-vote up" href="http://answers.unity3d.com/questions/253023/card-game-c.html#" command="voteUp"> </a>
+    <div id="post-253023-score" class="post-score" title="current number of votes">1</div>
+    <a id="post-253023-downvote" class="post-vote down" href="http://answers.unity3d.com/questions/253023/card-game-c.html#" command="voteDown"> </a>
+        <a id="favorite-mark" class="ajax-command favorite-mark" href="http://answers.unity3d.com/questions/253023/card-game-c.html#" command="markFavorite"> </a>
+        <div id="favorite-count" class="favorite-count"></div>
+</div>        </td>
+        <td>
+            <div id="item-right" class="quepix">
+                <div class="question-body">
+                <p>Hi everyone...I'm new to all of this, especially Unity3D. I started to design a pack of cards i could use for a game idea i have, Basically i want to have a card show up randomly when you tap a button on the screen (Android / IoS). Essentially giving you a shuffled pack feel, But... i want the cards called to be removed from the Random List of cards that Haven't been called, that way the same card won't show in the same game, until Reset.</p> 
+<p>Could anyone point me in the right direction with this? </p> 
+<p>I've made all the cards using Photoshop and imported them onto a Plane (Of which i made a prefab). How would i assing a specific number (array?) to each of these Card Prefabs...allowing me to call them to position randomly using a button?</p> 
+<p>Thanks in advance.</p>
+                </div>
+
+                <div id="question-tags" class="tags-container tags"><a rel="tag" title="see questions tagged  &#39;c#&#39;" href="http://answers.unity3d.com/questions/topics/single/730.html">c#</a><a rel="tag" title="see questions tagged  &#39;shuffle&#39;" href="http://answers.unity3d.com/questions/topics/single/4652.html">shuffle</a></div>
+
+
+<div id="post-253023-controls" class="post-controls">
+    <span id="node-253023-menu" class="context-menu">
+        <span id="node-253023-menu-trigger" class="action-link context-menu-trigger">more ▼</span>
+        <ul id="node-253023-menu-dropdown" class="context-menu-dropdown">
+            <li class="item"><a rel="nofollow" class="   " href="http://answers.unity3d.com/questions/253023/card-game-c.html#" title=""><b>3 total comments</b></a></li>
+            <li class="item"><a rel="nofollow" class="   " href="http://answers.unity3d.com/questions/253023/card-game-c.html#" title=""><b>766 characters /
+                142 words</b></a></li>
+        </ul>
+    </span>
+</div>
+
+
+                <div class="post-update-info-container">
+                    <div class="post-update-info post-update-info-user">
+                        <p style="line-height:12px;">asked <strong class="friendly-date" title="2012, May 15 at 22:00:11+0000">May 15, 2012 at 10:00 PM</strong>
+                        </p>
+
+<a href="http://answers.unity3d.com/users/26539/lodos3.html" style="display: inline-block; max-width: 32px;" rel="user" nodeid="26539"> <img class="gravatar " width="32" src="./Card Game [C#] - Unity Answers_files/6169b62ace09303dac26e748d834f0c8" id="" alt="avatar image" title="Lodos3">
+</a> <p><a href="http://answers.unity3d.com/users/26539/lodos3.html">Lodos3 </a><br>
+<span class="score" title="17 Karma">17</span><span title="9 badges">
+<span class="badge1">●</span>
+<span class="badgecount">9</span>
+</span><span title="8 badges">
+<span class="silver">●</span>
+<span class="badgecount">8</span>
+</span><span title="11 badges">
+<span class="bronze">●</span>
+<span class="badgecount">11</span>
+</span>
+</p>
+                    </div>
+                    <div class="post-update-info post-update-info-edited" style="display: none">
+                        <p style="line-height:12px;">
+                            <a href="http://answers.unity3d.com/revisions/253023.html">
+edited                                <strong class="friendly-date" title="2012, May 15 at 21:32:47+0000">May 15, 2012 at 09:32 PM</strong>
+                            </a>
+                        </p>
+
+                    </div>
+                </div>
+
+
+                <div class="comments-container" id="comments-container-253023">
+        <a name="253310"></a>
+        <div class="comment even" id="comment-253310" activerev="383599" nodeid="253310" authorid="25707">
+            <div id="post-253310-score" class="comment-score"></div>
+            <div class="comment-text"><p>How is this question different from the question you already asked at <a href="http://answers.unity3d.com/questions/253031/random-tag-call-script-c.html?">http://answers.unity3d.com/questions/253031/random-tag-call-script-c.html?</a> Please close (or append to) the old question if you need more information.</p>
+</div>
+            <div class="comment-info" id="comment-253310-info">
+            
+                <span class="comment-age friendly-date" title="2012, May 16 at 13:51:04+0000">May 16, 2012 at 01:51 PM</span>
+                <a class="comment-user userinfo" href="http://answers.unity3d.com/users/25707/drakestar.html">Drakestar </a>
+            </div>
+        </div>
+        <a name="253317"></a>
+        <div class="comment even" id="comment-253317" activerev="383609" nodeid="253317" authorid="20706">
+            <div id="post-253317-score" class="comment-score"></div>
+            <div class="comment-text"><p>mmm, I didn't know this was a duplicate question. Perhaps you should read and try those answers , there's alot of good info there actually. And also leave comments to those that answered your other question , if you don't understand the scripts they provided , just politely mention that you need some explanation to help you learn and use Lists for yourself.</p>
+</div>
+            <div class="comment-info" id="comment-253317-info">
+            
+                <span class="comment-age friendly-date" title="2012, May 16 at 14:06:32+0000">May 16, 2012 at 02:06 PM</span>
+                <a class="comment-user userinfo" href="http://answers.unity3d.com/users/20706/alucardj.html">alucardj </a>
+            </div>
+        </div>
+        <a name="253874"></a>
+        <div class="comment even" id="comment-253874" activerev="384382" nodeid="253874" authorid="20706">
+            <div id="post-253874-score" class="comment-score"></div>
+            <div class="comment-text"><p>see my last comment on <a rel="user" href="http://answers.unity3d.com/users/21269/whydoidoit.html" nodeid="21269">@whydoidoit</a> 's answer. Then check my answer (with screenshots). </p>
+</div>
+            <div class="comment-info" id="comment-253874-info">
+            
+                <span class="comment-age friendly-date" title="2012, May 17 at 15:21:31+0000">May 17, 2012 at 03:21 PM</span>
+                <a class="comment-user userinfo" href="http://answers.unity3d.com/users/20706/alucardj.html">alucardj </a>
+            </div>
+        </div>
+                </div>
+                <script type="text/javascript">$(function() {tools.rel({"253874":{"visibility":"full","type":"comment"},"253317":{"visibility":"full","type":"comment"},"253310":{"visibility":"full","type":"comment"}});});</script>
+                <div id="comment-tools-253023" class="comment-tools">
+                    <a href="http://answers.unity3d.com/questions/253023/card-game-c.html#" class="add-comment-link" style="display: none">add new comment</a>
+                    <span class="comments-locked">(comments are locked)</span>
+                </div>
+
+<div id="comment-253023-form-container" class="comment-form-container">
+    <form id="comment-253023-form" action="http://answers.unity3d.com/comments/253023/add.json" method="POST" accept-charset="utf-8"><input type="hidden" name="TH_CSRF" value="-61328155468023380">
+        <div class="comment-form-widgets-container">
+            <div class="comment-form-textarea-container">
+                <div class="wmd-button-bar"><ul class="wmd-button-row"><li class="wmd-button wmd-bold-button" title="Strong &lt;strong&gt; Ctrl+B" style="background-position: 0px 0px;"></li><li class="wmd-button wmd-italic-button" title="Emphasis &lt;em&gt; Ctrl+I" style="background-position: -20px 0px;"></li><li class="wmd-spacer wmd-spacer1"></li><li class="wmd-button wmd-link-button" title="Hyperlink &lt;a&gt; Ctrl+L" style="background-position: -40px 0px;"></li><li class="wmd-button wmd-quote-button" title="Blockquote &lt;blockquote&gt; Ctrl+Q" style="background-position: -60px 0px;"></li><li class="wmd-button wmd-code-button" title="Code Sample &lt;pre&gt;&lt;code&gt; Ctrl+K" style="background-position: -80px 0px;"></li><li class="wmd-button wmd-image-button" title="Image &lt;img&gt; Ctrl+G" style="background-position: -120px 0px;"></li><li class="wmd-button wmd-attachment-button" title="Attachment Ctrl+U" style="background-position: -100px 0px;"></li><li class="wmd-spacer wmd-spacer2"></li><li class="wmd-button wmd-olist-button" title="Numbered List &lt;ol&gt; Ctrl+O" style="background-position: -140px 0px;"></li><li class="wmd-button wmd-ulist-button" title="Bulleted List &lt;ul&gt; Ctrl+U" style="background-position: -160px 0px;"></li><li class="wmd-button wmd-heading-button" title="Heading &lt;h1&gt;/&lt;h2&gt; Ctrl+H" style="background-position: -180px 0px;"></li><li class="wmd-button wmd-hr-button" title="Horizontal Rule &lt;hr&gt; Ctrl+R" style="background-position: -200px 0px;"></li><li class="wmd-spacer wmd-spacer3"></li><li class="wmd-button wmd-undo-button" title="Undo - Ctrl+Z" style="background-position: -220px -20px;"></li><li class="wmd-button wmd-redo-button" title="Redo - Ctrl+Y" style="background-position: -240px -20px;"></li></ul></div><textarea name="body" class="commentBox"></textarea><div class="comments-form-attachments"><div></div><div></div></div>
+            </div>
+            <div class="comment-form-buttons">
+                <span id="comment-{{ post.id }}-chars-left" class="comment-chars-left">
+                    <span class="comments-char-left-count">10|3000</span>
+                    <span class="comments-chars-togo-msg">characters needed</span>
+                    <span class="comments-chars-left-msg">characters left</span>
+                </span>
+                <div class="comment-form-buttons-container">
+                    <input type="submit" class="comment-submit" value="comment">
+                    <input type="submit" class="comment-cancel" value="cancel">
+                </div>
+                
+            </div>
+            <div style="clear:both;"></div>
+        </div>
+        <input type="hidden" name="parent" value="253023">
+        <input type="hidden" name="visibility" value="full">
+        <div style="display: none" class="comment-form-extra-inputs"></div>
+    </form>
+</div>
+
+            </div>
+        </td>
+    </tr>
+</tbody></table>
+
+<hr>
+
+    <div class="answer-count-and-sort">
+        <span class="headQuestions answersCount"><span class="headQuestions-icon"></span>2 answers:</span>
+        <a name="sort-top"></a>
+            <span class="context-menu answer-sort-menu">
+                <span class="context-menu-trigger answer-sort-trigger">
+sort                    <span class="question-answers-sort">
+voted first                    </span>
+
+                    ▼
+                </span>
+                <ul class="context-menu-dropdown">
+                    <li class="item"><a href="http://answers.unity3d.com/questions/253023/card-game-c.html?sort=oldest" title="oldest answers will be shown first">oldest</a></li>
+                    <li class="item"><a href="http://answers.unity3d.com/questions/253023/card-game-c.html?sort=newest" title="newest answers will be shown first">newest</a></li>
+                    <li class="item"><a href="http://answers.unity3d.com/questions/253023/card-game-c.html?sort=votes" class="on" title="most voted answers will be shown first">voted first</a></li>
+                </ul>
+            </span>
+    </div>
+
+<a name="answer-253868"></a>
+<div style="clear:both;" id="answer-container-253868" class="answer full accepted-answer" nodeid="253868" authorid="20706">
+    <table style="width:100%;">
+        <tbody><tr>
+            <td style="width:30px;vertical-align:top">
+<div class="vote-buttons">
+    <a id="post-253868-upvote" class="post-vote up" href="http://answers.unity3d.com/questions/253023/card-game-c.html#" command="voteUp"> </a>
+    <div id="post-253868-score" class="post-score" title="current number of votes">1</div>
+    <a id="post-253868-downvote" class="post-vote down" href="http://answers.unity3d.com/questions/253023/card-game-c.html#" command="voteDown"> </a>
+        <a href="http://answers.unity3d.com/questions/253023/card-game-c.html#" command="acceptAnswer" id="post-253868-accept" style="" class="accept-answer on"> </a>
+</div>            </td>
+
+            <td>
+
+                <div class="item-right">
+                    <div class="answer-body"><p>I have edited the answer to include all considerations in the comments. First though, make sure your script name is the same as the class name (e.g. public class DeckOfCards : MonoBehaviour -&gt; script name should be DeckOfCards) : </p>
+<pre><code class="prettyprint linenums"><ol class="linenums"><li class="L0"><span class="pln"> </span><span class="kwd">using</span><span class="pln"> </span><span class="typ">UnityEngine</span><span class="pun">;</span></li><li class="L1"><span class="pln"> </span><span class="kwd">using</span><span class="pln"> </span><span class="typ">System</span><span class="pun">.</span><span class="typ">Collections</span><span class="pun">;</span></li><li class="L2"><span class="pln"> </span><span class="kwd">using</span><span class="pln"> </span><span class="typ">System</span><span class="pun">.</span><span class="typ">Collections</span><span class="pun">.</span><span class="typ">Generic</span><span class="pun">;</span></li><li class="L3"><span class="pln"> </span></li><li class="L4"><span class="pln"> </span><span class="kwd">public</span><span class="pln"> </span><span class="kwd">class</span><span class="pln"> </span><span class="typ">DeckOfCards</span><span class="pln"> </span><span class="pun">:</span><span class="pln"> </span><span class="typ">MonoBehaviour</span></li><li class="L5"><span class="pln"> </span><span class="pun">{</span></li><li class="L6"><span class="pln">     </span><span class="kwd">public</span><span class="pln"> </span><span class="typ">List</span><span class="pun">&lt;</span><span class="typ">GameObject</span><span class="pun">&gt;</span><span class="pln"> deck </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">new</span><span class="pln"> </span><span class="typ">List</span><span class="pun">&lt;</span><span class="typ">GameObject</span><span class="pun">&gt;();</span></li><li class="L7"><span class="pln"> </span></li><li class="L8"><span class="pln">     </span><span class="kwd">private</span><span class="pln"> </span><span class="typ">List</span><span class="pun">&lt;</span><span class="typ">GameObject</span><span class="pun">&gt;</span><span class="pln"> cards </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">new</span><span class="pln"> </span><span class="typ">List</span><span class="pun">&lt;</span><span class="typ">GameObject</span><span class="pun">&gt;();</span></li><li class="L9"><span class="pln">     </span><span class="kwd">private</span><span class="pln"> </span><span class="typ">List</span><span class="pun">&lt;</span><span class="typ">GameObject</span><span class="pun">&gt;</span><span class="pln"> hand </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">new</span><span class="pln"> </span><span class="typ">List</span><span class="pun">&lt;</span><span class="typ">GameObject</span><span class="pun">&gt;();</span></li><li class="L0"><span class="pln">     </span><span class="kwd">private</span><span class="pln"> </span><span class="kwd">int</span><span class="pln"> cardsDealt </span><span class="pun">=</span><span class="pln"> </span><span class="lit">0</span><span class="pun">;</span></li><li class="L1"><span class="pln">     </span><span class="kwd">private</span><span class="pln"> </span><span class="kwd">bool</span><span class="pln"> showReset </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">false</span><span class="pun">;</span></li><li class="L2"><span class="pln"> </span></li><li class="L3"><span class="pln">     </span><span class="kwd">void</span><span class="pln"> </span><span class="typ">ResetDeck</span><span class="pun">()</span></li><li class="L4"><span class="pln">     </span><span class="pun">{</span></li><li class="L5"><span class="pln">         cardsDealt </span><span class="pun">=</span><span class="pln"> </span><span class="lit">0</span><span class="pun">;</span></li><li class="L6"><span class="pln">         </span><span class="kwd">for</span><span class="pln"> </span><span class="pun">(</span><span class="kwd">int</span><span class="pln"> i </span><span class="pun">=</span><span class="pln"> </span><span class="lit">0</span><span class="pun">;</span><span class="pln"> i </span><span class="pun">&lt;</span><span class="pln"> hand</span><span class="pun">.</span><span class="typ">Count</span><span class="pun">;</span><span class="pln"> i</span><span class="pun">++)</span><span class="pln"> </span><span class="pun">{</span></li><li class="L7"><span class="pln">             </span><span class="typ">Destroy</span><span class="pun">(</span><span class="pln">hand</span><span class="pun">[</span><span class="pln">i</span><span class="pun">]);</span></li><li class="L8"><span class="pln">         </span><span class="pun">}</span></li><li class="L9"><span class="pln">         hand</span><span class="pun">.</span><span class="typ">Clear</span><span class="pun">();</span></li><li class="L0"><span class="pln">         cards</span><span class="pun">.</span><span class="typ">Clear</span><span class="pun">();</span></li><li class="L1"><span class="pln">         cards</span><span class="pun">.</span><span class="typ">AddRange</span><span class="pun">(</span><span class="pln">deck</span><span class="pun">);</span></li><li class="L2"><span class="pln">         showReset </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">false</span><span class="pun">;</span></li><li class="L3"><span class="pln">     </span><span class="pun">}</span></li><li class="L4"><span class="pln"> </span></li><li class="L5"><span class="pln">     </span><span class="typ">GameObject</span><span class="pln"> </span><span class="typ">DealCard</span><span class="pun">()</span></li><li class="L6"><span class="pln">     </span><span class="pun">{</span></li><li class="L7"><span class="pln">         </span><span class="kwd">if</span><span class="pun">(</span><span class="pln">cards</span><span class="pun">.</span><span class="typ">Count</span><span class="pln"> </span><span class="pun">==</span><span class="pln"> </span><span class="lit">0</span><span class="pun">)</span></li><li class="L8"><span class="pln">         </span><span class="pun">{</span></li><li class="L9"><span class="pln">             showReset </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">true</span><span class="pun">;</span></li><li class="L0"><span class="pln">             </span><span class="kwd">return</span><span class="pln"> </span><span class="kwd">null</span><span class="pun">;</span></li><li class="L1"><span class="pln">             </span><span class="com">//Alternatively to auto reset the deck:</span></li><li class="L2"><span class="pln">             </span><span class="com">//ResetDeck();</span></li><li class="L3"><span class="pln">         </span><span class="pun">}</span></li><li class="L4"><span class="pln"> </span></li><li class="L5"><span class="pln">         </span><span class="kwd">int</span><span class="pln"> card </span><span class="pun">=</span><span class="pln"> </span><span class="typ">Random</span><span class="pun">.</span><span class="typ">Range</span><span class="pun">(</span><span class="lit">0</span><span class="pun">,</span><span class="pln"> cards</span><span class="pun">.</span><span class="typ">Count</span><span class="pln"> </span><span class="pun">-</span><span class="pln"> </span><span class="lit">1</span><span class="pun">);</span></li><li class="L6"><span class="pln">         </span><span class="typ">GameObject</span><span class="pln"> go </span><span class="pun">=</span><span class="pln"> </span><span class="typ">GameObject</span><span class="pun">.</span><span class="typ">Instantiate</span><span class="pun">(</span><span class="pln">cards</span><span class="pun">[</span><span class="pln">card</span><span class="pun">])</span><span class="pln"> </span><span class="kwd">as</span><span class="pln"> </span><span class="typ">GameObject</span><span class="pun">;</span></li><li class="L7"><span class="pln">         cards</span><span class="pun">.</span><span class="typ">RemoveAt</span><span class="pun">(</span><span class="pln">card</span><span class="pun">);</span></li><li class="L8"><span class="pln">         </span></li><li class="L9"><span class="pln">         </span><span class="kwd">if</span><span class="pun">(</span><span class="pln">cards</span><span class="pun">.</span><span class="typ">Count</span><span class="pln"> </span><span class="pun">==</span><span class="pln"> </span><span class="lit">0</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span></li><li class="L0"><span class="pln">             showReset </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">true</span><span class="pun">;</span></li><li class="L1"><span class="pln">         </span><span class="pun">}</span></li><li class="L2"><span class="pln">         </span></li><li class="L3"><span class="pln">         </span><span class="kwd">return</span><span class="pln"> go</span><span class="pun">;</span></li><li class="L4"><span class="pln">     </span><span class="pun">}</span></li><li class="L5"><span class="pln"> </span></li><li class="L6"><span class="pln">     </span><span class="kwd">void</span><span class="pln"> </span><span class="typ">Start</span><span class="pun">()</span></li><li class="L7"><span class="pln">     </span><span class="pun">{</span></li><li class="L8"><span class="pln">         </span><span class="typ">ResetDeck</span><span class="pun">();</span></li><li class="L9"><span class="pln">     </span><span class="pun">}</span></li><li class="L0"><span class="pln"> </span></li><li class="L1"><span class="pln">     </span><span class="kwd">void</span><span class="pln"> </span><span class="typ">GameOver</span><span class="pun">()</span></li><li class="L2"><span class="pln">     </span><span class="pun">{</span></li><li class="L3"><span class="pln">         cardsDealt </span><span class="pun">=</span><span class="pln"> </span><span class="lit">0</span><span class="pun">;</span></li><li class="L4"><span class="pln">         </span><span class="kwd">for</span><span class="pln"> </span><span class="pun">(</span><span class="kwd">int</span><span class="pln"> v </span><span class="pun">=</span><span class="pln"> </span><span class="lit">0</span><span class="pun">;</span><span class="pln"> v </span><span class="pun">&lt;</span><span class="pln"> hand</span><span class="pun">.</span><span class="typ">Count</span><span class="pun">;</span><span class="pln"> v</span><span class="pun">++)</span><span class="pln"> </span><span class="pun">{</span></li><li class="L5"><span class="pln">             </span><span class="typ">Destroy</span><span class="pun">(</span><span class="pln">hand</span><span class="pun">[</span><span class="pln">v</span><span class="pun">]);</span></li><li class="L6"><span class="pln">         </span><span class="pun">}</span></li><li class="L7"><span class="pln">         hand</span><span class="pun">.</span><span class="typ">Clear</span><span class="pun">();</span></li><li class="L8"><span class="pln">         cards</span><span class="pun">.</span><span class="typ">Clear</span><span class="pun">();</span></li><li class="L9"><span class="pln">         cards</span><span class="pun">.</span><span class="typ">AddRange</span><span class="pun">(</span><span class="pln">deck</span><span class="pun">);</span></li><li class="L0"><span class="pln">     </span><span class="pun">}</span></li><li class="L1"><span class="pln"> </span></li><li class="L2"><span class="pln">     </span><span class="kwd">void</span><span class="pln"> </span><span class="typ">OnGUI</span><span class="pun">()</span></li><li class="L3"><span class="pln">     </span><span class="pun">{</span></li><li class="L4"><span class="pln">         </span><span class="kwd">if</span><span class="pln"> </span><span class="pun">(!</span><span class="pln">showReset</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span></li><li class="L5"><span class="pln">             </span><span class="com">// Deal button</span></li><li class="L6"><span class="pln">             </span><span class="kwd">if</span><span class="pln"> </span><span class="pun">(</span><span class="pln">GUI</span><span class="pun">.</span><span class="typ">Button</span><span class="pun">(</span><span class="kwd">new</span><span class="pln"> </span><span class="typ">Rect</span><span class="pun">(</span><span class="lit">10</span><span class="pun">,</span><span class="pln"> </span><span class="lit">10</span><span class="pun">,</span><span class="pln"> </span><span class="lit">100</span><span class="pun">,</span><span class="pln"> </span><span class="lit">20</span><span class="pun">),</span><span class="pln"> </span><span class="str">"Deal"</span><span class="pun">))</span></li><li class="L7"><span class="pln">             </span><span class="pun">{</span></li><li class="L8"><span class="pln">                 </span><span class="typ">MoveDealtCard</span><span class="pun">();</span></li><li class="L9"><span class="pln">             </span><span class="pun">}</span></li><li class="L0"><span class="pln">         </span><span class="pun">}</span></li><li class="L1"><span class="pln">         </span><span class="kwd">else</span><span class="pln"> </span><span class="pun">{</span></li><li class="L2"><span class="pln">             </span><span class="com">// Reset button</span></li><li class="L3"><span class="pln">             </span><span class="kwd">if</span><span class="pln"> </span><span class="pun">(</span><span class="pln">GUI</span><span class="pun">.</span><span class="typ">Button</span><span class="pun">(</span><span class="kwd">new</span><span class="pln"> </span><span class="typ">Rect</span><span class="pun">(</span><span class="lit">10</span><span class="pun">,</span><span class="pln"> </span><span class="lit">10</span><span class="pun">,</span><span class="pln"> </span><span class="lit">100</span><span class="pun">,</span><span class="pln"> </span><span class="lit">20</span><span class="pun">),</span><span class="pln"> </span><span class="str">"Reset"</span><span class="pun">))</span></li><li class="L4"><span class="pln">             </span><span class="pun">{</span></li><li class="L5"><span class="pln">                 </span><span class="typ">ResetDeck</span><span class="pun">();</span></li><li class="L6"><span class="pln">             </span><span class="pun">}</span></li><li class="L7"><span class="pln">         </span><span class="pun">}</span></li><li class="L8"><span class="pln">         </span><span class="com">// GameOver button</span></li><li class="L9"><span class="pln">         </span><span class="kwd">if</span><span class="pln"> </span><span class="pun">(</span><span class="pln">GUI</span><span class="pun">.</span><span class="typ">Button</span><span class="pun">(</span><span class="kwd">new</span><span class="pln"> </span><span class="typ">Rect</span><span class="pun">(</span><span class="typ">Screen</span><span class="pun">.</span><span class="pln">width </span><span class="pun">-</span><span class="pln"> </span><span class="lit">110</span><span class="pun">,</span><span class="pln"> </span><span class="lit">10</span><span class="pun">,</span><span class="pln"> </span><span class="lit">100</span><span class="pun">,</span><span class="pln"> </span><span class="lit">20</span><span class="pun">),</span><span class="pln"> </span><span class="str">"GameOver"</span><span class="pun">))</span></li><li class="L0"><span class="pln">         </span><span class="pun">{</span></li><li class="L1"><span class="pln">             </span><span class="typ">GameOver</span><span class="pun">();</span></li><li class="L2"><span class="pln">         </span><span class="pun">}</span></li><li class="L3"><span class="pln">     </span><span class="pun">}</span></li><li class="L4"><span class="pln"> </span></li><li class="L5"><span class="pln">     </span><span class="kwd">void</span><span class="pln"> </span><span class="typ">MoveDealtCard</span><span class="pun">()</span></li><li class="L6"><span class="pln">     </span><span class="pun">{</span></li><li class="L7"><span class="pln">         </span><span class="typ">GameObject</span><span class="pln"> newCard </span><span class="pun">=</span><span class="pln"> </span><span class="typ">DealCard</span><span class="pun">();</span></li><li class="L8"><span class="pln">         </span><span class="com">// check card is null or not</span></li><li class="L9"><span class="pln">         </span><span class="kwd">if</span><span class="pln"> </span><span class="pun">(</span><span class="pln">newCard </span><span class="pun">==</span><span class="pln"> </span><span class="kwd">null</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span></li><li class="L0"><span class="pln">             </span><span class="typ">Debug</span><span class="pun">.</span><span class="typ">Log</span><span class="pun">(</span><span class="str">"Out of Cards"</span><span class="pun">);</span></li><li class="L1"><span class="pln">             showReset </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">true</span><span class="pun">;</span></li><li class="L2"><span class="pln">             </span><span class="kwd">return</span><span class="pun">;</span></li><li class="L3"><span class="pln">         </span><span class="pun">}</span></li><li class="L4"><span class="pln">         </span></li><li class="L5"><span class="pln">         </span><span class="com">//newCard.transform.position = Vector3.zero;</span></li><li class="L6"><span class="pln">         newCard</span><span class="pun">.</span><span class="pln">transform</span><span class="pun">.</span><span class="pln">position </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">new</span><span class="pln"> </span><span class="typ">Vector3</span><span class="pun">((</span><span class="kwd">float</span><span class="pun">)</span><span class="pln">cardsDealt </span><span class="pun">/</span><span class="pln"> </span><span class="lit">4</span><span class="pun">,</span><span class="pln"> </span><span class="pun">(</span><span class="kwd">float</span><span class="pun">)</span><span class="pln">cardsDealt </span><span class="pun">/</span><span class="pln"> </span><span class="pun">-</span><span class="lit">4</span><span class="pun">,</span><span class="pln"> </span><span class="pun">(</span><span class="kwd">float</span><span class="pun">)</span><span class="pln">cardsDealt </span><span class="pun">/</span><span class="pln"> </span><span class="pun">-</span><span class="lit">4</span><span class="pun">);</span><span class="pln"> </span><span class="com">// place card 1/4 up on all axis from last</span></li><li class="L7"><span class="pln">         hand</span><span class="pun">.</span><span class="typ">Add</span><span class="pun">(</span><span class="pln">newCard</span><span class="pun">);</span><span class="pln"> </span><span class="com">// add card to hand</span></li><li class="L8"><span class="pln">         cardsDealt </span><span class="pun">++;</span></li><li class="L9"><span class="pln">     </span><span class="pun">}</span></li><li class="L0"><span class="pln"> </span><span class="pun">}</span></li><li class="L1"><span class="pln">&nbsp;</span></li></ol></code></pre>
+<p>Now here's where you drag and drop your card prefabs. Look in the inspector and you'll see Deck : Size : 0 . </p>
+<p><img src="./Card Game [C#] - Unity Answers_files/943-inspect+1.png" alt="alt text"></p>
+<p>Now change the 0 to 52. you should have the second screenshot. </p>
+<p><img src="./Card Game [C#] - Unity Answers_files/944-inspect+2.png" alt="alt text"></p>
+<p>This is where you drag and drop into the list. So ignore my last comment, you really should do it this way , and not the long-hand way =]</p>
+<p><a rel="user" href="http://answers.unity3d.com/users/21269/whydoidoit.html" nodeid="21269">@whydoidoit</a> this is from your JS answer, I hope you don't mind. I just needed a place to upload screenshots. I saw your link on another qn (orbit cam), I think it's really nice that you are sharing scripts. Thanks , I shall be browsing your 'site later. All the best =]</p>
+</div>
+
+<div class="node-attachments">
+        <div class="node-attachment">
+            <span class="img-attachment-icon"></span>
+            <a href="http://answers.unity3d.com/storage/attachments/943-inspect%201.png">inspect 1.png</a>
+            <span>(21.4 kB)</span>
+        </div>
+        <div class="node-attachment">
+            <span class="img-attachment-icon"></span>
+            <a href="http://answers.unity3d.com/storage/attachments/944-inspect%202.png">inspect 2.png</a>
+            <span>(26.1 kB)</span>
+        </div>
+</div>
+<div id="post-253868-controls" class="post-controls">
+    <span id="node-253868-menu" class="context-menu">
+        <span id="node-253868-menu-trigger" class="action-link context-menu-trigger">more ▼</span>
+        <ul id="node-253868-menu-dropdown" class="context-menu-dropdown">
+            <li class="item"><a rel="nofollow" class="   " href="http://answers.unity3d.com/questions/253023/card-game-c.html#" title=""><b>8 total comments</b></a></li>
+            <li class="item"><a rel="nofollow" class="   " href="http://answers.unity3d.com/questions/253023/card-game-c.html#" title=""><b>3641 characters /
+                414 words</b></a></li>
+        </ul>
+    </span>
+</div>
+
+
+                    <div class="post-update-info-container">
+                        <div class="post-update-info post-update-info-user">
+                            <p style="line-height:12px;"> answered <strong class="friendly-date" title="2012, May 17 at 15:14:03+0000">May 17, 2012 at 03:14 PM</strong></p>
+<a href="http://answers.unity3d.com/users/20706/alucardj.html" style="display: inline-block; max-width: 32px;" rel="user" nodeid="20706"> <img class="gravatar " width="32" src="./Card Game [C#] - Unity Answers_files/ecb3e19b666dd26fbc2e5de4fb13c0d8" id="" alt="avatar image" title="alucardj">
+</a> <p><a href="http://answers.unity3d.com/users/20706/alucardj.html">alucardj </a><br>
+<span class="score" title="30827 Karma"><span class="">30.8k</span></span><span title="172 badges">
+<span class="badge1">●</span>
+<span class="badgecount">172</span>
+</span><span title="1066 badges">
+<span class="silver">●</span>
+<span class="badgecount">1066</span>
+</span><span title="239 badges">
+<span class="bronze">●</span>
+<span class="badgecount">239</span>
+</span>
+</p>                        </div>
+                            <div class="post-update-info post-update-info-edited" style="display: none;">
+                                <p style="line-height:12px;">
+                                   <a href="http://answers.unity3d.com/revisions/253868.html">
+edited                                        <strong class="friendly-date" title="2012, May 20 at 17:31:52+0000">May 20, 2012 at 05:31 PM</strong>
+                                    </a>
+                                </p>
+                            </div>
+                    </div>
+
+                    <div class="comments-container" id="comments-container-253868">
+        <a name="253871"></a>
+        <div class="comment even" id="comment-253871" activerev="384378" nodeid="253871" authorid="21269">
+            <div id="post-253871-score" class="comment-score"></div>
+            <div class="comment-text"><p>You go ahead :) No problem...</p>
+</div>
+            <div class="comment-info" id="comment-253871-info">
+            
+                <span class="comment-age friendly-date" title="2012, May 17 at 15:17:05+0000">May 17, 2012 at 03:17 PM</span>
+                <a class="comment-user userinfo" href="http://answers.unity3d.com/users/21269/whydoidoit.html">whydoidoit </a>
+            </div>
+        </div>
+        <a name="254959"></a>
+        <div class="comment even" id="comment-254959" activerev="385812" nodeid="254959" authorid="26539">
+            <div id="post-254959-score" class="comment-score"></div>
+            <div class="comment-text"><p>I tried to convert the OnGUI Javascript posted above to C#</p> 
+<pre><code class="prettyprint linenums"><ol class="linenums"><li class="L0"><span class="pln">     </span><span class="kwd">using</span><span class="pln"> </span><span class="typ">UnityEngine</span><span class="pun">;</span></li><li class="L1"><span class="pln">     </span><span class="kwd">using</span><span class="pln"> </span><span class="typ">System</span><span class="pun">.</span><span class="typ">Collections</span><span class="pun">;</span></li><li class="L2"><span class="pln">&nbsp;</span></li><li class="L3"><span class="pln">&nbsp;</span></li><li class="L4"><span class="pln">     </span><span class="kwd">public</span><span class="pln"> </span><span class="kwd">class</span><span class="pln"> </span><span class="typ">Deal</span><span class="pln"> </span><span class="pun">:</span><span class="pln"> </span><span class="typ">MonoBehaviour</span><span class="pln"> </span><span class="pun">{</span></li><li class="L5"><span class="pln">     </span><span class="kwd">void</span><span class="pln">  </span><span class="typ">OnGUI</span><span class="pln"> </span><span class="pun">(){</span></li><li class="L6"><span class="pln">         </span><span class="kwd">if</span><span class="pun">(</span><span class="typ">GUILayout</span><span class="pun">.</span><span class="typ">Button</span><span class="pun">(</span><span class="str">"Deal"</span><span class="pun">))</span><span class="pln"> </span><span class="pun">{</span></li><li class="L7"><span class="pln">            </span><span class="typ">GameObject</span><span class="pln"> newCard </span><span class="pun">=</span><span class="pln"> </span><span class="typ">DeckOfCards</span><span class="pun">();</span></li><li class="L8"><span class="pln">            newCard</span><span class="pun">.</span><span class="pln">transform</span><span class="pun">.</span><span class="pln">position </span><span class="pun">=</span><span class="pln"> </span><span class="typ">Vector3</span><span class="pun">.</span><span class="pln">zero</span><span class="pun">;</span><span class="pln"> </span><span class="pun">}</span></li><li class="L9"><span class="pln">             </span><span class="pun">}</span></li><li class="L0"><span class="pln">             </span><span class="pun">}</span></li><li class="L1"><span class="pln">&nbsp;</span></li><li class="L2"><span class="pln">&nbsp;</span></li></ol></code></pre> 
+<p>It isnt working tho =/ ... how can i run the script you gave me with the cards so that when i click a button .. its runs the script , eventually getting to the end and then changing to a reset button ... allowing me to start a fresh deck.</p></div>
+            <div class="comment-info" id="comment-254959-info">
+            
+                <span class="comment-age friendly-date" title="2012, May 20 at 14:39:13+0000">May 20, 2012 at 02:39 PM</span>
+                <a class="comment-user userinfo" href="http://answers.unity3d.com/users/26539/lodos3.html">Lodos3 </a>
+            </div>
+        </div>
+        <a name="255013"></a>
+        <div class="comment even" id="comment-255013" activerev="385870" nodeid="255013" authorid="20706">
+            <div id="post-255013-score" class="comment-score"></div>
+            <div class="comment-text"><p>I updated the answer with the buttons. But when you reset, the previously instantiated cards are Not destroyed.</p>
+</div>
+            <div class="comment-info" id="comment-255013-info">
+            
+                <span class="comment-age friendly-date" title="2012, May 20 at 17:03:58+0000">May 20, 2012 at 05:03 PM</span>
+                <a class="comment-user userinfo" href="http://answers.unity3d.com/users/20706/alucardj.html">alucardj </a>
+            </div>
+        </div>
+        <a name="255017"></a>
+        <div class="comment even" id="comment-255017" activerev="385878" nodeid="255017" authorid="26539">
+            <div id="post-255017-score" class="comment-score"></div>
+            <div class="comment-text"><p>Excellent :P , i just need to work out how to get them to destroy :) thanks guys...this has been a massive learning curve for me lol. i hope to be helping out people like me verysoon .. il keep you guys updated on my progress :) </p> 
+<p>ty again!</p></div>
+            <div class="comment-info" id="comment-255017-info">
+            
+                <span class="comment-age friendly-date" title="2012, May 20 at 17:10:44+0000">May 20, 2012 at 05:10 PM</span>
+                <a class="comment-user userinfo" href="http://answers.unity3d.com/users/26539/lodos3.html">Lodos3 </a>
+            </div>
+        </div>
+        <a name="255031"></a>
+        <div class="comment even" id="comment-255031" activerev="385896" nodeid="255031" authorid="20706">
+            <div id="post-255031-score" class="comment-score"></div>
+            <div class="comment-text"><p>The 'Reset' button should show when all the cards have been dealt. It is displayed when the boolean is set to true : </p>
+<pre><code class="prettyprint linenums"><ol class="linenums"><li class="L0"><span class="pln">    </span><span class="kwd">if</span><span class="pun">(</span><span class="pln">cards</span><span class="pun">.</span><span class="typ">Count</span><span class="pln"> </span><span class="pun">==</span><span class="pln"> </span><span class="lit">0</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span></li><li class="L1"><span class="pln">      showReset </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">true</span><span class="pun">;</span></li><li class="L2"><span class="pln">    </span><span class="pun">}</span></li><li class="L3"><span class="pln">&nbsp;</span></li></ol></code></pre>
+<p>I just updated the answer to include a 'GameOver' button. I have added another list 'hand' , that stores all the cards that have been dealt. This will be useful in a card game, esp with this example showing how to destroy the cards in the 'hand' list. </p>
+</div>
+            <div class="comment-info" id="comment-255031-info">
+            
+                <span class="comment-age friendly-date" title="2012, May 20 at 17:35:20+0000">May 20, 2012 at 05:35 PM</span>
+                <a class="comment-user userinfo" href="http://answers.unity3d.com/users/20706/alucardj.html">alucardj </a>
+            </div>
+        </div>
+            <div class="expand-comments-container">
+                <a href="http://answers.unity3d.com/questions/253023/card-game-c.html#" class="comments-expand">show 3 more replies</a>
+            </div>
+                    </div>
+                    <div id="comment-tools-253868" class="comment-tools">
+                        <a href="http://answers.unity3d.com/questions/253023/card-game-c.html#" class="add-comment-link" style="display: none;">add new comment</a>
+                        <span class="comments-locked">(comments are locked)</span>
+                    </div>
+
+<div id="comment-253868-form-container" class="comment-form-container">
+    <form id="comment-253868-form" action="http://answers.unity3d.com/comments/253868/add.json" method="POST" accept-charset="utf-8"><input type="hidden" name="TH_CSRF" value="-61328155468023380">
+        <div class="comment-form-widgets-container">
+            <div class="comment-form-textarea-container">
+                <div class="wmd-button-bar"><ul class="wmd-button-row"><li class="wmd-button wmd-bold-button" title="Strong &lt;strong&gt; Ctrl+B" style="background-position: 0px 0px;"></li><li class="wmd-button wmd-italic-button" title="Emphasis &lt;em&gt; Ctrl+I" style="background-position: -20px 0px;"></li><li class="wmd-spacer wmd-spacer1"></li><li class="wmd-button wmd-link-button" title="Hyperlink &lt;a&gt; Ctrl+L" style="background-position: -40px 0px;"></li><li class="wmd-button wmd-quote-button" title="Blockquote &lt;blockquote&gt; Ctrl+Q" style="background-position: -60px 0px;"></li><li class="wmd-button wmd-code-button" title="Code Sample &lt;pre&gt;&lt;code&gt; Ctrl+K" style="background-position: -80px 0px;"></li><li class="wmd-button wmd-image-button" title="Image &lt;img&gt; Ctrl+G" style="background-position: -120px 0px;"></li><li class="wmd-button wmd-attachment-button" title="Attachment Ctrl+U" style="background-position: -100px 0px;"></li><li class="wmd-spacer wmd-spacer2"></li><li class="wmd-button wmd-olist-button" title="Numbered List &lt;ol&gt; Ctrl+O" style="background-position: -140px 0px;"></li><li class="wmd-button wmd-ulist-button" title="Bulleted List &lt;ul&gt; Ctrl+U" style="background-position: -160px 0px;"></li><li class="wmd-button wmd-heading-button" title="Heading &lt;h1&gt;/&lt;h2&gt; Ctrl+H" style="background-position: -180px 0px;"></li><li class="wmd-button wmd-hr-button" title="Horizontal Rule &lt;hr&gt; Ctrl+R" style="background-position: -200px 0px;"></li><li class="wmd-spacer wmd-spacer3"></li><li class="wmd-button wmd-undo-button" title="Undo - Ctrl+Z" style="background-position: -220px -20px;"></li><li class="wmd-button wmd-redo-button" title="Redo - Ctrl+Y" style="background-position: -240px -20px;"></li></ul></div><textarea name="body" class="commentBox"></textarea><div class="comments-form-attachments"><div></div><div></div></div>
+            </div>
+            <div class="comment-form-buttons">
+                <span id="comment-{{ post.id }}-chars-left" class="comment-chars-left">
+                    <span class="comments-char-left-count">10|3000</span>
+                    <span class="comments-chars-togo-msg">characters needed</span>
+                    <span class="comments-chars-left-msg">characters left</span>
+                </span>
+                <div class="comment-form-buttons-container">
+                    <input type="submit" class="comment-submit" value="comment">
+                    <input type="submit" class="comment-cancel" value="cancel">
+                </div>
+                
+            </div>
+            <div style="clear:both;"></div>
+        </div>
+        <input type="hidden" name="parent" value="253868">
+        <input type="hidden" name="visibility" value="full">
+        <div style="display: none" class="comment-form-extra-inputs"></div>
+    </form>
+</div>
+
+                </div>
+            </td>
+        </tr>
+    </tbody></table>
+</div>
+
+            <script type="text/javascript">$(function() {tools.rel({"253868":{"accepted":true,"score":1,"type":"answer"}}); tools.rel({"255031":{"visibility":"full","type":"comment"},"255013":{"visibility":"full","type":"comment"},"253871":{"visibility":"full","type":"comment"},"254959":{"visibility":"full","type":"comment"},"255017":{"visibility":"full","type":"comment"}})});</script>
+<a name="answer-253049"></a>
+<div style="clear:both;" id="answer-container-253049" class="answer full" nodeid="253049" authorid="21269">
+    <table style="width:100%;">
+        <tbody><tr>
+            <td style="width:30px;vertical-align:top">
+<div class="vote-buttons">
+    <a id="post-253049-upvote" class="post-vote up" href="http://answers.unity3d.com/questions/253023/card-game-c.html#" command="voteUp"> </a>
+    <div id="post-253049-score" class="post-score" title="current number of votes">0</div>
+    <a id="post-253049-downvote" class="post-vote down" href="http://answers.unity3d.com/questions/253023/card-game-c.html#" command="voteDown"> </a>
+        <a href="http://answers.unity3d.com/questions/253023/card-game-c.html#" command="acceptAnswer" id="post-253049-accept" style="display: none" class="accept-answer"> </a>
+</div>            </td>
+
+            <td>
+
+                <div class="item-right">
+                    <div class="answer-body"><p>You could create a script with a list of prefabs, use the inspector to make it 52 long and then drop the prefabs into each slot.  That gives you 52 cards that you can access. </p>
+<p>Your then need to make a copy of the deck and deal out the cards one at a time in random order, removing it from the copied deck.</p>
+<p>This script might help:</p>
+<pre><code class="prettyprint linenums"><ol class="linenums"><li class="L0"><span class="pln"> </span><span class="com">#pragma</span><span class="pln"> strict</span></li><li class="L1"><span class="pln">&nbsp;</span></li><li class="L2"><span class="pln"> </span><span class="kwd">import</span><span class="pln"> </span><span class="typ">System</span><span class="pun">.</span><span class="typ">Collections</span><span class="pun">.</span><span class="typ">Generic</span><span class="pun">;</span></li><li class="L3"><span class="pln">&nbsp;</span></li><li class="L4"><span class="pln"> </span><span class="kwd">var</span><span class="pln"> deck </span><span class="pun">:</span><span class="pln"> </span><span class="typ">List</span><span class="pun">.&lt;</span><span class="typ">GameObject</span><span class="pun">&gt;;</span></li><li class="L5"><span class="pln">&nbsp;</span></li><li class="L6"><span class="pln"> </span><span class="kwd">private</span><span class="pln"> </span><span class="kwd">var</span><span class="pln"> cards </span><span class="pun">:</span><span class="pln"> </span><span class="typ">List</span><span class="pun">.&lt;</span><span class="typ">GameObject</span><span class="pun">&gt;</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">new</span><span class="pln"> </span><span class="typ">List</span><span class="pun">.&lt;</span><span class="typ">GameObject</span><span class="pun">&gt;();</span></li><li class="L7"><span class="pln">&nbsp;</span></li><li class="L8"><span class="pln"> </span><span class="kwd">function</span><span class="pln"> </span><span class="typ">ResetDeck</span><span class="pun">()</span></li><li class="L9"><span class="pln"> </span><span class="pun">{</span></li><li class="L0"><span class="pln">     cards</span><span class="pun">.</span><span class="typ">Clear</span><span class="pun">();</span></li><li class="L1"><span class="pln">     cards</span><span class="pun">.</span><span class="typ">AddRange</span><span class="pun">(</span><span class="pln">deck</span><span class="pun">);</span></li><li class="L2"><span class="pln"> </span><span class="pun">}</span></li><li class="L3"><span class="pln">&nbsp;</span></li><li class="L4"><span class="pln"> </span><span class="kwd">function</span><span class="pln"> </span><span class="typ">DealCard</span><span class="pun">()</span><span class="pln"> </span><span class="pun">:</span><span class="pln"> </span><span class="typ">GameObject</span></li><li class="L5"><span class="pln"> </span><span class="pun">{</span></li><li class="L6"><span class="pln">     </span><span class="kwd">if</span><span class="pun">(</span><span class="pln">cards</span><span class="pun">.</span><span class="typ">Count</span><span class="pun">==</span><span class="lit">0</span><span class="pun">)</span></li><li class="L7"><span class="pln">     </span><span class="pun">{</span></li><li class="L8"><span class="pln">         </span><span class="kwd">return</span><span class="pln"> </span><span class="kwd">null</span><span class="pun">;</span></li><li class="L9"><span class="pln">         </span><span class="com">//Alternatively to auto reset the deck:</span></li><li class="L0"><span class="pln">         </span><span class="com">//ResetDeck();</span></li><li class="L1"><span class="pln">     </span><span class="pun">}</span></li><li class="L2"><span class="pln">     </span></li><li class="L3"><span class="pln">     </span><span class="kwd">var</span><span class="pln"> card </span><span class="pun">:</span><span class="pln"> </span><span class="kwd">int</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="typ">Random</span><span class="pun">.</span><span class="typ">Range</span><span class="pun">(</span><span class="lit">0</span><span class="pun">,</span><span class="pln"> cards</span><span class="pun">.</span><span class="typ">Count</span><span class="pun">-</span><span class="lit">1</span><span class="pun">);</span></li><li class="L4"><span class="pln">     </span><span class="kwd">var</span><span class="pln"> go </span><span class="pun">:</span><span class="pln"> </span><span class="typ">GameObject</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="typ">GameObject</span><span class="pun">.</span><span class="typ">Instantiate</span><span class="pun">(</span><span class="pln">cards</span><span class="pun">[</span><span class="pln">card</span><span class="pun">])</span><span class="pln"> </span><span class="kwd">as</span><span class="pln"> </span><span class="typ">GameObject</span><span class="pun">;</span></li><li class="L5"><span class="pln">     cards</span><span class="pun">.</span><span class="typ">RemoveAt</span><span class="pun">(</span><span class="pln">card</span><span class="pun">);</span></li><li class="L6"><span class="pln">     </span><span class="kwd">return</span><span class="pln"> go</span><span class="pun">;</span></li><li class="L7"><span class="pln"> </span><span class="pun">}</span></li><li class="L8"><span class="pln">&nbsp;</span></li><li class="L9"><span class="pln"> </span><span class="kwd">function</span><span class="pln"> </span><span class="typ">Start</span><span class="pun">()</span></li><li class="L0"><span class="pln"> </span><span class="pun">{</span></li><li class="L1"><span class="pln">     </span><span class="typ">ResetDeck</span><span class="pun">();</span></li><li class="L2"><span class="pln"> </span><span class="pun">}</span></li><li class="L3"><span class="pln">&nbsp;</span></li><li class="L4"><span class="pln"> </span><span class="kwd">function</span><span class="pln"> </span><span class="typ">RemainingCardCount</span><span class="pun">()</span><span class="pln"> </span></li><li class="L5"><span class="pln"> </span><span class="pun">{</span></li><li class="L6"><span class="pln">     </span><span class="kwd">return</span><span class="pln"> cards</span><span class="pun">.</span><span class="typ">Count</span><span class="pun">;</span></li><li class="L7"><span class="pln"> </span><span class="pun">}</span></li><li class="L8"><span class="pln">&nbsp;</span></li></ol></code></pre>
+<p>When you call DealCard it will create a new GameObject from the prefab - you'd then need to position it etc.  After 52 cards it would start returning "null" or you could check the RemainingCardCount().  In the script you could delete the return null; line and uncomment the ResetDeck() line to have it automatically start again.</p>
+<p>You would probably want to call this in an OnGUI function that would show your button and then position the created game object according to the camera you have and where you want the item to appear.  A simple OnGUI might look like this:</p>
+<pre><code class="prettyprint linenums"><ol class="linenums"><li class="L0"><span class="pln"> </span><span class="kwd">function</span><span class="pln"> </span><span class="typ">OnGUI</span><span class="pun">()</span></li><li class="L1"><span class="pln"> </span><span class="pun">{</span></li><li class="L2"><span class="pln">     </span><span class="kwd">if</span><span class="pun">(</span><span class="typ">GUILayout</span><span class="pun">.</span><span class="typ">Button</span><span class="pun">(</span><span class="str">"Deal"</span><span class="pun">))</span></li><li class="L3"><span class="pln">     </span><span class="pun">{</span></li><li class="L4"><span class="pln">         </span><span class="kwd">var</span><span class="pln"> newCard </span><span class="pun">:</span><span class="pln"> </span><span class="typ">GameObject</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="typ">DealCard</span><span class="pun">();</span></li><li class="L5"><span class="pln">         newCard</span><span class="pun">.</span><span class="pln">transform</span><span class="pun">.</span><span class="pln">position </span><span class="pun">=</span><span class="pln"> </span><span class="typ">Vector3</span><span class="pun">.</span><span class="pln">zero</span><span class="pun">;</span><span class="pln"> </span><span class="com">//Replace with your location</span></li><li class="L6"><span class="pln">     </span><span class="pun">}</span></li><li class="L7"><span class="pln"> </span><span class="pun">}</span></li></ol></code></pre>
+</div>
+
+
+<div id="post-253049-controls" class="post-controls">
+    <span id="node-253049-menu" class="context-menu">
+        <span id="node-253049-menu-trigger" class="action-link context-menu-trigger">more ▼</span>
+        <ul id="node-253049-menu-dropdown" class="context-menu-dropdown">
+            <li class="item"><a rel="nofollow" class="   " href="http://answers.unity3d.com/questions/253023/card-game-c.html#" title=""><b>8 total comments</b></a></li>
+            <li class="item"><a rel="nofollow" class="   " href="http://answers.unity3d.com/questions/253023/card-game-c.html#" title=""><b>1930 characters /
+                256 words</b></a></li>
+        </ul>
+    </span>
+</div>
+
+
+                    <div class="post-update-info-container">
+                        <div class="post-update-info post-update-info-user">
+                            <p style="line-height:12px;"> answered <strong class="friendly-date" title="2012, May 15 at 23:08:33+0000">May 15, 2012 at 11:08 PM</strong></p>
+<a href="http://answers.unity3d.com/users/21269/whydoidoit.html" style="display: inline-block; max-width: 32px;" rel="user" nodeid="21269"> <img class="gravatar " width="32" src="./Card Game [C#] - Unity Answers_files/43adcf99cd9f3ccb588117bbdb855f5c" id="" alt="avatar image" title="whydoidoit">
+</a> <p><a href="http://answers.unity3d.com/users/21269/whydoidoit.html">whydoidoit </a><br>
+<span class="score" title="55137 Karma"><span class="">55.1k</span></span><span title="61 badges">
+<span class="badge1">●</span>
+<span class="badgecount">61</span>
+</span><span title="120 badges">
+<span class="silver">●</span>
+<span class="badgecount">120</span>
+</span><span title="245 badges">
+<span class="bronze">●</span>
+<span class="badgecount">245</span>
+</span>
+</p>                        </div>
+                            <div class="post-update-info post-update-info-edited" style="display: none;">
+                                <p style="line-height:12px;">
+                                   <a href="http://answers.unity3d.com/revisions/253049.html">
+edited                                        <strong class="friendly-date" title="2012, May 15 at 23:16:25+0000">May 15, 2012 at 11:16 PM</strong>
+                                    </a>
+                                </p>
+                            </div>
+                    </div>
+
+                    <div class="comments-container" id="comments-container-253049">
+        <a name="253305"></a>
+        <div class="comment even" id="comment-253305" activerev="383593" nodeid="253305" authorid="20706">
+            <div id="post-253305-score" class="comment-score"></div>
+            <div class="comment-text"><p>I just noticed , this answer is in JS , not C# =]</p>
+</div>
+            <div class="comment-info" id="comment-253305-info">
+            
+                <span class="comment-age friendly-date" title="2012, May 16 at 13:37:29+0000">May 16, 2012 at 01:37 PM</span>
+                <a class="comment-user userinfo" href="http://answers.unity3d.com/users/20706/alucardj.html">alucardj </a>
+            </div>
+        </div>
+        <a name="253311"></a>
+        <div class="comment even" id="comment-253311" activerev="383603" nodeid="253311" authorid="20706">
+            <div id="post-253311-score" class="comment-score"></div>
+            <div class="comment-text"><p><a rel="user" href="http://answers.unity3d.com/users/236344/lodanos.html" nodeid="236344">@Loda</a>s , if you drag your cards into individual var Transforms, then you'll have to do some setting up to load those cards into the deck List : </p>
+<pre><code class="prettyprint linenums"><ol class="linenums"><li class="L0"><span class="pln"> </span><span class="kwd">public</span><span class="pln"> </span><span class="typ">GameObject</span><span class="pln"> </span><span class="typ">Club1</span><span class="pun">;</span></li><li class="L1"><span class="pln"> </span><span class="kwd">public</span><span class="pln"> </span><span class="typ">GameObject</span><span class="pln"> </span><span class="typ">Club2</span><span class="pun">;</span></li><li class="L2"><span class="pln"> </span><span class="kwd">public</span><span class="pln"> </span><span class="typ">GameObject</span><span class="pln"> </span><span class="typ">Club3</span><span class="pun">;</span></li><li class="L3"><span class="pln"> </span><span class="kwd">public</span><span class="pln"> </span><span class="typ">GameObject</span><span class="pln"> </span><span class="typ">Club4</span><span class="pun">;</span></li><li class="L4"><span class="pln"> </span></li><li class="L5"><span class="pln">     </span><span class="typ">List</span><span class="pun">&lt;</span><span class="typ">GameObject</span><span class="pun">&gt;</span><span class="pln"> deck </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">new</span><span class="pln"> </span><span class="typ">List</span><span class="pun">&lt;</span><span class="typ">GameObject</span><span class="pun">&gt;();</span></li><li class="L6"><span class="pln">     </span></li><li class="L7"><span class="pln">     </span><span class="kwd">void</span><span class="pln"> </span><span class="typ">LoadDeckList</span><span class="pun">()</span></li><li class="L8"><span class="pln">     </span><span class="pun">{</span></li><li class="L9"><span class="pln">         deck</span><span class="pun">.</span><span class="typ">Add</span><span class="pun">(</span><span class="typ">Club1</span><span class="pun">);</span><span class="pln"> </span></li><li class="L0"><span class="pln">         deck</span><span class="pun">.</span><span class="typ">Add</span><span class="pun">(</span><span class="typ">Club2</span><span class="pun">);</span><span class="pln"> </span></li><li class="L1"><span class="pln">         deck</span><span class="pun">.</span><span class="typ">Add</span><span class="pun">(</span><span class="typ">Club3</span><span class="pun">);</span><span class="pln"> </span></li><li class="L2"><span class="pln">         deck</span><span class="pun">.</span><span class="typ">Add</span><span class="pun">(</span><span class="typ">Club4</span><span class="pun">);</span><span class="pln"> </span><span class="com">// ect ect for all cards</span></li><li class="L3"><span class="pln">&nbsp;</span></li><li class="L4"><span class="pln">     </span><span class="pun">}</span></li><li class="L5"><span class="pln">&nbsp;</span></li></ol></code></pre>
+<p>try using the method in the answer , load your card prefabs into the deck List. I have tried to convert the above answer to C# , but it is untested and could very well contain errors (C# is not my native) =]</p>
+<pre><code class="prettyprint linenums"><ol class="linenums"><li class="L0"><span class="pln"> </span><span class="kwd">using</span><span class="pln"> </span><span class="typ">UnityEngine</span><span class="pun">;</span></li><li class="L1"><span class="pln"> </span><span class="kwd">using</span><span class="pln"> </span><span class="typ">System</span><span class="pun">.</span><span class="typ">Collections</span><span class="pun">;</span></li><li class="L2"><span class="pln"> </span></li><li class="L3"><span class="pln"> </span><span class="kwd">public</span><span class="pln"> </span><span class="kwd">class</span><span class="pln"> </span><span class="typ">DeckAndCards</span><span class="pln"> </span><span class="pun">:</span><span class="pln"> </span><span class="typ">MonoBehaviour</span></li><li class="L4"><span class="pln"> </span><span class="pun">{</span></li><li class="L5"><span class="pln">     </span><span class="typ">List</span><span class="pun">&lt;</span><span class="typ">GameObject</span><span class="pun">&gt;</span><span class="pln"> deck </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">new</span><span class="pln"> </span><span class="typ">List</span><span class="pun">&lt;</span><span class="typ">GameObject</span><span class="pun">&gt;();</span></li><li class="L6"><span class="pln">     </span></li><li class="L7"><span class="pln">     </span><span class="kwd">private</span><span class="pln"> </span><span class="typ">List</span><span class="pun">&lt;</span><span class="typ">GameObject</span><span class="pun">&gt;</span><span class="pln"> cards </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">new</span><span class="pln"> </span><span class="typ">List</span><span class="pun">&lt;</span><span class="typ">GameObject</span><span class="pun">&gt;();</span></li><li class="L8"><span class="pln">     </span></li><li class="L9"><span class="pln">     </span><span class="kwd">void</span><span class="pln"> </span><span class="typ">ResetDeck</span><span class="pun">()</span></li><li class="L0"><span class="pln">     </span><span class="pun">{</span></li><li class="L1"><span class="pln">         cards</span><span class="pun">.</span><span class="typ">Clear</span><span class="pun">();</span></li><li class="L2"><span class="pln">         cards</span><span class="pun">.</span><span class="typ">AddRange</span><span class="pun">(</span><span class="pln">deck</span><span class="pun">);</span></li><li class="L3"><span class="pln">     </span><span class="pun">}</span></li><li class="L4"><span class="pln">     </span></li><li class="L5"><span class="pln">     </span><span class="kwd">void</span><span class="pln"> </span><span class="typ">DealCard</span><span class="pun">()</span><span class="pln"> </span><span class="pun">:</span><span class="pln"> </span><span class="typ">GameObject</span></li><li class="L6"><span class="pln">     </span><span class="pun">{</span></li><li class="L7"><span class="pln">         </span><span class="kwd">if</span><span class="pun">(</span><span class="pln">cards</span><span class="pun">.</span><span class="typ">Count</span><span class="pln"> </span><span class="pun">==</span><span class="pln"> </span><span class="lit">0</span><span class="pun">)</span></li><li class="L8"><span class="pln">         </span><span class="pun">{</span></li><li class="L9"><span class="pln">            </span><span class="kwd">return</span><span class="pln"> </span><span class="kwd">null</span><span class="pun">;</span></li><li class="L0"><span class="pln">             </span><span class="com">//Alternatively to auto reset the deck:</span></li><li class="L1"><span class="pln">             </span><span class="com">//ResetDeck();</span></li><li class="L2"><span class="pln">         </span><span class="pun">}</span></li><li class="L3"><span class="pln">     </span></li><li class="L4"><span class="pln">         </span><span class="kwd">int</span><span class="pln"> card </span><span class="pun">=</span><span class="pln"> </span><span class="typ">Random</span><span class="pun">.</span><span class="typ">Range</span><span class="pun">(</span><span class="lit">0</span><span class="pun">,</span><span class="pln"> cards</span><span class="pun">.</span><span class="typ">Count</span><span class="pln"> </span><span class="pun">-</span><span class="pln"> </span><span class="lit">1</span><span class="pun">);</span></li><li class="L5"><span class="pln">         </span><span class="typ">GameObject</span><span class="pln"> go </span><span class="pun">=</span><span class="pln"> </span><span class="typ">GameObject</span><span class="pun">.</span><span class="typ">Instantiate</span><span class="pun">(</span><span class="pln">cards</span><span class="pun">[</span><span class="pln">card</span><span class="pun">])</span><span class="pln"> </span><span class="kwd">as</span><span class="pln"> </span><span class="typ">GameObject</span><span class="pun">;</span></li><li class="L6"><span class="pln">         cards</span><span class="pun">.</span><span class="typ">RemoveAt</span><span class="pun">(</span><span class="pln">card</span><span class="pun">);</span></li><li class="L7"><span class="pln">         </span><span class="kwd">return</span><span class="pln"> go</span><span class="pun">;</span></li><li class="L8"><span class="pln">     </span><span class="pun">}</span></li><li class="L9"><span class="pln">     </span></li><li class="L0"><span class="pln">     </span><span class="kwd">void</span><span class="pln"> </span><span class="typ">Start</span><span class="pun">()</span></li><li class="L1"><span class="pln">     </span><span class="pun">{</span></li><li class="L2"><span class="pln">         </span><span class="typ">ResetDeck</span><span class="pun">();</span></li><li class="L3"><span class="pln">     </span><span class="pun">}</span></li><li class="L4"><span class="pln">     </span></li><li class="L5"><span class="pln">     </span><span class="kwd">void</span><span class="pln"> </span><span class="typ">RemainingCardCount</span><span class="pun">()</span><span class="pln"> </span></li><li class="L6"><span class="pln">     </span><span class="pun">{</span></li><li class="L7"><span class="pln">         </span><span class="kwd">return</span><span class="pln"> cards</span><span class="pun">.</span><span class="typ">Count</span><span class="pun">;</span></li><li class="L8"><span class="pln">     </span><span class="pun">}</span></li><li class="L9"><span class="pln"> </span><span class="pun">}</span></li><li class="L0"><span class="pln"> </span></li></ol></code></pre>
+</div>
+            <div class="comment-info" id="comment-253311-info">
+            
+                <span class="comment-age friendly-date" title="2012, May 16 at 13:56:00+0000">May 16, 2012 at 01:56 PM</span>
+                <a class="comment-user userinfo" href="http://answers.unity3d.com/users/20706/alucardj.html">alucardj </a>
+            </div>
+        </div>
+        <a name="253322"></a>
+        <div class="comment even" id="comment-253322" activerev="383614" nodeid="253322" authorid="21269">
+            <div id="post-253322-score" class="comment-score">2</div>
+            <div class="comment-text"><p>To use the List in either JS or C# you just need to attach the script to a GameObject and view it in the inspector.  When you expand Deck it will say 0 items, change this to 52 and you will get 52 slots.  Drag the cards into those slots.</p>
+</div>
+            <div class="comment-info" id="comment-253322-info">
+            
+                <span class="comment-age friendly-date" title="2012, May 16 at 14:09:29+0000">May 16, 2012 at 02:09 PM</span>
+                <a class="comment-user userinfo" href="http://answers.unity3d.com/users/21269/whydoidoit.html">whydoidoit </a>
+            </div>
+        </div>
+        <a name="253427"></a>
+        <div class="comment even" id="comment-253427" activerev="383759" nodeid="253427" authorid="26539">
+            <div id="post-253427-score" class="comment-score"></div>
+            <div class="comment-text"><p>I've done this, i attached it to a Blank plane called DealCard. The prefabs are in the slots ready to go...But how do i define the list?</p></div>
+            <div class="comment-info" id="comment-253427-info">
+            
+                <span class="comment-age friendly-date" title="2012, May 16 at 17:30:32+0000">May 16, 2012 at 05:30 PM</span>
+                <a class="comment-user userinfo" href="http://answers.unity3d.com/users/26539/lodos3.html">Lodos3 </a>
+            </div>
+        </div>
+        <a name="253832"></a>
+        <div class="comment even" id="comment-253832" activerev="384337" nodeid="253832" authorid="20706">
+            <div id="post-253832-score" class="comment-score"></div>
+            <div class="comment-text"><p>Ok, I am guessing this help has stopped because you don't quite understand : "attach the script to a GameObject and view it in the inspector. When you expand Deck it will say 0 items, change this to 52 and you will get 52 slots. Drag the cards into those slots". That's ok, list's and arrays are hard to get your head around when starting. </p>
+<p>The advice you have been given is to <em>Forget</em> putting all your cards into separate Transforms in the Inspector, and put then into the List deck in the Inspector. This is the best method by far, soo much extra typing doing it your way.</p>
+<p>However , if you want to write some code that populates List deck, I can help. But first you need to change your <em>typecasting</em> . What this means is you are putting your cards into a variable that is typecast as a Transform. e.g. public Transform Diamond1; Now if you look at the List it is typecast as GameObject. e.g. List deck = new List();</p>
+<p>Can you see Transform and GameObject? To put Diamond1 into (the List) deck, the Diamond has to be typecast as GameObject , or the deck has to be typecast as Transform. I suggest you store the GameObject, as you can access all the components from this typecast (inc transform).</p>
+<p>Here is the Long method for populating the list. You'll need to do the other suits (just the same as clubs): </p>
+<pre><code class="prettyprint linenums"><ol class="linenums"><li class="L0"><span class="pln"> </span><span class="kwd">using</span><span class="pln"> </span><span class="typ">UnityEngine</span><span class="pun">;</span></li><li class="L1"><span class="pln"> </span><span class="kwd">using</span><span class="pln"> </span><span class="typ">System</span><span class="pun">.</span><span class="typ">Collections</span><span class="pun">;</span></li><li class="L2"><span class="pln">&nbsp;</span></li><li class="L3"><span class="pln"> </span><span class="kwd">public</span><span class="pln"> </span><span class="kwd">class</span><span class="pln"> </span><span class="typ">DeckAndCards</span><span class="pln"> </span><span class="pun">:</span><span class="pln"> </span><span class="typ">MonoBehaviour</span></li><li class="L4"><span class="pln"> </span><span class="pun">{</span></li><li class="L5"><span class="pln">     </span><span class="typ">List</span><span class="pun">&lt;</span><span class="typ">GameObject</span><span class="pun">&gt;</span><span class="pln"> deck </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">new</span><span class="pln"> </span><span class="typ">List</span><span class="pun">&lt;</span><span class="typ">GameObject</span><span class="pun">&gt;();</span></li><li class="L6"><span class="pln">&nbsp;</span></li><li class="L7"><span class="pln">     </span><span class="kwd">private</span><span class="pln"> </span><span class="typ">List</span><span class="pun">&lt;</span><span class="typ">GameObject</span><span class="pun">&gt;</span><span class="pln"> cards </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">new</span><span class="pln"> </span><span class="typ">List</span><span class="pun">&lt;</span><span class="typ">GameObject</span><span class="pun">&gt;();</span></li><li class="L8"><span class="pln">     </span></li><li class="L9"><span class="pln">     </span><span class="kwd">public</span><span class="pln"> </span><span class="typ">GameObject</span><span class="pln"> </span><span class="typ">Club1</span><span class="pun">;</span></li><li class="L0"><span class="pln">     </span><span class="kwd">public</span><span class="pln"> </span><span class="typ">GameObject</span><span class="pln"> </span><span class="typ">Club2</span><span class="pun">;</span></li><li class="L1"><span class="pln">     </span><span class="kwd">public</span><span class="pln"> </span><span class="typ">GameObject</span><span class="pln"> </span><span class="typ">Club3</span><span class="pun">;</span></li><li class="L2"><span class="pln">     </span><span class="kwd">public</span><span class="pln"> </span><span class="typ">GameObject</span><span class="pln"> </span><span class="typ">Club4</span><span class="pun">;</span></li><li class="L3"><span class="pln">     </span><span class="kwd">public</span><span class="pln"> </span><span class="typ">GameObject</span><span class="pln"> </span><span class="typ">Club5</span><span class="pun">;</span></li><li class="L4"><span class="pln">     </span><span class="kwd">public</span><span class="pln"> </span><span class="typ">GameObject</span><span class="pln"> </span><span class="typ">Club6</span><span class="pun">;</span></li><li class="L5"><span class="pln">     </span><span class="kwd">public</span><span class="pln"> </span><span class="typ">GameObject</span><span class="pln"> </span><span class="typ">Club7</span><span class="pun">;</span></li><li class="L6"><span class="pln">     </span><span class="kwd">public</span><span class="pln"> </span><span class="typ">GameObject</span><span class="pln"> </span><span class="typ">Club8</span><span class="pun">;</span></li><li class="L7"><span class="pln">     </span><span class="kwd">public</span><span class="pln"> </span><span class="typ">GameObject</span><span class="pln"> </span><span class="typ">Club9</span><span class="pun">;</span></li><li class="L8"><span class="pln">     </span><span class="kwd">public</span><span class="pln"> </span><span class="typ">GameObject</span><span class="pln"> </span><span class="typ">Club10</span><span class="pun">;</span></li><li class="L9"><span class="pln">     </span><span class="kwd">public</span><span class="pln"> </span><span class="typ">GameObject</span><span class="pln"> </span><span class="typ">Club11</span><span class="pun">;</span></li><li class="L0"><span class="pln">     </span><span class="kwd">public</span><span class="pln"> </span><span class="typ">GameObject</span><span class="pln"> </span><span class="typ">Club12</span><span class="pun">;</span></li><li class="L1"><span class="pln">     </span><span class="kwd">public</span><span class="pln"> </span><span class="typ">GameObject</span><span class="pln"> </span><span class="typ">Club13</span><span class="pun">;</span><span class="pln"> </span><span class="com">// you can do the other suits!</span></li><li class="L2"><span class="pln">&nbsp;</span></li><li class="L3"><span class="pln">     </span><span class="kwd">void</span><span class="pln"> </span><span class="typ">LoadDeckList</span><span class="pun">()</span></li><li class="L4"><span class="pln">     </span><span class="pun">{</span></li><li class="L5"><span class="pln">         deck</span><span class="pun">.</span><span class="typ">Add</span><span class="pun">(</span><span class="typ">Club1</span><span class="pun">);</span><span class="pln"> </span></li><li class="L6"><span class="pln">         deck</span><span class="pun">.</span><span class="typ">Add</span><span class="pun">(</span><span class="typ">Club2</span><span class="pun">);</span><span class="pln"> </span></li><li class="L7"><span class="pln">         deck</span><span class="pun">.</span><span class="typ">Add</span><span class="pun">(</span><span class="typ">Club3</span><span class="pun">);</span><span class="pln"> </span></li><li class="L8"><span class="pln">         deck</span><span class="pun">.</span><span class="typ">Add</span><span class="pun">(</span><span class="typ">Club4</span><span class="pun">);</span></li><li class="L9"><span class="pln">         deck</span><span class="pun">.</span><span class="typ">Add</span><span class="pun">(</span><span class="typ">Club5</span><span class="pun">);</span></li><li class="L0"><span class="pln">         deck</span><span class="pun">.</span><span class="typ">Add</span><span class="pun">(</span><span class="typ">Club6</span><span class="pun">);</span></li><li class="L1"><span class="pln">         deck</span><span class="pun">.</span><span class="typ">Add</span><span class="pun">(</span><span class="typ">Club7</span><span class="pun">);</span></li><li class="L2"><span class="pln">         deck</span><span class="pun">.</span><span class="typ">Add</span><span class="pun">(</span><span class="typ">Club8</span><span class="pun">);</span></li><li class="L3"><span class="pln">         deck</span><span class="pun">.</span><span class="typ">Add</span><span class="pun">(</span><span class="typ">Club9</span><span class="pun">);</span></li><li class="L4"><span class="pln">         deck</span><span class="pun">.</span><span class="typ">Add</span><span class="pun">(</span><span class="typ">Club10</span><span class="pun">);</span></li><li class="L5"><span class="pln">         deck</span><span class="pun">.</span><span class="typ">Add</span><span class="pun">(</span><span class="typ">Club11</span><span class="pun">);</span></li><li class="L6"><span class="pln">         deck</span><span class="pun">.</span><span class="typ">Add</span><span class="pun">(</span><span class="typ">Club12</span><span class="pun">);</span></li><li class="L7"><span class="pln">         deck</span><span class="pun">.</span><span class="typ">Add</span><span class="pun">(</span><span class="typ">Club13</span><span class="pun">);</span></li><li class="L8"><span class="pln">         </span></li><li class="L9"><span class="pln">         </span><span class="typ">Debug</span><span class="pun">.</span><span class="typ">Log</span><span class="pun">(</span><span class="str">" List deck = "</span><span class="pln"> </span><span class="pun">+</span><span class="pln"> deck</span><span class="pun">);</span><span class="pln"> </span><span class="com">// this should show your List deck in the console, and show that the cards have been added</span></li><li class="L0"><span class="pln">     </span><span class="pun">}</span></li><li class="L1"><span class="pln">&nbsp;</span></li><li class="L2"><span class="pln">     </span><span class="kwd">void</span><span class="pln"> </span><span class="typ">ResetDeck</span><span class="pun">()</span></li><li class="L3"><span class="pln">     </span><span class="pun">{</span></li><li class="L4"><span class="pln">         </span><span class="com">// NOW load the List deck first</span></li><li class="L5"><span class="pln">         deck</span><span class="pun">.</span><span class="typ">Clear</span><span class="pun">();</span></li><li class="L6"><span class="pln">         </span><span class="typ">LoadDeckList</span><span class="pun">();</span></li><li class="L7"><span class="pln">         </span></li><li class="L8"><span class="pln">         </span><span class="com">//</span></li><li class="L9"><span class="pln">         cards</span><span class="pun">.</span><span class="typ">Clear</span><span class="pun">();</span></li><li class="L0"><span class="pln">         cards</span><span class="pun">.</span><span class="typ">AddRange</span><span class="pun">(</span><span class="pln">deck</span><span class="pun">);</span></li><li class="L1"><span class="pln">     </span><span class="pun">}</span></li><li class="L2"><span class="pln">&nbsp;</span></li><li class="L3"><span class="pln">     </span><span class="kwd">void</span><span class="pln"> </span><span class="typ">DealCard</span><span class="pun">()</span><span class="pln"> </span><span class="pun">:</span><span class="pln"> </span><span class="typ">GameObject</span></li><li class="L4"><span class="pln">     </span><span class="pun">{</span></li><li class="L5"><span class="pln">         </span><span class="kwd">if</span><span class="pun">(</span><span class="pln">cards</span><span class="pun">.</span><span class="typ">Count</span><span class="pln"> </span><span class="pun">==</span><span class="pln"> </span><span class="lit">0</span><span class="pun">)</span></li><li class="L6"><span class="pln">         </span><span class="pun">{</span></li><li class="L7"><span class="pln">            </span><span class="kwd">return</span><span class="pln"> </span><span class="kwd">null</span><span class="pun">;</span></li><li class="L8"><span class="pln">             </span><span class="com">//Alternatively to auto reset the deck:</span></li><li class="L9"><span class="pln">             </span><span class="com">//ResetDeck();</span></li><li class="L0"><span class="pln">         </span><span class="pun">}</span></li><li class="L1"><span class="pln">&nbsp;</span></li><li class="L2"><span class="pln">         </span><span class="kwd">int</span><span class="pln"> card </span><span class="pun">=</span><span class="pln"> </span><span class="typ">Random</span><span class="pun">.</span><span class="typ">Range</span><span class="pun">(</span><span class="lit">0</span><span class="pun">,</span><span class="pln"> cards</span><span class="pun">.</span><span class="typ">Count</span><span class="pln"> </span><span class="pun">-</span><span class="pln"> </span><span class="lit">1</span><span class="pun">);</span></li><li class="L3"><span class="pln">         </span><span class="typ">GameObject</span><span class="pln"> go </span><span class="pun">=</span><span class="pln"> </span><span class="typ">GameObject</span><span class="pun">.</span><span class="typ">Instantiate</span><span class="pun">(</span><span class="pln">cards</span><span class="pun">[</span><span class="pln">card</span><span class="pun">])</span><span class="pln"> </span><span class="kwd">as</span><span class="pln"> </span><span class="typ">GameObject</span><span class="pun">;</span></li><li class="L4"><span class="pln">         cards</span><span class="pun">.</span><span class="typ">RemoveAt</span><span class="pun">(</span><span class="pln">card</span><span class="pun">);</span></li><li class="L5"><span class="pln">         </span><span class="kwd">return</span><span class="pln"> go</span><span class="pun">;</span></li><li class="L6"><span class="pln">     </span><span class="pun">}</span></li><li class="L7"><span class="pln">&nbsp;</span></li><li class="L8"><span class="pln">     </span><span class="kwd">void</span><span class="pln"> </span><span class="typ">Start</span><span class="pun">()</span></li><li class="L9"><span class="pln">     </span><span class="pun">{</span></li><li class="L0"><span class="pln">         </span><span class="typ">ResetDeck</span><span class="pun">();</span></li><li class="L1"><span class="pln">     </span><span class="pun">}</span></li><li class="L2"><span class="pln">&nbsp;</span></li><li class="L3"><span class="pln">     </span><span class="kwd">void</span><span class="pln"> </span><span class="typ">RemainingCardCount</span><span class="pun">()</span><span class="pln"> </span></li><li class="L4"><span class="pln">     </span><span class="pun">{</span></li><li class="L5"><span class="pln">         </span><span class="kwd">return</span><span class="pln"> cards</span><span class="pun">.</span><span class="typ">Count</span><span class="pun">;</span></li><li class="L6"><span class="pln">     </span><span class="pun">}</span></li><li class="L7"><span class="pln"> </span><span class="pun">}</span></li></ol></code></pre>
+</div>
+            <div class="comment-info" id="comment-253832-info">
+            
+                <span class="comment-age friendly-date" title="2012, May 17 at 13:44:50+0000">May 17, 2012 at 01:44 PM</span>
+                <a class="comment-user userinfo" href="http://answers.unity3d.com/users/20706/alucardj.html">alucardj </a>
+            </div>
+        </div>
+            <div class="expand-comments-container">
+                <a href="http://answers.unity3d.com/questions/253023/card-game-c.html#" class="comments-expand">show 3 more replies</a>
+            </div>
+                    </div>
+                    <div id="comment-tools-253049" class="comment-tools">
+                        <a href="http://answers.unity3d.com/questions/253023/card-game-c.html#" class="add-comment-link" style="display: none;">add new comment</a>
+                        <span class="comments-locked">(comments are locked)</span>
+                    </div>
+
+<div id="comment-253049-form-container" class="comment-form-container">
+    <form id="comment-253049-form" action="http://answers.unity3d.com/comments/253049/add.json" method="POST" accept-charset="utf-8"><input type="hidden" name="TH_CSRF" value="-61328155468023380">
+        <div class="comment-form-widgets-container">
+            <div class="comment-form-textarea-container">
+                <div class="wmd-button-bar"><ul class="wmd-button-row"><li class="wmd-button wmd-bold-button" title="Strong &lt;strong&gt; Ctrl+B" style="background-position: 0px 0px;"></li><li class="wmd-button wmd-italic-button" title="Emphasis &lt;em&gt; Ctrl+I" style="background-position: -20px 0px;"></li><li class="wmd-spacer wmd-spacer1"></li><li class="wmd-button wmd-link-button" title="Hyperlink &lt;a&gt; Ctrl+L" style="background-position: -40px 0px;"></li><li class="wmd-button wmd-quote-button" title="Blockquote &lt;blockquote&gt; Ctrl+Q" style="background-position: -60px 0px;"></li><li class="wmd-button wmd-code-button" title="Code Sample &lt;pre&gt;&lt;code&gt; Ctrl+K" style="background-position: -80px 0px;"></li><li class="wmd-button wmd-image-button" title="Image &lt;img&gt; Ctrl+G" style="background-position: -120px 0px;"></li><li class="wmd-button wmd-attachment-button" title="Attachment Ctrl+U" style="background-position: -100px 0px;"></li><li class="wmd-spacer wmd-spacer2"></li><li class="wmd-button wmd-olist-button" title="Numbered List &lt;ol&gt; Ctrl+O" style="background-position: -140px 0px;"></li><li class="wmd-button wmd-ulist-button" title="Bulleted List &lt;ul&gt; Ctrl+U" style="background-position: -160px 0px;"></li><li class="wmd-button wmd-heading-button" title="Heading &lt;h1&gt;/&lt;h2&gt; Ctrl+H" style="background-position: -180px 0px;"></li><li class="wmd-button wmd-hr-button" title="Horizontal Rule &lt;hr&gt; Ctrl+R" style="background-position: -200px 0px;"></li><li class="wmd-spacer wmd-spacer3"></li><li class="wmd-button wmd-undo-button" title="Undo - Ctrl+Z" style="background-position: -220px -20px;"></li><li class="wmd-button wmd-redo-button" title="Redo - Ctrl+Y" style="background-position: -240px -20px;"></li></ul></div><textarea name="body" class="commentBox"></textarea><div class="comments-form-attachments"><div></div><div></div></div>
+            </div>
+            <div class="comment-form-buttons">
+                <span id="comment-{{ post.id }}-chars-left" class="comment-chars-left">
+                    <span class="comments-char-left-count">10|3000</span>
+                    <span class="comments-chars-togo-msg">characters needed</span>
+                    <span class="comments-chars-left-msg">characters left</span>
+                </span>
+                <div class="comment-form-buttons-container">
+                    <input type="submit" class="comment-submit" value="comment">
+                    <input type="submit" class="comment-cancel" value="cancel">
+                </div>
+                
+            </div>
+            <div style="clear:both;"></div>
+        </div>
+        <input type="hidden" name="parent" value="253049">
+        <input type="hidden" name="visibility" value="full">
+        <div style="display: none" class="comment-form-extra-inputs"></div>
+    </form>
+</div>
+
+                </div>
+            </td>
+        </tr>
+    </tbody></table>
+</div>
+
+            <script type="text/javascript">$(function() {tools.rel({"253049":{"type":"answer"}}); tools.rel({"253832":{"visibility":"full","type":"comment"},"253322":{"visibility":"full","score":2,"type":"comment"},"253427":{"visibility":"full","type":"comment"},"253305":{"visibility":"full","type":"comment"},"253311":{"visibility":"full","type":"comment"}})});</script>
+
+
+
+    <div style="clear:both">
+    </div>
+
+    <div style="padding:10px 0 0 0;">
+        <div class="headNormal">
+Your answer        </div>
+    </div>
+
+
+<form id="fmanswer" action="http://answers.unity3d.com/answers/253023/post.html" method="POST"><input type="hidden" name="TH_CSRF" value="-61328155468023380">
+
+    <div class="form-item">
+        <div id="wmd-button-bar" class="wmd-panel wmd-button-bar"><ul class="wmd-button-row"><li class="wmd-button wmd-bold-button" title="Strong &lt;strong&gt; Ctrl+B" style="background-position: 0px 0px;"></li><li class="wmd-button wmd-italic-button" title="Emphasis &lt;em&gt; Ctrl+I" style="background-position: -20px 0px;"></li><li class="wmd-spacer wmd-spacer1"></li><li class="wmd-button wmd-link-button" title="Hyperlink &lt;a&gt; Ctrl+L" style="background-position: -40px 0px;"></li><li class="wmd-button wmd-quote-button" title="Blockquote &lt;blockquote&gt; Ctrl+Q" style="background-position: -60px 0px;"></li><li class="wmd-button wmd-code-button" title="Code Sample &lt;pre&gt;&lt;code&gt; Ctrl+K" style="background-position: -80px 0px;"></li><li class="wmd-button wmd-image-button" title="Image &lt;img&gt; Ctrl+G" style="background-position: -120px 0px;"></li><li class="wmd-button wmd-attachment-button" title="Attachment Ctrl+U" style="background-position: -100px 0px;"></li><li class="wmd-spacer wmd-spacer2"></li><li class="wmd-button wmd-olist-button" title="Numbered List &lt;ol&gt; Ctrl+O" style="background-position: -140px 0px;"></li><li class="wmd-button wmd-ulist-button" title="Bulleted List &lt;ul&gt; Ctrl+U" style="background-position: -160px 0px;"></li><li class="wmd-button wmd-heading-button" title="Heading &lt;h1&gt;/&lt;h2&gt; Ctrl+H" style="background-position: -180px 0px;"></li><li class="wmd-button wmd-hr-button" title="Horizontal Rule &lt;hr&gt; Ctrl+R" style="background-position: -200px 0px;"></li><li class="wmd-spacer wmd-spacer3"></li><li class="wmd-button wmd-undo-button" title="Undo - Ctrl+Z" style="background-position: -220px -20px;"></li><li class="wmd-button wmd-redo-button" title="Redo - Ctrl+Y" style="background-position: -240px -20px;"></li><li class="wmd-button wmd-help-button" style="background-position: -260px 0px;"><a href="http://answers.unity3d.com/static/markdown/help.html" target="_blank" title="Markdown Help"></a></li></ul></div>
+        <div class="resizable-textarea"><span><textarea id="body" name="body" rows="10" style="width:100%;" class="processed"></textarea><div class="grippie" style="margin-right: -6px;"></div></span></div>
+
+        <div class="preview-toggle">
+            <span id="pre-collapse" title=" Toggle the real time Markdown editor preview ">[hide preview]</span>
+            <span style="text-align: right; margin-left: 200px;" id="editor-metrics"></span>
+
+    <input type="hidden" id="wiki" name="wiki" value="false">
+
+        </div>
+        <div id="previewer" class="wmd-preview"></div>
+
+
+
+
+<script type="text/javascript">
+    var attachmentsEnabled = true;
+    pageContext.url.authorizeAttachmentsUrl = "/authorizeAttachment.json";
+    pageContext.authorizeUploadContext = {
+        type: 'answer'
+    };
+</script>
+
+<div id="main-attachments-container" class="message">
+    <p>
+        <strong><label>Attachments:</label></strong>
+Up to 2 attachments (including images) can be used with a maximum of 524.3 kB each and 1.0 MB total.    </p>
+    <div id="img-attachments-container"></div>
+    <div id="attachments-container"></div>
+</div>
+
+    </div>
+
+
+    <div class="form-actions">
+        <p>
+            <input type="submit" class="submit" value="Login/Signup to Post Your Answer" onclick="submitClicked(event, this.form)"> 
+        </p></div>
+
+</form>
+</div>
+<script type="text/x-jquery-tmpl" id="redirect-question-dialog">
+        <p>Redirect 'Card Game [C#]' into:</p>
+        <div>
+            <strong>${search}</strong>
+        </div>
+        <div>
+        <div class="SearchAnswers">
+            <input type="text" style="background-image: none;" class="textInput" id="searchQuestion" value="Find Question" onclick="if(this.value=='Find Question'){this.value = ''}" />
+            <form>
+                <input type="hidden" name="to" />
+            </form>
+        </div>
+        </div>
+    </script>
+<script type="text/javascript">
+        $(function($) {
+            commandUtils.initializeLabels();
+        });
+</script>
+
+            </div>
+
+                <div id="CARight" align="left">
+                        
+    <div id="subscription_box" class="boxC">
+    <h3 class="subtitle">Follow this question</h3>
+    <strong>By Email:</strong><br>
+        <p>Once you sign in you will be able to subscribe for any updates here</p>
+
+    <strong>By RSS:</strong>
+    <p>
+        <a title="subscribe to answers" href="http://answers.unity3d.com/feed/253023/answers.rss" class="feed-icon"></a>
+Answers    </p>
+    <p>
+        <a title="subscribe to comments and answers" href="http://answers.unity3d.com/feed/253023/comments-and-answers.rss" class="feed-icon"></a>
+Answers and Comments    </p>
+</div>
+
+
+        <div>
+            <div class="boxC" id="sidebar-upper">
+    <h2>Welcome to Unity Answers</h2>
+    <p>The best place to ask and answer questions about development with Unity. </p>
+
+<p> If you are a new user, check out our <a href="http://answers.unity3d.com/page/faq.html">FAQ</a> for more information.</p>
+
+<p>If you are a moderator, see our <a href="http://answers.unity3d.com/page/modguide.html">Moderator Guidelines</a> page.</p>
+
+<p>We are making improvements to UA, see the <a href="http://answers.unity3d.com/page/changes.html">list of changes</a>.</p>
+</div>
+
+<style>.unity-ad { margin-top: 10px; margin-bottom: 10px; } .unity-ad img { max-width: 100%; height: auto; display: block;} .unity-ad img a { border: 0; }</style>
+<div class="unity-ad" data-source="answers"></div>
+
+
+        </div>
+        <div>
+            <div class="boxC" id="sidebar-lower">
+   <h2>Unity Answers tutorial video!</h2>
+<p>To help users post good questions and use the site effectively we have posted a&nbsp;<a href="https://www.youtube.com/watch?v=ezAPpViLs2Q">tutorial video</a>.  Please check it out.</p>
+</div>
+        </div>
+
+                        
+
+
+<div class="boxC" id="question-tags-box">
+    <p>
+		Topics:
+    </p>
+    <p class="tags">
+            <a rel="tag" title="see questions tagged  &#39;c#&#39;" href="http://answers.unity3d.com/questions/topics/single/730.html">c#</a> <span class="tag-number">x13310</span><br>
+            <a rel="tag" title="see questions tagged  &#39;shuffle&#39;" href="http://answers.unity3d.com/questions/topics/single/4652.html">shuffle</a> <span class="tag-number">x22</span><br>
+    </p>
+    <p>
+        asked: <strong title="May 15, 2012 10:00:11 PM">May 15, 2012 at 10:00 PM</strong>
+    </p>
+    <p>
+     	Seen: <strong>9090 times</strong>
+    </p>
+    <p>
+        Last Updated: <strong title="Nov 18, 2014 8:51:29 PM">Nov 18, 2014 at 08:51 PM</strong>
+    </p>
+</div>
+<div class="boxC">
+    <h3 class="subtitle">Related Questions</h3>
+    <div class="questions-related">
+            <p>
+                <a href="http://answers.unity3d.com/questions/544890/distribute-terrain-in-zones.html">Distribute terrain in zones</a>
+            </p>
+            <p>
+                <a href="http://answers.unity3d.com/questions/560504/multiple-cars-not-working.html">Multiple Cars not working</a>
+            </p>
+            <p>
+                <a href="http://answers.unity3d.com/questions/252884/shuffle-objects-in-object-array-randomly-in-c.html">Shuffle objects in object array randomly in C#</a>
+            </p>
+            <p>
+                <a href="http://answers.unity3d.com/questions/253031/random-tag-call-script-c.html">Random Tag Call Script [C#]</a>
+            </p>
+            <p>
+                <a href="http://answers.unity3d.com/questions/725369/making-a-bubble-level-not-a-game-but-work-tool.html">Making a bubble level (not a game but work tool)</a>
+            </p>
+            <p>
+                <a href="http://answers.unity3d.com/questions/558436/flip-over-an-object-smooth-transition.html">Flip over an object (smooth transition)</a>
+            </p>
+            <p>
+                <a href="http://answers.unity3d.com/questions/486626/how-can-i-shuffle-alist.html">How can i shuffle  a list</a>
+            </p>
+            <p>
+                <a href="http://answers.unity3d.com/questions/612594/initialising-list-array-for-use-in-a-custom-editor.html">Initialising List array for use in a custom Editor</a>
+            </p>
+            <p>
+                <a href="http://answers.unity3d.com/questions/478247/list-woes-c.html">List woes. (C#)</a>
+            </p>
+            <p>
+                <a href="http://answers.unity3d.com/questions/495004/renderer-on-object-disabled-after-level-reload.html">Renderer on object disabled after level reload</a>
+            </p>
+    </div>
+</div>
+                </div>
+            <div id="tail">
+                </div>
+
+        </div>
+
+        <div class="spacer3"></div>
+    </div>
+
+
+
+<div id="ground">
+    <div>
+            <div class="footerLinks">
+            <a href="http://answers.unity3d.com/page/about.html">about</a> <span class="link-separator"> |</span>
+            <a href="http://answers.unity3d.com/page/faq.html">faq</a> <span class="link-separator"> |</span>
+            <a href="http://unity3d.com/company/legal/privacy-policy">privacy policy</a> <span class="link-separator"> |</span>
+            <a href="http://unity3d.com/company/legal/privacy-policy#cookies">cookies</a> <span class="link-separator"> |</span>
+	    <a href="mailto:support@unity3d.com">contact</a>
+        </div>
+        <p class="footer-copyright" style="text-align: left; width: 150px; margin-left: auto; margin-right: auto; font-size: 85%">
+            <a href="http://answerhub.com/?utm_source=appfooter&utm_medium=web&utm_campaign=Application%2BReferral%2B" style="color: #3060A8;"><img src="./Card Game [C#] - Unity Answers_files/ah_badge.png" title="AnswerHub" alt="AnswerHub" align="left" style="margin-top: 5px"><span>Enterprise<br>Social Q&amp;A</span></a>
+        </p>
+    </div>
+</div>
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-2854981-1']);
+  _gaq.push(['_trackPageview']);
+  _gaq.push(['account2._setAccount', 'UA-42271496-1']);
+  _gaq.push(['account2._trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $(".answer-body pre code").addClass("prettyprint").addClass("linenums");
+            $(".question-body pre code").addClass("prettyprint").addClass("linenums");
+            $(".comment-text pre code").addClass("prettyprint").addClass("linenums");
+
+            prettyPrint();
+        });
+    </script>
+
+
+<table cellspacing="0" cellpadding="0" class="gstl_50 gssb_c" style="width: 2px; display: none; top: 3px; position: absolute; left: -1px;"><tbody><tr><td class="gssb_f"></td><td class="gssb_e" style="width: 100%;"></td></tr></tbody></table><table cellspacing="0" cellpadding="0" class="gstl_51 gssb_c" style="width: 262px; display: none; top: 152px; position: absolute; left: 844px;"><tbody><tr><td class="gssb_f"></td><td class="gssb_e" style="width: 100%;"></td></tr></tbody></table></body></html>
