@@ -43,6 +43,7 @@ public class DeckZoneScript : MonoBehaviour {
 			scriptCard.attack = N["attack"].AsInt;
 			scriptCard.cost = N["cost"].AsInt;
 			scriptCard.warna = N["warna"];
+			scriptCard.img = N["image"];
 			scriptCard.card_init();
 
 			cardCpy.transform.SetParent(GameObject.Find("Canvas").transform.Find("DeckCanvas").Find ("MaskDeck").Find("DeckZone"),false);

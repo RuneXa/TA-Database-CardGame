@@ -9,6 +9,8 @@ public class CardScript : MonoBehaviour {
 	[SerializeField] public int attack; //attack kartu
 	[SerializeField] public int cost; //biaya untuk pakai kartu
 	[SerializeField] public string warna;
+	[SerializeField] public string img;
+	[SerializeField] public Sprite[] imgSprite;
 
 	//public Image img; //gambar kartu, ga dipake dulu karena udah dibikinin duluan di prefab.
 
@@ -32,7 +34,24 @@ public class CardScript : MonoBehaviour {
 		this.transform.FindChild("Label_Cost").FindChild("Text").GetComponent<Text>().text = cost.ToString();
 		this.transform.FindChild("Label_Attack").FindChild("Text").GetComponent<Text>().text = attack.ToString();
 		//this.transform.FindChild("Label_Nama").FindChild("Text").GetComponent<Text>().text = nama;
-		//this.transform.FindChild("Label_Gambar").GetComponent<Image>().sprite = img;
+
+		if(img != null){
+			StartCoroutine(setImage ());
+		}
+
+	}
+
+	IEnumerator setImage()
+	{
+		for(int i =0; i< imgSprite.Length;i++)
+		{
+			if(imgSprite[i].name == img){
+				this.transform.FindChild("Label_Gambar").GetComponent<Image>().sprite = imgSprite[i];
+				break;
+			}
+		}
+
+		yield return null;
 	}
 
 }

@@ -47,7 +47,7 @@ public class  LoginScript : MonoBehaviour {
 		}
 		else
 		{
-			GameObject.Find("TextLoginGagal").gameObject.SetActive(true);
+			this.transform.root.Find("TextLoginGagal").gameObject.SetActive(true);
 		}
 	}
 }

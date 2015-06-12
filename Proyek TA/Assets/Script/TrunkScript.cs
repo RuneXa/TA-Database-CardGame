@@ -44,6 +44,7 @@ public class TrunkScript : MonoBehaviour  {
 			scriptCard.attack = N["attack"].AsInt;
 			scriptCard.cost = N["cost"].AsInt;
 			scriptCard.warna = N["warna"];
+			scriptCard.img = N["image"];
 			scriptCard.card_init();
 
 			cardCpy.AddComponent<CardInEditorScript>();
