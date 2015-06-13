@@ -20,7 +20,7 @@ if($_POST["multi"])
 	  }
 	  
 	  echo '{'; // start relasi
-	  while ($atom=current($row)){
+	  while (($atom=current($row)) !=NULL){
 			
 		  echo '"'.addslashes(key($row)).'"'; //key
 		  
