@@ -4,6 +4,8 @@ using UnityEngine.UI;
 
 public class CardScript : MonoBehaviour {
 
+	public TurnHandlerScript turnHandler;
+
 	[SerializeField] public string kode; //kode kartu
 	[SerializeField] public string nama; //nama kartu
 	[SerializeField] public int attack; //attack kartu
@@ -13,6 +15,28 @@ public class CardScript : MonoBehaviour {
 	[SerializeField] public Sprite[] imgSprite;
 
 	//public Image img; //gambar kartu, ga dipake dulu karena udah dibikinin duluan di prefab.
+
+	void Start(){
+		if(Application.loadedLevelName == "PlayScene")
+		{
+			turnHandler = GameObject.Find("TurnManager").GetComponent<TurnHandlerScript>();
+		}
+	}
+
+	void Update(){
+		if(Application.loadedLevelName == "PlayScene")
+		{	
+			if(turnHandler.turnPhase == TurnHandlerScript.Turn.MAINPLAYER)
+			{
+				this.GetComponent<DragScript>().enabled = true;
+			}
+			else
+			{
+				this.GetComponent<DragScript>().enabled = false;
+			}
+		}
+	}
+
 
 	public void card_init(){
 

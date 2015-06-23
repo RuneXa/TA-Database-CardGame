@@ -1,6 +1,6 @@
 <?php
 
-$link=mysqli_connect("127.0.0.1",$_POST["username"],$_POST["password"],"db_tcg") or die("Cannot connect to mysql server.");
+$link=mysqli_connect("127.0.0.1","root","","db_tcg") or die("Cannot connect to mysql server.");
 
 //print '[{"one":"Hello", "two":"World"}]';
 if($_POST["multi"])

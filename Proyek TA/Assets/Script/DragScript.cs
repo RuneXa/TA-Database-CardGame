@@ -2,8 +2,7 @@
 using UnityEngine.UI;
 using System.Collections;
 using UnityEngine.EventSystems;
-
-public class DragScript : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerClickHandler {
+public class DragScript : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerClickHandler, IPointerEnterHandler {
 	
 	public Transform parentToReturnTo = null;
 	public Transform placeholderParent = null;
@@ -78,8 +77,26 @@ public class DragScript : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
 			{
 				Destroy(this.gameObject);
 			}
-				}
+		}
 	}
+	#endregion
+
+	#region IPointerEnter implementation
+	public void OnPointerEnter (PointerEventData eventData)
+	{
+		if(Application.loadedLevelName == "PlayScene")
+		{
+			if(eventData.pointerEnter != null)
+			{
+				Text nameTxt = GameObject.Find ("Canvas").transform.Find("CardDetail").FindChild("CardName").GetComponent<Text>();
+				Text descTxt = GameObject.Find ("Canvas").transform.Find("CardDetail").FindChild("CardDesc").GetComponent<Text>();
+				CardScript detailCard = this.GetComponent<CardScript>() as CardScript;
+				nameTxt.text = detailCard.nama;
+				descTxt.text = ("Attack\t= " + detailCard.attack + "\nCost\t= " + detailCard.cost) ;
+			}
+		}
+	}
+
 	#endregion
 
 }

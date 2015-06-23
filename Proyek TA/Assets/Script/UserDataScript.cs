@@ -8,6 +8,7 @@ public class UserDataScript : MonoBehaviour {
 	public string nama_user;
 	public int exp;
 	public string phpPath;
+	public int gameNum;
 
 	void Start () {
 		phpPath = "http://localhost/card.php";

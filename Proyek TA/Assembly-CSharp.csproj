@@ -46,17 +46,18 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\NewBehaviourScript.cs" />
      <Compile Include="Assets\Script\CardInEditorScript.cs" />
      <Compile Include="Assets\Script\CardScript.cs" />
      <Compile Include="Assets\Script\DeckScript.cs" />
      <Compile Include="Assets\Script\DeckZoneScript.cs" />
      <Compile Include="Assets\Script\DragScript.cs" />
      <Compile Include="Assets\Script\DropZone.cs" />
+     <Compile Include="Assets\Script\EnemyScript.cs" />
      <Compile Include="Assets\Script\ExitScript.cs" />
      <Compile Include="Assets\Script\GraveScript.cs" />
      <Compile Include="Assets\Script\LoginScript.cs" />
      <Compile Include="Assets\Script\MainMenuScript.cs" />
+     <Compile Include="Assets\Script\ReportScript.cs" />
      <Compile Include="Assets\Script\ResolveScript.cs" />
      <Compile Include="Assets\Script\ScrollRectCustom.cs" />
      <Compile Include="Assets\Script\SimpleJSON.cs" />

@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class TurnHandlerScript : MonoBehaviour {
 
@@ -17,13 +18,29 @@ public class TurnHandlerScript : MonoBehaviour {
 	}
 
 	public Turn turnPhase;
+	public EnemyScript enemyData;
+	public UserDataScript userData;
+	public int playerHealth;
+	public int playerResources; 
+	public Text playerHP;
+	public Text playerCT;
+	public Text enemyHP;
 
 	void Start () {
 		turnPhase = Turn.NULL;
+		playerHealth = 100;
+		playerResources = 3;
+		userData = GameObject.Find ("UserManager").GetComponent<UserDataScript>();
+		enemyData = GameObject.Find("Canvas").transform.Find("Enemy").GetComponent<EnemyScript>();
+		playerHP = GameObject.Find ("texts").transform.Find ("t_playerHealth").GetComponent<Text>();
+		enemyHP = GameObject.Find ("texts").transform.Find ("t_enemyHealth").GetComponent<Text>();
+		playerCT = GameObject.Find ("texts").transform.Find ("t_playerResources").GetComponent<Text>();
+		editParamValue();
 		resolvePhase();
 	}
 
 	public void resolvePhase () {
+		Debug.Log (turnPhase);
 		switch(turnPhase){
 			case (Turn.START):
 			StartCoroutine(turnStart());
@@ -38,19 +55,27 @@ public class TurnHandlerScript : MonoBehaviour {
 			StartCoroutine(turnResolvePlayer());
 				break;
 			case (Turn.MAINENEMY):
-			//turnMainEnemy();
+			StartCoroutine(turnMainEnemy());
 				break;
 			case (Turn.RESOLVEENEMY):
-			//turnResolveEnemy();
+			Debug.Log ("oioi");
+			StartCoroutine(turnResolveEnemy());
 				break;
 			case (Turn.END):
-			//turnEnd();
+			StartCoroutine(turnEnd());
 				break;
 		}
 	}
 
+	public void editParamValue(){
+		playerHP.text = userData.nama_user+"'s Health : "+ playerHealth.ToString();
+		playerCT.text = userData.nama_user+"'s Resources : "+ playerResources.ToString();
+		enemyHP.text = enemyData.nama + "'s Health : "+ enemyData.health.ToString();
+	}
+
 	IEnumerator turnStart()
 	{
+
 		for(int i = 0; i<5;i++){
 			GameObject.Find("b_draw").GetComponent<DeckScript>().Draw();
 			yield return new WaitForSeconds(0.3f);
@@ -61,6 +86,8 @@ public class TurnHandlerScript : MonoBehaviour {
 
 	IEnumerator turnDraw()
 	{
+		playerResources++;
+		editParamValue();
 		yield return new WaitForSeconds(0.5f);
 		GameObject.Find("b_draw").GetComponent<DeckScript>().Draw();
 		turnPhase++;
@@ -81,7 +108,10 @@ public class TurnHandlerScript : MonoBehaviour {
 			jumlahAtk += cardInField.GetComponent<CardScript>().attack;
 		}
 
-		Debug.Log (jumlahAtk); // hp musuh -= jumlahAtk
+		enemyData.health -= jumlahAtk;
+		editParamValue();
+
+		Debug.Log ("Jumlah serangan : "+jumlahAtk+"\nNyawa Musuh : "+enemyData.health); // hp musuh -= jumlahAtk
 
 		while(GameObject.Find ("Field").transform.childCount > 0){
 			GameObject.Find ("Field").transform.GetChild(0).SetParent(GameObject.Find ("Field").transform.parent.FindChild("Graveyard"));
@@ -93,4 +123,34 @@ public class TurnHandlerScript : MonoBehaviour {
 		resolvePhase();
 	}
 
+	IEnumerator turnMainEnemy()
+	{
+		yield return null;
+		turnPhase++;
+		resolvePhase();
+	}
+
+	IEnumerator turnResolveEnemy()
+	{
+		int jumlahAtk = 0;
+		jumlahAtk = (int) (enemyData.attack * Random.value);
+		
+		playerHealth -= jumlahAtk;
+		editParamValue();
+		
+		Debug.Log ("Jumlah serangan : "+jumlahAtk+"\nNyawa Player : "+playerHealth); // hp player -= jumlahAtk
+
+		yield return new WaitForSeconds(0.3f);
+
+		// if hp player == 0 turn phase = lose, else turnphase++
+		turnPhase++;
+		resolvePhase();
+	}
+
+	IEnumerator turnEnd()
+	{
+		yield return new WaitForSeconds(0.3f);
+		turnPhase = Turn.DRAW;
+		resolvePhase();
+	}
 }
