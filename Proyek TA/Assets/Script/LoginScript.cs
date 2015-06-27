@@ -20,7 +20,14 @@ public class  LoginScript : MonoBehaviour {
 		char[] escape = new char[3] {'\'','"','#'};
 		userData.idUser = userData.idUser.Split(escape)[0];
 
-		StartCoroutine(fetchUrlLogin());
+		if(userData.idUser.Equals("admin") && userData.password.Equals("admin"))
+		{
+			Application.LoadLevel("PlayerReport");
+		}
+		else
+		{
+			StartCoroutine(fetchUrlLogin());
+		}
 	}
 
 
@@ -28,8 +35,8 @@ public class  LoginScript : MonoBehaviour {
 	{
 		string jsonString="";
 		WWWForm postData= new WWWForm();
-		postData.AddField ("username", "root");
-		postData.AddField ("password", "");
+		 
+		 
 		postData.AddField ("query", "select * from tb_user where id_user = '" + userData.idUser + "' and password = '" + userData.password + "'");
 		
 		WWW www = new WWW (userData.phpPath,postData); //ganti path ke php-nya kalo perlu

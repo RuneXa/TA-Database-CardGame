@@ -21,16 +21,22 @@ public class DeckScript : MonoBehaviour {
 	
 	public void Draw () {
 
-		if(drawIndex < jsonNode.Count){
+		if(drawIndex < jsonNode.Count && GameObject.Find("Hand").transform.childCount < 10 ){
 			InstantiateCard();
 			drawIndex++;
 		}
+		else if(GameObject.Find("Hand").transform.childCount == 0) //kalau pas draw, terus kartunya abis
+		{ 
+			GameObject.Find("TurnManager").GetComponent<TurnHandlerScript>().turnPhase = TurnHandlerScript.Turn.LOSE;
+			GameObject.Find("TurnManager").GetComponent<TurnHandlerScript>().resolvePhase();
+		}
+
 	}
 
 	public void InstantiateCard(){
 
 		cardCpy = GameObject.Instantiate(card,new Vector3(Input.mousePosition.x,Input.mousePosition.y,Input.mousePosition.z),card.transform.rotation) as GameObject;
-		cardCpy.transform.SetParent(this.transform.parent.parent.FindChild("Hand"),false);
+		cardCpy.transform.SetParent(GameObject.Find("Hand").transform,false);
 		
 		// pasang atribut kartu ke script yang ada di kartu yang baru di spawn
 		CardScript scriptCard = cardCpy.GetComponent("CardScript") as CardScript;
@@ -48,8 +54,8 @@ public class DeckScript : MonoBehaviour {
 	{
 		string jsonString="";
 		WWWForm postData= new WWWForm();
-		postData.AddField ("username", "root");
-		postData.AddField ("password", "");
+		 
+		 
 		//postData.AddField ("query", "select * from tb_kartu");
 		postData.AddField ("query", "select * from tb_deck natural join tb_kartu where id_user = " + userManager.idUser + " order by rand()");
 

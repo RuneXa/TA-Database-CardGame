@@ -20,8 +20,8 @@ public class DeckZoneScript : MonoBehaviour {
 	{
 		string jsonString="";
 		WWWForm postData= new WWWForm();
-		postData.AddField ("username", "root");
-		postData.AddField ("password", "");
+		 
+		 
 		postData.AddField ("query", "select * from tb_deck natural join tb_kartu where id_user = " + userManager.idUser);
 
 		

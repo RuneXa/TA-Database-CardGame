@@ -48,6 +48,7 @@
   <ItemGroup>
      <Compile Include="Assets\Script\CardInEditorScript.cs" />
      <Compile Include="Assets\Script\CardScript.cs" />
+     <Compile Include="Assets\Script\CreateIDScript.cs" />
      <Compile Include="Assets\Script\DeckScript.cs" />
      <Compile Include="Assets\Script\DeckZoneScript.cs" />
      <Compile Include="Assets\Script\DragScript.cs" />

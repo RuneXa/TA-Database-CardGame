@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using SimpleJSON;
 
 public class TurnHandlerScript : MonoBehaviour {
 
@@ -58,11 +59,16 @@ public class TurnHandlerScript : MonoBehaviour {
 			StartCoroutine(turnMainEnemy());
 				break;
 			case (Turn.RESOLVEENEMY):
-			Debug.Log ("oioi");
 			StartCoroutine(turnResolveEnemy());
 				break;
 			case (Turn.END):
 			StartCoroutine(turnEnd());
+				break;
+			case (Turn.WIN):
+			StartCoroutine(win());
+				break;
+			case (Turn.LOSE):
+				StartCoroutine(lose());
 				break;
 		}
 	}
@@ -77,7 +83,7 @@ public class TurnHandlerScript : MonoBehaviour {
 	{
 
 		for(int i = 0; i<5;i++){
-			GameObject.Find("b_draw").GetComponent<DeckScript>().Draw();
+			this.GetComponent<DeckScript>().Draw();
 			yield return new WaitForSeconds(0.3f);
 		}
 		turnPhase++;
@@ -89,7 +95,7 @@ public class TurnHandlerScript : MonoBehaviour {
 		playerResources++;
 		editParamValue();
 		yield return new WaitForSeconds(0.5f);
-		GameObject.Find("b_draw").GetComponent<DeckScript>().Draw();
+		this.GetComponent<DeckScript>().Draw();
 		turnPhase++;
 		resolvePhase();
 	}
@@ -101,26 +107,47 @@ public class TurnHandlerScript : MonoBehaviour {
 
 	IEnumerator turnResolvePlayer()
 	{
+
 		int jumlahAtk = 0;
+		int jumlahRsc = 0;
 
 		foreach(Transform cardInField in GameObject.Find("Field").transform)
 		{
 			jumlahAtk += cardInField.GetComponent<CardScript>().attack;
+			jumlahRsc += cardInField.GetComponent<CardScript>().cost;
 		}
 
-		enemyData.health -= jumlahAtk;
-		editParamValue();
+		if(jumlahRsc <= playerResources){
+			GameObject.Find("Canvas").transform.Find("texts").transform.Find("t_resourceKurang").gameObject.SetActive(false);
+			enemyData.health -= jumlahAtk;
+			playerResources -= jumlahRsc;
+			editParamValue();
 
-		Debug.Log ("Jumlah serangan : "+jumlahAtk+"\nNyawa Musuh : "+enemyData.health); // hp musuh -= jumlahAtk
+			Debug.Log ("Jumlah serangan : "+jumlahAtk+"\nNyawa Musuh : "+enemyData.health); // hp musuh -= jumlahAtk
 
-		while(GameObject.Find ("Field").transform.childCount > 0){
-			GameObject.Find ("Field").transform.GetChild(0).SetParent(GameObject.Find ("Field").transform.parent.FindChild("Graveyard"));
-			yield return new WaitForSeconds(0.2f);
+			while(GameObject.Find ("Field").transform.childCount > 0){
+				GameObject.Find ("Field").transform.GetChild(0).SetParent(GameObject.Find ("Field").transform.parent.FindChild("Graveyard"));
+				yield return new WaitForSeconds(0.2f);
+			}
+
+			if(enemyData.health <= 0)
+			{
+				turnPhase = Turn.WIN;
+				resolvePhase();
+			}
+				else
+			{
+				turnPhase++;
+				resolvePhase();
+			}
 		}
-
-		// if hp musuh == 0 turn phase = win, else turnphase++
-		turnPhase++;
-		resolvePhase();
+		else
+		{
+			GameObject.Find("Canvas").transform.Find("texts").transform.Find("t_resourceKurang").gameObject.SetActive(true);
+			Debug.Log ("Player Resource Tidak Cukup");
+			turnPhase = Turn.MAINPLAYER;
+			resolvePhase();
+		}
 	}
 
 	IEnumerator turnMainEnemy()
@@ -142,9 +169,16 @@ public class TurnHandlerScript : MonoBehaviour {
 
 		yield return new WaitForSeconds(0.3f);
 
-		// if hp player == 0 turn phase = lose, else turnphase++
-		turnPhase++;
-		resolvePhase();
+		if(playerHealth <= 0)
+		{
+			turnPhase = Turn.LOSE;
+			resolvePhase();
+		}
+		else
+		{
+			turnPhase++;
+			resolvePhase();
+		}
 	}
 
 	IEnumerator turnEnd()
@@ -152,5 +186,46 @@ public class TurnHandlerScript : MonoBehaviour {
 		yield return new WaitForSeconds(0.3f);
 		turnPhase = Turn.DRAW;
 		resolvePhase();
+	}
+
+	IEnumerator win(){
+
+		GameObject.Find("Canvas").transform.Find("Enemy").gameObject.SetActive(false);
+		GameObject.Find("Canvas").transform.Find("texts").transform.Find("t_win").gameObject.SetActive(true);
+		string jsonString="";
+		WWWForm postData= new WWWForm();
+
+		postData.AddField ("query", 
+		                   "update tb_winrate set win =+ 1 where id_user = '" + userData.idUser + "'; " +
+		                   "update tb_user set exp =+ (select expVar from tb_datamusuh where id = '" + enemyData.kode + "') where id_user = '" + userData.idUser + "';" );
+		
+		WWW www = new WWW (userData.phpPath,postData);
+		yield return www.isDone;
+		for (int i=0; i<www.bytesDownloaded; i++) {
+			jsonString+=(char)www.bytes [i]; //append char ke jsonString
+		}
+		//JSONNode jsonNode = JSON.Parse (jsonString); //parsing JSON
+
+		yield return new WaitForSeconds(2f);
+		Application.LoadLevel("MainMenu");
+	}
+
+	IEnumerator lose(){
+
+		GameObject.Find("Canvas").transform.Find("texts").transform.Find("t_lose").gameObject.SetActive(true);
+		string jsonString="";
+		WWWForm postData= new WWWForm();
+		
+		postData.AddField ("query", "update tb_winrate set loss =+ 1 where id_user = '" + userData.idUser + "'");
+
+		WWW www = new WWW (userData.phpPath,postData);
+		yield return www.isDone;
+		for (int i=0; i<www.bytesDownloaded; i++) {
+			jsonString+=(char)www.bytes [i]; //append char ke jsonString
+		}
+		//JSONNode jsonNode = JSON.Parse (jsonString); //parsing JSON
+		
+		yield return new WaitForSeconds(2f);
+		Application.LoadLevel("MainMenu");
 	}
 }

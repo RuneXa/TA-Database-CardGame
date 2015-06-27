@@ -23,8 +23,8 @@ public class EnemyScript : MonoBehaviour {
 	{
 		string jsonString="";
 		WWWForm postData= new WWWForm();
-		postData.AddField ("username", "root");
-		postData.AddField ("password", "");
+		 
+		 
 		postData.AddField ("query", "select * from tb_datamusuh order by rand() limit 1");
 		
 		WWW www = new WWW (userManager.phpPath,postData); //ganti path ke php-nya kalo perlu
@@ -37,5 +37,14 @@ public class EnemyScript : MonoBehaviour {
 		nama = jsonNode[0]["nama"];
 		attack = jsonNode[0]["attack"].AsInt;
 		health = jsonNode[0]["health"].AsInt;
+		img = jsonNode[0]["image"];
+
+		for(int i =0; i< imgSprite.Length;i++)
+		{
+			if(imgSprite[i].name == img){
+				this.GetComponent<Image>().sprite = imgSprite[i];
+				break;
+			}
+		}
 	}
 }

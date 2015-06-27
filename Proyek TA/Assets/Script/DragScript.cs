@@ -67,6 +67,7 @@ public class DragScript : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
 			GameObject.Destroy(this.gameObject);
 		}
 
+
 	}
 	
 	#region IPointerClickHandler implementation

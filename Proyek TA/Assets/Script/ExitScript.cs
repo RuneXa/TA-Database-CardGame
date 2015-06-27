@@ -7,4 +7,8 @@ public class ExitScript : MonoBehaviour {
 		Application.Quit();
 	}
 
+	public void create() {
+		Application.LoadLevel("CreateID1");
+	}
+
 }

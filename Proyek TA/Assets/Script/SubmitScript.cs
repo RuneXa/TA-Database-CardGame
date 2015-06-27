@@ -21,8 +21,8 @@ public class SubmitScript : MonoBehaviour {
 	{
 		string query="";
 		WWWForm postData= new WWWForm();
-		postData.AddField ("username", "root");
-		postData.AddField ("password", "");
+		 
+		 
 		postData.AddField("multi","1");
 
 		//truncate dulu baru dimasukkin lagi

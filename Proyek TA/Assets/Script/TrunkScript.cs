@@ -20,8 +20,8 @@ public class TrunkScript : MonoBehaviour  {
 	{
 		string jsonString="";
 		WWWForm postData= new WWWForm();
-		postData.AddField ("username", "root");
-		postData.AddField ("password", "");
+		 
+		 
 		postData.AddField ("query", "select * from tb_kartu");
 		
 		
