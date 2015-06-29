@@ -37,7 +37,7 @@ public class ReportScript : MonoBehaviour {
 			string jsonString="";
 			WWWForm postData= new WWWForm();
 
-			postData.AddField ("query", "select id_user, win/(win+loss)*100 as winrate from tb_winrate");
+			postData.AddField ("query", "select id_user, nama , win/(win+loss)*100 as winrate from tb_winrate natural join tb_user");
 			
 			WWW www = new WWW (userData.phpPath,postData); //ganti path ke php-nya kalo perlu
 			yield return www.isDone;
@@ -48,7 +48,7 @@ public class ReportScript : MonoBehaviour {
 			textReport.text = "Winrate :\n";
 			foreach(JSONNode N in jsonNode.Children)
 			{
-				textReport.text = textReport.text + "\n" + N["id_user"] + " : " + N["winrate"] +"%";
+				textReport.text = textReport.text + "\n" + N["nama"] + " : " + N["winrate"] +"%";
 			}
 		Debug.Log (textReport.text);
 			

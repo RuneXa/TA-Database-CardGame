@@ -61,7 +61,6 @@ public class CardScript : MonoBehaviour {
 
 		this.gameObject.GetComponent<Image>().color = tempWarna; //set warna dasar
 		this.transform.FindChild("Label_Cost").FindChild("Text").GetComponent<Text>().text = cost.ToString();
-		this.transform.FindChild("Label_Value").FindChild("Text").GetComponent<Text>().text = attack.ToString();
 		//this.transform.FindChild("Label_Nama").FindChild("Text").GetComponent<Text>().text = nama;
 
 		if(img != null){

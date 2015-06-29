@@ -13,7 +13,7 @@ public class SubmitScript : MonoBehaviour {
 	}
 
 	public void submitDeck() {
-		StartCoroutine("fetchUrlSubmitKartu");
+		StartCoroutine(fetchUrlSubmitKartu());
 	}
 	
 

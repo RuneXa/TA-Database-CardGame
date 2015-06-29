@@ -7,18 +7,20 @@ public class CreateIDScript : MonoBehaviour {
 
 	UserDataScript userManager;
 	Text idInput;
-	Text passInput;
+	InputField passInput;
 	Text namaInput;
 	JSONNode jsonNode;
 	GameObject txtGagal;
 
 	void Start () {  
-		txtGagal = GameObject.Find ("LabelGagal");
-		txtGagal.SetActive(false);
+		if(Application.loadedLevelName == "CreateID1"){
+			txtGagal = GameObject.Find("Canvas").transform.Find ("LabelGagal").gameObject;
+			txtGagal.SetActive(false);
+		}
 		userManager = GameObject.Find("UserManager").GetComponent<UserDataScript>();
 		if(Application.loadedLevelName == "CreateID1"){
 			idInput = GameObject.Find ("InputID").transform.Find("Text").GetComponent<Text>();
-			passInput = GameObject.Find ("InputPass").transform.Find("Text").GetComponent<Text>();
+			passInput = GameObject.Find ("InputPass").GetComponent<InputField>();
 		}
 		else if(Application.loadedLevelName == "CreateID2"){
 			namaInput = GameObject.Find ("InputNama").transform.Find("Text").GetComponent<Text>();
@@ -26,7 +28,7 @@ public class CreateIDScript : MonoBehaviour {
 	}
 
 	public void Lanjut1() {
-		if(!idInput.text.Equals("admin") || !passInput.text.Equals("admin"))
+		if(!idInput.text.Equals("admin"))
 		{
 			StartCoroutine(cekUser());
 		}
@@ -40,7 +42,7 @@ public class CreateIDScript : MonoBehaviour {
 	{
 		string jsonString="";
 		WWWForm postData= new WWWForm();
-		postData.AddField ("query", "select id_user from tb_user where id_user = " + idInput.text);
+		postData.AddField ("query", "select id_user from tb_user where id_user = '" + idInput.text + "'");
 		
 		WWW www = new WWW (userManager.phpPath,postData); //ganti path ke php-nya kalo perlu
 		yield return www.isDone;
@@ -48,7 +50,7 @@ public class CreateIDScript : MonoBehaviour {
 			jsonString+=(char)www.bytes [i]; //append char ke jsonString
 		}
 		jsonNode = JSON.Parse (jsonString); //parsing JSON
-		if(jsonNode[0] != null)
+		if(jsonNode[0] == null)
 		{
 			userManager.idUser = idInput.text;
 			userManager.password = passInput.text;
