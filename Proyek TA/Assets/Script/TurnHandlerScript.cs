@@ -26,6 +26,11 @@ public class TurnHandlerScript : MonoBehaviour {
 	public Text playerHP;
 	public Text playerCT;
 	public Text enemyHP;
+	int jumlahAtk;
+	int jumlahDef;
+	int jumlahHeal;
+	int jumlahRsc;
+
 
 	void Start () {
 		turnPhase = Turn.NULL;
@@ -108,18 +113,23 @@ public class TurnHandlerScript : MonoBehaviour {
 	IEnumerator turnResolvePlayer()
 	{
 
-		int jumlahAtk = 0;
-		int jumlahRsc = 0;
+		jumlahAtk = 0;
+		jumlahDef = 0;
+		jumlahHeal = 0;
+		jumlahRsc = 0;
 
 		foreach(Transform cardInField in GameObject.Find("Field").transform)
 		{
 			jumlahAtk += cardInField.GetComponent<CardScript>().attack;
+			jumlahDef += cardInField.GetComponent<CardScript>().defend;
+			jumlahHeal += cardInField.GetComponent<CardScript>().heal;
 			jumlahRsc += cardInField.GetComponent<CardScript>().cost;
 		}
 
 		if(jumlahRsc <= playerResources){
 			GameObject.Find("Canvas").transform.Find("texts").transform.Find("t_resourceKurang").gameObject.SetActive(false);
 			enemyData.health -= jumlahAtk;
+			playerHealth += jumlahHeal;
 			playerResources -= jumlahRsc;
 			editParamValue();
 
@@ -159,9 +169,13 @@ public class TurnHandlerScript : MonoBehaviour {
 
 	IEnumerator turnResolveEnemy()
 	{
-		int jumlahAtk = 0;
-		jumlahAtk = (int) (enemyData.attack * Random.value);
-		
+		jumlahAtk = 0;
+		jumlahAtk = (int) (enemyData.attack * Random.value) - jumlahDef;
+		if(jumlahAtk < 0)
+		{
+			jumlahAtk = 0;
+		}
+
 		playerHealth -= jumlahAtk;
 		editParamValue();
 		

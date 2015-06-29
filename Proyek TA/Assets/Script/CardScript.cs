@@ -9,6 +9,8 @@ public class CardScript : MonoBehaviour {
 	[SerializeField] public string kode; //kode kartu
 	[SerializeField] public string nama; //nama kartu
 	[SerializeField] public int attack; //attack kartu
+	[SerializeField] public int defend; //def kartu
+	[SerializeField] public int heal; //nilai heal kartu
 	[SerializeField] public int cost; //biaya untuk pakai kartu
 	[SerializeField] public string warna;
 	[SerializeField] public string img;
@@ -44,19 +46,22 @@ public class CardScript : MonoBehaviour {
 		if(warna == "red")
 		{
 			tempWarna=Color.red;
+			this.transform.FindChild("Label_Value").FindChild("Text").GetComponent<Text>().text = attack.ToString();
 		}
 		if(warna == "blue")
 		{
 			tempWarna=Color.blue;
+			this.transform.FindChild("Label_Value").FindChild("Text").GetComponent<Text>().text = defend.ToString();
 		}
 		if(warna == "green")
 		{
 			tempWarna=Color.green;
+			this.transform.FindChild("Label_Value").FindChild("Text").GetComponent<Text>().text = heal.ToString();
 		}
 
 		this.gameObject.GetComponent<Image>().color = tempWarna; //set warna dasar
 		this.transform.FindChild("Label_Cost").FindChild("Text").GetComponent<Text>().text = cost.ToString();
-		this.transform.FindChild("Label_Attack").FindChild("Text").GetComponent<Text>().text = attack.ToString();
+		this.transform.FindChild("Label_Value").FindChild("Text").GetComponent<Text>().text = attack.ToString();
 		//this.transform.FindChild("Label_Nama").FindChild("Text").GetComponent<Text>().text = nama;
 
 		if(img != null){

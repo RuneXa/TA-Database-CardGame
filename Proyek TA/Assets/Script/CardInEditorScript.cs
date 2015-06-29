@@ -16,6 +16,7 @@ public class CardInEditorScript : MonoBehaviour, IPointerClickHandler {
 	
 	public void OnPointerClick (PointerEventData eventData){
 		if(GameObject.Find ("DeckZone").transform.childCount < 60){
+			GameObject.Find ("Canvas").transform.Find ("cardMaxTxt").gameObject.SetActive(false);
 			cardCpy = Transform.Instantiate(card,new Vector3(0,0,0),card.transform.rotation) as GameObject; 
 			cardCpy.transform.SetParent(GameObject.Find("DeckZone").transform,false);
 			cekSizeDeckZone();
@@ -24,6 +25,7 @@ public class CardInEditorScript : MonoBehaviour, IPointerClickHandler {
 		else
 		{
 			Debug.Log ("Jumlah Maksimal Deck = 60");
+			GameObject.Find ("Canvas").transform.Find ("cardMaxTxt").gameObject.SetActive(true);
 		}
 	}
 

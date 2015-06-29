@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 14, 2015 at 04:33 AM
+-- Generation Time: Jun 29, 2015 at 12:45 PM
 -- Server version: 5.6.21
 -- PHP Version: 5.6.3
 
@@ -33,15 +33,17 @@ CREATE TABLE IF NOT EXISTS `tb_datamusuh` (
   `nama` varchar(40) NOT NULL,
   `health` int(11) NOT NULL,
   `attack` int(11) NOT NULL,
-  `desc` text
+  `desc` text,
+  `expVar` int(20) NOT NULL,
+  `image` varchar(20) NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tb_datamusuh`
 --
 
-INSERT INTO `tb_datamusuh` (`id`, `nama`, `health`, `attack`, `desc`) VALUES
-(1, 'Tempura', 100, 10, 'Merupakan monster makanan yang bisa membuat lawan lapar dan tidak punya tenaga untuk melanjutkan permainan');
+INSERT INTO `tb_datamusuh` (`id`, `nama`, `health`, `attack`, `desc`, `expVar`, `image`) VALUES
+(1, 'Tempura', 100, 10, 'Merupakan monster makanan yang bisa membuat lawan lapar dan tidak punya tenaga untuk melanjutkan permainan', 50, 'musuh1');
 
 -- --------------------------------------------------------
 
@@ -50,7 +52,7 @@ INSERT INTO `tb_datamusuh` (`id`, `nama`, `health`, `attack`, `desc`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `tb_deck` (
-  `id_user` int(11) NOT NULL,
+  `id_user` varchar(20) NOT NULL,
   `kode_kartu` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -59,16 +61,34 @@ CREATE TABLE IF NOT EXISTS `tb_deck` (
 --
 
 INSERT INTO `tb_deck` (`id_user`, `kode_kartu`) VALUES
-(1, 1),
-(1, 1),
-(1, 1),
-(1, 1),
-(1, 2),
-(1, 2),
-(1, 2),
-(1, 3),
-(1, 3),
-(1, 3);
+('1', 1),
+('1', 1),
+('1', 1),
+('1', 1),
+('1', 1),
+('1', 2),
+('1', 2),
+('1', 2),
+('1', 2),
+('1', 3),
+('1', 3),
+('1', 3),
+('2', 1),
+('2', 1),
+('2', 1),
+('2', 1),
+('2', 2),
+('2', 2),
+('2', 2),
+('2', 2),
+('2', 2),
+('2', 2),
+('2', 2),
+('2', 3),
+('2', 4),
+('2', 4),
+('2', 4),
+('2', 4);
 
 -- --------------------------------------------------------
 
@@ -81,8 +101,10 @@ CREATE TABLE IF NOT EXISTS `tb_kartu` (
   `nama` varchar(30) NOT NULL,
   `efek` text NOT NULL,
   `warna` varchar(20) NOT NULL,
-  `attack` int(11) DEFAULT NULL,
-  `cost` int(11) DEFAULT NULL,
+  `attack` int(11) NOT NULL DEFAULT '0',
+  `defend` int(11) NOT NULL DEFAULT '0',
+  `heal` int(11) NOT NULL DEFAULT '0',
+  `cost` int(11) NOT NULL DEFAULT '0',
   `image` varchar(20) DEFAULT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
@@ -90,11 +112,11 @@ CREATE TABLE IF NOT EXISTS `tb_kartu` (
 -- Dumping data for table `tb_kartu`
 --
 
-INSERT INTO `tb_kartu` (`kode_kartu`, `nama`, `efek`, `warna`, `attack`, `cost`, `image`) VALUES
-(1, 'Api di lubang', 'ya gitu lah', 'red', 10, 3, 'atk0'),
-(2, 'katanya sih batu', 'katanya', 'blue', 0, 2, 'def0'),
-(3, 'obat ijo', 'katanya sih pait', 'green', 0, 5, 'heal0'),
-(4, 'air panas', 'kalo disirem lumayan', 'red', 8, 4, 'atk0');
+INSERT INTO `tb_kartu` (`kode_kartu`, `nama`, `efek`, `warna`, `attack`, `defend`, `heal`, `cost`, `image`) VALUES
+(1, 'Api di lubang', 'ya gitu lah', 'red', 10, 0, 0, 3, 'atk0'),
+(2, 'katanya sih batu', 'katanya', 'blue', 0, 5, 0, 2, 'def0'),
+(3, 'obat ijo', 'katanya sih pait', 'green', 0, 0, 10, 5, 'heal0'),
+(4, 'air panas', 'kalo disirem lumayan', 'red', 8, 0, 0, 4, 'atk1');
 
 -- --------------------------------------------------------
 
@@ -103,18 +125,20 @@ INSERT INTO `tb_kartu` (`kode_kartu`, `nama`, `efek`, `warna`, `attack`, `cost`,
 --
 
 CREATE TABLE IF NOT EXISTS `tb_user` (
-`id_user` int(11) NOT NULL,
+  `id_user` varchar(20) NOT NULL,
   `password` varchar(16) NOT NULL,
   `nama` varchar(40) NOT NULL,
   `exp` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tb_user`
 --
 
 INSERT INTO `tb_user` (`id_user`, `password`, `nama`, `exp`) VALUES
-(1, '123456', 'player', 0);
+('1', '123456', 'player', 50),
+('2', '0987654', 'Bukan Richie', 0),
+('3', '987654', 'Bukan Evans', 0);
 
 -- --------------------------------------------------------
 
@@ -123,11 +147,19 @@ INSERT INTO `tb_user` (`id_user`, `password`, `nama`, `exp`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `tb_winrate` (
-`id` int(11) NOT NULL,
-  `id_user` int(11) NOT NULL,
+  `id_user` varchar(20) NOT NULL,
   `win` int(11) NOT NULL,
   `loss` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tb_winrate`
+--
+
+INSERT INTO `tb_winrate` (`id_user`, `win`, `loss`) VALUES
+('1', 1, 1),
+('2', 1, 1),
+('3', 5, 7);
 
 --
 -- Indexes for dumped tables
@@ -161,7 +193,7 @@ ALTER TABLE `tb_user`
 -- Indexes for table `tb_winrate`
 --
 ALTER TABLE `tb_winrate`
- ADD PRIMARY KEY (`id`), ADD UNIQUE KEY `id_user` (`id_user`);
+ ADD UNIQUE KEY `id_user` (`id_user`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -178,16 +210,6 @@ MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 ALTER TABLE `tb_kartu`
 MODIFY `kode_kartu` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
 --
--- AUTO_INCREMENT for table `tb_user`
---
-ALTER TABLE `tb_user`
-MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
---
--- AUTO_INCREMENT for table `tb_winrate`
---
-ALTER TABLE `tb_winrate`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
---
 -- Constraints for dumped tables
 --
 
@@ -195,8 +217,8 @@ MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 -- Constraints for table `tb_deck`
 --
 ALTER TABLE `tb_deck`
-ADD CONSTRAINT `tb_deck_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `tb_user` (`id_user`),
-ADD CONSTRAINT `tb_deck_ibfk_2` FOREIGN KEY (`kode_kartu`) REFERENCES `tb_kartu` (`kode_kartu`);
+ADD CONSTRAINT `tb_deck_ibfk_2` FOREIGN KEY (`kode_kartu`) REFERENCES `tb_kartu` (`kode_kartu`),
+ADD CONSTRAINT `tb_deck_ibfk_3` FOREIGN KEY (`id_user`) REFERENCES `tb_user` (`id_user`);
 
 --
 -- Constraints for table `tb_winrate`

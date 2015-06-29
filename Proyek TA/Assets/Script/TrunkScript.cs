@@ -42,6 +42,8 @@ public class TrunkScript : MonoBehaviour  {
 			scriptCard.kode = N["kode_kartu"];
 			scriptCard.nama = N["nama"];
 			scriptCard.attack = N["attack"].AsInt;
+			scriptCard.defend = N["defend"].AsInt;
+			scriptCard.heal = N["heal"].AsInt;
 			scriptCard.cost = N["cost"].AsInt;
 			scriptCard.warna = N["warna"];
 			scriptCard.img = N["image"];

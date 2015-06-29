@@ -43,6 +43,8 @@ public class DeckScript : MonoBehaviour {
 		scriptCard.kode = jsonNode[drawIndex]["kode_kartu"];
 		scriptCard.nama = jsonNode[drawIndex]["nama"];
 		scriptCard.attack = jsonNode[drawIndex]["attack"].AsInt;
+		scriptCard.defend = jsonNode[drawIndex]["defend"].AsInt;
+		scriptCard.heal = jsonNode[drawIndex]["heal"].AsInt;
 		scriptCard.cost = jsonNode[drawIndex]["cost"].AsInt;
 		scriptCard.warna = jsonNode[drawIndex]["warna"];
 		scriptCard.img = jsonNode[drawIndex]["image"];

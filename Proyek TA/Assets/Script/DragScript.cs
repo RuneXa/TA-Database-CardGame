@@ -93,7 +93,18 @@ public class DragScript : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
 				Text descTxt = GameObject.Find ("Canvas").transform.Find("CardDetail").FindChild("CardDesc").GetComponent<Text>();
 				CardScript detailCard = this.GetComponent<CardScript>() as CardScript;
 				nameTxt.text = detailCard.nama;
-				descTxt.text = ("Attack\t= " + detailCard.attack + "\nCost\t= " + detailCard.cost) ;
+				if(detailCard.warna == "red")
+				{
+					descTxt.text = ("Attack\t= " + detailCard.attack + "\nCost\t= " + detailCard.cost) ;
+				}
+				if(detailCard.warna == "blue")
+				{
+					descTxt.text = ("Defend\t= " + detailCard.defend + "\nCost\t= " + detailCard.cost) ;
+				}
+				if(detailCard.warna == "green")
+				{
+					descTxt.text = ("Heal\t= " + detailCard.heal + "\nCost\t= " + detailCard.cost) ;
+				}
 			}
 		}
 	}
