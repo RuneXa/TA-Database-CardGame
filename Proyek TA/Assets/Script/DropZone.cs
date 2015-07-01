@@ -31,7 +31,7 @@ public class DropZone : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
 	public void OnDrop(PointerEventData eventData) {
 
 		DragScript d = eventData.pointerDrag.GetComponent<DragScript>();
-		if(this.name == "Field" && this.transform.childCount > 3)
+		if((this.name == "Field" || this.name == "RField") && this.transform.childCount > 3)
 		{
 
 		}

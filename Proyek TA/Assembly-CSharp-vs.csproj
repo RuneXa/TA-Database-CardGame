@@ -62,6 +62,7 @@
      <Compile Include="Assets\Script\ResolveScript.cs" />
      <Compile Include="Assets\Script\ScrollRectCustom.cs" />
      <Compile Include="Assets\Script\SimpleJSON.cs" />
+     <Compile Include="Assets\Script\SplashScreen.cs" />
      <Compile Include="Assets\Script\SubmitScript.cs" />
      <Compile Include="Assets\Script\TrunkScript.cs" />
      <Compile Include="Assets\Script\TurnHandlerScript.cs" />

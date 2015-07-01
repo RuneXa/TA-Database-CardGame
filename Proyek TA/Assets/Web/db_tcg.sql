@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 29, 2015 at 12:45 PM
+-- Generation Time: Jul 01, 2015 at 01:52 PM
 -- Server version: 5.6.21
 -- PHP Version: 5.6.3
 
@@ -61,18 +61,6 @@ CREATE TABLE IF NOT EXISTS `tb_deck` (
 --
 
 INSERT INTO `tb_deck` (`id_user`, `kode_kartu`) VALUES
-('1', 1),
-('1', 1),
-('1', 1),
-('1', 1),
-('1', 1),
-('1', 2),
-('1', 2),
-('1', 2),
-('1', 2),
-('1', 3),
-('1', 3),
-('1', 3),
 ('2', 1),
 ('2', 1),
 ('2', 1),
@@ -88,7 +76,72 @@ INSERT INTO `tb_deck` (`id_user`, `kode_kartu`) VALUES
 ('2', 4),
 ('2', 4),
 ('2', 4),
-('2', 4);
+('2', 4),
+('1', 1),
+('1', 1),
+('1', 1),
+('1', 1),
+('1', 1),
+('1', 1),
+('1', 1),
+('1', 2),
+('1', 2),
+('1', 2),
+('1', 2),
+('1', 2),
+('1', 3),
+('1', 3),
+('filbert', 1),
+('filbert', 1),
+('filbert', 1),
+('filbert', 1),
+('filbert', 1),
+('filbert', 1),
+('filbert', 1),
+('filbert', 1),
+('filbert', 1),
+('filbert', 1),
+('filbert', 1),
+('filbert', 2),
+('filbert', 2),
+('filbert', 2),
+('filbert', 2),
+('filbert', 2),
+('filbert', 2),
+('filbert', 2),
+('filbert', 3),
+('filbert', 3),
+('filbert', 3),
+('alvin', 1),
+('alvin', 1),
+('alvin', 1),
+('alvin', 1),
+('alvin', 1),
+('alvin', 1),
+('alvin', 1),
+('alvin', 2),
+('alvin', 2),
+('alvin', 2),
+('alvin', 3),
+('alvin', 3),
+('alvin', 3),
+('alvin', 3),
+('alvin', 4),
+('test', 1),
+('test', 1),
+('test', 1),
+('test', 1),
+('test', 1),
+('test', 2),
+('test', 2),
+('test', 2),
+('test', 2),
+('test', 2),
+('test', 3),
+('test', 3),
+('test', 3),
+('test', 3),
+('test', 3);
 
 -- --------------------------------------------------------
 
@@ -138,7 +191,14 @@ CREATE TABLE IF NOT EXISTS `tb_user` (
 INSERT INTO `tb_user` (`id_user`, `password`, `nama`, `exp`) VALUES
 ('1', '123456', 'player', 50),
 ('2', '0987654', 'Bukan Richie', 0),
-('3', '987654', 'Bukan Evans', 0);
+('3', '987654', 'Bukan Evans', 0),
+('alvin', 'bukanalvin', 'Katanya sih alvin', 0),
+('cobalagi', 'kurangberuntung', 'yaaah', 0),
+('filbert', 'bukanfilbert', 'Katanya sih Filbert', 0),
+('tes', 'aaa', 'bbb', 0),
+('test', 'baru', 'uji', 0),
+('uji2', 'ujicoba', 'test', 0),
+('uji4', 'coba', 'test', 0);
 
 -- --------------------------------------------------------
 

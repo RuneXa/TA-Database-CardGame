@@ -118,6 +118,11 @@ public class TurnHandlerScript : MonoBehaviour {
 		jumlahHeal = 0;
 		jumlahRsc = 0;
 
+		foreach(Transform cardInField in GameObject.Find("RField").transform)
+		{
+			playerResources += cardInField.GetComponent<CardScript>().cost;
+		}
+
 		foreach(Transform cardInField in GameObject.Find("Field").transform)
 		{
 			jumlahAtk += cardInField.GetComponent<CardScript>().attack;
@@ -134,6 +139,11 @@ public class TurnHandlerScript : MonoBehaviour {
 			editParamValue();
 
 			Debug.Log ("Jumlah serangan : "+jumlahAtk+"\nNyawa Musuh : "+enemyData.health); // hp musuh -= jumlahAtk
+
+			while(GameObject.Find ("RField").transform.childCount > 0){
+				GameObject.Find ("RField").transform.GetChild(0).SetParent(GameObject.Find ("RField").transform.parent.FindChild("Graveyard"));
+				yield return new WaitForSeconds(0.2f);
+			}
 
 			while(GameObject.Find ("Field").transform.childCount > 0){
 				GameObject.Find ("Field").transform.GetChild(0).SetParent(GameObject.Find ("Field").transform.parent.FindChild("Graveyard"));
