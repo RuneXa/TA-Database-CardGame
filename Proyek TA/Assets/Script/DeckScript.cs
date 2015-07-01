@@ -68,7 +68,7 @@ public class DeckScript : MonoBehaviour {
 		 
 		 
 		//postData.AddField ("query", "select * from tb_kartu");
-		postData.AddField ("query", "select * from tb_deck natural join tb_kartu where id_user = " + userManager.idUser + " order by rand()");
+		postData.AddField ("query", "select * from tb_deck natural join tb_kartu where id_user = '" + userManager.idUser + "' order by rand()");
 
 		WWW www = new WWW (userManager.phpPath,postData); //ganti path ke php-nya kalo perlu
 		yield return www.isDone;
