@@ -21,16 +21,25 @@ public class DeckScript : MonoBehaviour {
 	
 	public void Draw () {
 
-		if(drawIndex < jsonNode.Count && GameObject.Find("Hand").transform.childCount < 10 ){
-			InstantiateCard();
-			drawIndex++;
+		if(jsonNode != null){
+
+			if(drawIndex < jsonNode.Count && GameObject.Find("Hand").transform.childCount < 10 ){
+				InstantiateCard();
+				drawIndex++;
+			}
+			else if(GameObject.Find("Hand").transform.childCount == 0) //kalau pas draw, terus kartunya abis
+			{ 
+				GameObject.Find("TurnManager").GetComponent<TurnHandlerScript>().turnPhase = TurnHandlerScript.Turn.LOSE;
+				GameObject.Find("TurnManager").GetComponent<TurnHandlerScript>().resolvePhase();
+			}
+		
 		}
-		else if(GameObject.Find("Hand").transform.childCount == 0) //kalau pas draw, terus kartunya abis
-		{ 
+		else
+		{
+			Debug.Log ("Deck Kosong");
 			GameObject.Find("TurnManager").GetComponent<TurnHandlerScript>().turnPhase = TurnHandlerScript.Turn.LOSE;
 			GameObject.Find("TurnManager").GetComponent<TurnHandlerScript>().resolvePhase();
 		}
-
 	}
 
 	public void InstantiateCard(){
