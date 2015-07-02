@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 29, 2015 at 12:45 PM
+-- Generation Time: Jul 02, 2015 at 02:06 AM
 -- Server version: 5.6.21
 -- PHP Version: 5.6.3
 
@@ -19,8 +19,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `db_tcg`
 --
-CREATE DATABASE IF NOT EXISTS `db_tcg` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
-USE `db_tcg`;
 
 -- --------------------------------------------------------
 
@@ -88,7 +86,62 @@ INSERT INTO `tb_deck` (`id_user`, `kode_kartu`) VALUES
 ('2', 4),
 ('2', 4),
 ('2', 4),
-('2', 4);
+('2', 4),
+('ujicoba', 1),
+('ujicoba', 1),
+('ujicoba', 1),
+('ujicoba', 1),
+('ujicoba', 1),
+('ujicoba', 1),
+('ujicoba', 1),
+('ujicoba', 1),
+('ujicoba', 1),
+('ujicoba', 1),
+('ujicoba', 1),
+('ujicoba', 3),
+('ujicoba', 3),
+('ujicoba', 3),
+('ujicoba', 3),
+('6', 1),
+('6', 1),
+('6', 1),
+('6', 1),
+('6', 1),
+('6', 1),
+('6', 1),
+('6', 1),
+('6', 1),
+('6', 1),
+('6', 2),
+('6', 2),
+('6', 2),
+('6', 2),
+('6', 2),
+('6', 2),
+('6', 2),
+('6', 2),
+('6', 2),
+('6', 2),
+('6', 3),
+('6', 3),
+('6', 3),
+('6', 3),
+('6', 3),
+('6', 3),
+('6', 3),
+('6', 3),
+('6', 3),
+('6', 3),
+('6', 4),
+('6', 4),
+('6', 4),
+('6', 4),
+('6', 4),
+('6', 4),
+('6', 4),
+('6', 4),
+('6', 4),
+('6', 4);
 
 -- --------------------------------------------------------
 
@@ -138,7 +191,18 @@ CREATE TABLE IF NOT EXISTS `tb_user` (
 INSERT INTO `tb_user` (`id_user`, `password`, `nama`, `exp`) VALUES
 ('1', '123456', 'player', 50),
 ('2', '0987654', 'Bukan Richie', 0),
-('3', '987654', 'Bukan Evans', 0);
+('3', '987654', 'Bukan Evans', 0),
+('6', '2', 'tes', 0),
+('Ujicoba', '1234', 'Ujicoba', 0);
+
+--
+-- Triggers `tb_user`
+--
+DELIMITER //
+CREATE TRIGGER `ins_deck` AFTER INSERT ON `tb_user`
+ FOR EACH ROW Insert INTO tb_winrate (id_user,win,loss) Values(CONCAT(NEW.id_user),0,0)
+//
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -162,6 +226,15 @@ INSERT INTO `tb_winrate` (`id_user`, `win`, `loss`) VALUES
 ('3', 5, 7);
 
 --
+-- Triggers `tb_winrate`
+--
+DELIMITER //
+CREATE TRIGGER `ins_deck1` AFTER INSERT ON `tb_winrate`
+ FOR EACH ROW Insert INTO tb_deck (id_user,kode_kartu) Values(CONCAT(NEW.id_user),1),(CONCAT(NEW.id_user),1),(CONCAT(NEW.id_user),1),(CONCAT(NEW.id_user),1),(CONCAT(NEW.id_user),1),(CONCAT(NEW.id_user),1),(CONCAT(NEW.id_user),1),(CONCAT(NEW.id_user),1),(CONCAT(NEW.id_user),1),(CONCAT(NEW.id_user),1),(CONCAT(NEW.id_user),2),(CONCAT(NEW.id_user),2),(CONCAT(NEW.id_user),2),(CONCAT(NEW.id_user),2),(CONCAT(NEW.id_user),2),(CONCAT(NEW.id_user),2),(CONCAT(NEW.id_user),2),(CONCAT(NEW.id_user),2),(CONCAT(NEW.id_user),2),(CONCAT(NEW.id_user),2),(CONCAT(NEW.id_user),3),(CONCAT(NEW.id_user),3),(CONCAT(NEW.id_user),3),(CONCAT(NEW.id_user),3),(CONCAT(NEW.id_user),3),(CONCAT(NEW.id_user),3),(CONCAT(NEW.id_user),3),(CONCAT(NEW.id_user),3),(CONCAT(NEW.id_user),3),(CONCAT(NEW.id_user),3),(CONCAT(NEW.id_user),4),(CONCAT(NEW.id_user),4),(CONCAT(NEW.id_user),4),(CONCAT(NEW.id_user),4),(CONCAT(NEW.id_user),4),(CONCAT(NEW.id_user),4),(CONCAT(NEW.id_user),4),(CONCAT(NEW.id_user),4),(CONCAT(NEW.id_user),4),(CONCAT(NEW.id_user),4)
+//
+DELIMITER ;
+
+--
 -- Indexes for dumped tables
 --
 
@@ -181,13 +254,13 @@ ALTER TABLE `tb_deck`
 -- Indexes for table `tb_kartu`
 --
 ALTER TABLE `tb_kartu`
- ADD UNIQUE KEY `kode_kartu` (`kode_kartu`), ADD KEY `kode_kartu_2` (`kode_kartu`);
+ ADD PRIMARY KEY (`kode_kartu`), ADD UNIQUE KEY `kode_kartu` (`kode_kartu`), ADD KEY `kode_kartu_2` (`kode_kartu`);
 
 --
 -- Indexes for table `tb_user`
 --
 ALTER TABLE `tb_user`
- ADD UNIQUE KEY `id_user` (`id_user`), ADD UNIQUE KEY `passworrd` (`password`);
+ ADD PRIMARY KEY (`id_user`), ADD UNIQUE KEY `id_user` (`id_user`), ADD UNIQUE KEY `passworrd` (`password`);
 
 --
 -- Indexes for table `tb_winrate`
