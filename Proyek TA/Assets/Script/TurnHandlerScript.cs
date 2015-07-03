@@ -223,6 +223,8 @@ public class TurnHandlerScript : MonoBehaviour {
 		string jsonString="";
 		WWWForm postData= new WWWForm();
 
+		postData.AddField("multi","1");
+
 		postData.AddField ("query", 
 		                   "update tb_winrate set win = win + 1 where id_user = '" + userData.idUser + "'; " +
 		                   "update tb_user set exp = exp + (select expVar from tb_datamusuh where id = '" + enemyData.kode + "') where id_user = '" + userData.idUser + "';" );

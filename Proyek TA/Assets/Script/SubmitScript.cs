@@ -19,6 +19,7 @@ public class SubmitScript : MonoBehaviour {
 
 	IEnumerator fetchUrlSubmitKartu()
 	{
+		GameObject.Find ("Canvas").transform.Find("saveTxt").gameObject.SetActive(true);
 		string query="";
 		WWWForm postData= new WWWForm();
 		 
@@ -39,6 +40,7 @@ public class SubmitScript : MonoBehaviour {
 		
 		WWW www = new WWW (userManager.phpPath,postData); //ganti path ke php-nya kalo perlu
 		yield return www.isDone;
+		yield return new WaitForSeconds(2f);
 		Application.LoadLevel("MainMenu");
 	}
 
