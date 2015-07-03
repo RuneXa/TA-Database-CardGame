@@ -152,6 +152,8 @@ public class TurnHandlerScript : MonoBehaviour {
 
 			if(enemyData.health <= 0)
 			{
+				enemyData.health = 0;
+				editParamValue();
 				turnPhase = Turn.WIN;
 				resolvePhase();
 			}
@@ -195,6 +197,8 @@ public class TurnHandlerScript : MonoBehaviour {
 
 		if(playerHealth <= 0)
 		{
+			playerHealth = 0;
+			editParamValue();
 			turnPhase = Turn.LOSE;
 			resolvePhase();
 		}
@@ -220,8 +224,8 @@ public class TurnHandlerScript : MonoBehaviour {
 		WWWForm postData= new WWWForm();
 
 		postData.AddField ("query", 
-		                   "update tb_winrate set win =+ 1 where id_user = '" + userData.idUser + "'; " +
-		                   "update tb_user set exp =+ (select expVar from tb_datamusuh where id = '" + enemyData.kode + "') where id_user = '" + userData.idUser + "';" );
+		                   "update tb_winrate set win = win + 1 where id_user = '" + userData.idUser + "'; " +
+		                   "update tb_user set exp = exp + (select expVar from tb_datamusuh where id = '" + enemyData.kode + "') where id_user = '" + userData.idUser + "';" );
 		
 		WWW www = new WWW (userData.phpPath,postData);
 		yield return www.isDone;
@@ -240,7 +244,7 @@ public class TurnHandlerScript : MonoBehaviour {
 		string jsonString="";
 		WWWForm postData= new WWWForm();
 		
-		postData.AddField ("query", "update tb_winrate set loss =+ 1 where id_user = '" + userData.idUser + "'");
+		postData.AddField ("query", "update tb_winrate set loss = loss + 1 where id_user = '" + userData.idUser + "'");
 
 		WWW www = new WWW (userData.phpPath,postData);
 		yield return www.isDone;

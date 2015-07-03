@@ -37,7 +37,7 @@ public class ReportScript : MonoBehaviour {
 			string jsonString="";
 			WWWForm postData= new WWWForm();
 
-			postData.AddField ("query", "select id_user, nama , win/(win+loss)*100 as winrate from tb_winrate natural join tb_user");
+			postData.AddField ("query", "select id_user, nama , (win/(win+loss))*100 as winrate from tb_winrate natural join tb_user");
 			
 			WWW www = new WWW (userData.phpPath,postData); //ganti path ke php-nya kalo perlu
 			yield return www.isDone;
