@@ -23,8 +23,7 @@ public class EnemyScript : MonoBehaviour {
 	{
 		string jsonString="";
 		WWWForm postData= new WWWForm();
-		 
-		 
+		 		 
 		postData.AddField ("query", "select * from tb_datamusuh order by rand() limit 1");
 		
 		WWW www = new WWW (userManager.phpPath,postData); //ganti path ke php-nya kalo perlu

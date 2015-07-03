@@ -68,9 +68,8 @@ public class CreateIDScript : MonoBehaviour {
 
 		string jsonString="";
 		WWWForm postData= new WWWForm();
-		postData.AddField ("query", "insert into tb_user (id_user,password,nama,exp) values ('"+userManager.idUser+"','"+userManager.password+"','"+userManager.nama_user+"','0');" +
-		                   "insert into tb_winrate (id_user,win,loss) values ('"+userManager.idUser+",'0','0');");
-		
+		postData.AddField ("query", "insert into tb_user (id_user,password,nama,exp) values ('"+userManager.idUser+"','"+userManager.password+"','"+userManager.nama_user+"','0');");
+
 		WWW www = new WWW (userManager.phpPath,postData); //ganti path ke php-nya kalo perlu
 		yield return www.isDone;
 		for (int i=0; i<www.bytesDownloaded; i++) {
