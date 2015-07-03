@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 02, 2015 at 02:06 AM
+-- Generation Time: Jul 03, 2015 at 10:34 AM
 -- Server version: 5.6.21
 -- PHP Version: 5.6.3
 
@@ -19,6 +19,8 @@ SET time_zone = "+00:00";
 --
 -- Database: `db_tcg`
 --
+CREATE DATABASE IF NOT EXISTS `db_tcg` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE `db_tcg`;
 
 -- --------------------------------------------------------
 
@@ -26,22 +28,24 @@ SET time_zone = "+00:00";
 -- Table structure for table `tb_datamusuh`
 --
 
+DROP TABLE IF EXISTS `tb_datamusuh`;
 CREATE TABLE IF NOT EXISTS `tb_datamusuh` (
 `id` int(11) NOT NULL,
   `nama` varchar(40) NOT NULL,
   `health` int(11) NOT NULL,
   `attack` int(11) NOT NULL,
-  `desc` text,
   `expVar` int(20) NOT NULL,
   `image` varchar(20) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tb_datamusuh`
 --
 
-INSERT INTO `tb_datamusuh` (`id`, `nama`, `health`, `attack`, `desc`, `expVar`, `image`) VALUES
-(1, 'Tempura', 100, 10, 'Merupakan monster makanan yang bisa membuat lawan lapar dan tidak punya tenaga untuk melanjutkan permainan', 50, 'musuh1');
+INSERT INTO `tb_datamusuh` (`id`, `nama`, `health`, `attack`, `expVar`, `image`) VALUES
+(1, 'Arumpmet', 70, 13, 30, 'musuh1'),
+(2, 'Burbro', 100, 20, 70, 'musuh2'),
+(3, 'RIPinpeperroni', 300, 5, 70, 'musuh3');
 
 -- --------------------------------------------------------
 
@@ -49,6 +53,7 @@ INSERT INTO `tb_datamusuh` (`id`, `nama`, `health`, `attack`, `desc`, `expVar`, 
 -- Table structure for table `tb_deck`
 --
 
+DROP TABLE IF EXISTS `tb_deck`;
 CREATE TABLE IF NOT EXISTS `tb_deck` (
   `id_user` varchar(20) NOT NULL,
   `kode_kartu` int(11) NOT NULL
@@ -59,89 +64,22 @@ CREATE TABLE IF NOT EXISTS `tb_deck` (
 --
 
 INSERT INTO `tb_deck` (`id_user`, `kode_kartu`) VALUES
-('1', 1),
-('1', 1),
-('1', 1),
-('1', 1),
-('1', 1),
-('1', 2),
-('1', 2),
-('1', 2),
-('1', 2),
-('1', 3),
-('1', 3),
-('1', 3),
-('2', 1),
-('2', 1),
-('2', 1),
-('2', 1),
-('2', 2),
-('2', 2),
-('2', 2),
-('2', 2),
-('2', 2),
-('2', 2),
-('2', 2),
-('2', 3),
-('2', 4),
-('2', 4),
-('2', 4),
-('2', 4),
-('ujicoba', 1),
-('ujicoba', 1),
-('ujicoba', 1),
-('ujicoba', 1),
-('ujicoba', 1),
-('ujicoba', 1),
-('ujicoba', 1),
-('ujicoba', 1),
-('ujicoba', 1),
-('ujicoba', 1),
-('ujicoba', 1),
-('ujicoba', 3),
-('ujicoba', 3),
-('ujicoba', 3),
-('ujicoba', 3),
-('6', 1),
-('6', 1),
-('6', 1),
-('6', 1),
-('6', 1),
-('6', 1),
-('6', 1),
-('6', 1),
-('6', 1),
-('6', 1),
-('6', 2),
-('6', 2),
-('6', 2),
-('6', 2),
-('6', 2),
-('6', 2),
-('6', 2),
-('6', 2),
-('6', 2),
-('6', 2),
-('6', 3),
-('6', 3),
-('6', 3),
-('6', 3),
-('6', 3),
-('6', 3),
-('6', 3),
-('6', 3),
-('6', 3),
-('6', 3),
-('6', 4),
-('6', 4),
-('6', 4),
-('6', 4),
-('6', 4),
-('6', 4),
-('6', 4),
-('6', 4),
-('6', 4),
-('6', 4);
+('test', 1),
+('test', 1),
+('test', 1),
+('test', 1),
+('test', 1),
+('test', 1),
+('test', 1),
+('test', 1),
+('test', 1),
+('test', 2),
+('test', 2),
+('test', 2),
+('test', 7),
+('test', 7),
+('test', 7),
+('test', 7);
 
 -- --------------------------------------------------------
 
@@ -149,27 +87,39 @@ INSERT INTO `tb_deck` (`id_user`, `kode_kartu`) VALUES
 -- Table structure for table `tb_kartu`
 --
 
+DROP TABLE IF EXISTS `tb_kartu`;
 CREATE TABLE IF NOT EXISTS `tb_kartu` (
 `kode_kartu` int(11) NOT NULL,
   `nama` varchar(30) NOT NULL,
-  `efek` text NOT NULL,
   `warna` varchar(20) NOT NULL,
   `attack` int(11) NOT NULL DEFAULT '0',
   `defend` int(11) NOT NULL DEFAULT '0',
   `heal` int(11) NOT NULL DEFAULT '0',
   `cost` int(11) NOT NULL DEFAULT '0',
   `image` varchar(20) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tb_kartu`
 --
 
-INSERT INTO `tb_kartu` (`kode_kartu`, `nama`, `efek`, `warna`, `attack`, `defend`, `heal`, `cost`, `image`) VALUES
-(1, 'Api di lubang', 'ya gitu lah', 'red', 10, 0, 0, 3, 'atk0'),
-(2, 'katanya sih batu', 'katanya', 'blue', 0, 5, 0, 2, 'def0'),
-(3, 'obat ijo', 'katanya sih pait', 'green', 0, 0, 10, 5, 'heal0'),
-(4, 'air panas', 'kalo disirem lumayan', 'red', 8, 0, 0, 4, 'atk1');
+INSERT INTO `tb_kartu` (`kode_kartu`, `nama`, `warna`, `attack`, `defend`, `heal`, `cost`, `image`) VALUES
+(1, 'Pedang Api', 'red', 5, 0, 0, 2, 'atk0'),
+(2, 'Kapak Besi', 'red', 17, 0, 0, 5, 'atk1'),
+(3, 'Pistol Biasa', 'red', 3, 0, 0, 1, 'atk2'),
+(4, 'Tombak Roda', 'red', 8, 0, 0, 3, 'atk3'),
+(5, 'Pedang Kait', 'red', 10, 0, 0, 4, 'atk4'),
+(6, 'Dua Tongkat', 'red', 2, 0, 0, 0, 'atk5'),
+(7, 'Perisai Link', 'blue', 0, 10, 0, 2, 'def0'),
+(8, 'Perisai Merah Biru', 'blue', 0, 5, 0, 1, 'def1'),
+(9, 'Perisai P', 'blue', 0, 15, 0, 7, 'def2'),
+(10, 'Perisai Rata', 'blue', 0, 7, 0, 2, 'def3'),
+(11, 'Perisai Amerika', 'blue', 0, 20, 0, 10, 'def4'),
+(12, 'Medicaid', 'green', 0, 0, 40, 10, 'heal0'),
+(13, 'Ijo ijo', 'green', 0, 0, 5, 0, 'heal1'),
+(14, 'Pot 1', 'green', 0, 0, 15, 2, 'heal2'),
+(15, 'Pot 2', 'green', 0, 0, 17, 3, 'heal3'),
+(16, 'Pot 3', 'green', 0, 0, 20, 4, 'heal4');
 
 -- --------------------------------------------------------
 
@@ -177,6 +127,7 @@ INSERT INTO `tb_kartu` (`kode_kartu`, `nama`, `efek`, `warna`, `attack`, `defend
 -- Table structure for table `tb_user`
 --
 
+DROP TABLE IF EXISTS `tb_user`;
 CREATE TABLE IF NOT EXISTS `tb_user` (
   `id_user` varchar(20) NOT NULL,
   `password` varchar(16) NOT NULL,
@@ -189,15 +140,12 @@ CREATE TABLE IF NOT EXISTS `tb_user` (
 --
 
 INSERT INTO `tb_user` (`id_user`, `password`, `nama`, `exp`) VALUES
-('1', '123456', 'player', 50),
-('2', '0987654', 'Bukan Richie', 0),
-('3', '987654', 'Bukan Evans', 0),
-('6', '2', 'tes', 0),
-('Ujicoba', '1234', 'Ujicoba', 0);
+('test', 'test', 'test', 0);
 
 --
 -- Triggers `tb_user`
 --
+DROP TRIGGER IF EXISTS `ins_deck`;
 DELIMITER //
 CREATE TRIGGER `ins_deck` AFTER INSERT ON `tb_user`
  FOR EACH ROW Insert INTO tb_winrate (id_user,win,loss) Values(CONCAT(NEW.id_user),0,0)
@@ -210,6 +158,7 @@ DELIMITER ;
 -- Table structure for table `tb_winrate`
 --
 
+DROP TABLE IF EXISTS `tb_winrate`;
 CREATE TABLE IF NOT EXISTS `tb_winrate` (
   `id_user` varchar(20) NOT NULL,
   `win` int(11) NOT NULL,
@@ -221,16 +170,15 @@ CREATE TABLE IF NOT EXISTS `tb_winrate` (
 --
 
 INSERT INTO `tb_winrate` (`id_user`, `win`, `loss`) VALUES
-('1', 1, 1),
-('2', 1, 1),
-('3', 5, 7);
+('test', 0, 1);
 
 --
 -- Triggers `tb_winrate`
 --
+DROP TRIGGER IF EXISTS `ins_deck1`;
 DELIMITER //
 CREATE TRIGGER `ins_deck1` AFTER INSERT ON `tb_winrate`
- FOR EACH ROW Insert INTO tb_deck (id_user,kode_kartu) Values(CONCAT(NEW.id_user),1),(CONCAT(NEW.id_user),1),(CONCAT(NEW.id_user),1),(CONCAT(NEW.id_user),1),(CONCAT(NEW.id_user),1),(CONCAT(NEW.id_user),1),(CONCAT(NEW.id_user),1),(CONCAT(NEW.id_user),1),(CONCAT(NEW.id_user),1),(CONCAT(NEW.id_user),1),(CONCAT(NEW.id_user),2),(CONCAT(NEW.id_user),2),(CONCAT(NEW.id_user),2),(CONCAT(NEW.id_user),2),(CONCAT(NEW.id_user),2),(CONCAT(NEW.id_user),2),(CONCAT(NEW.id_user),2),(CONCAT(NEW.id_user),2),(CONCAT(NEW.id_user),2),(CONCAT(NEW.id_user),2),(CONCAT(NEW.id_user),3),(CONCAT(NEW.id_user),3),(CONCAT(NEW.id_user),3),(CONCAT(NEW.id_user),3),(CONCAT(NEW.id_user),3),(CONCAT(NEW.id_user),3),(CONCAT(NEW.id_user),3),(CONCAT(NEW.id_user),3),(CONCAT(NEW.id_user),3),(CONCAT(NEW.id_user),3),(CONCAT(NEW.id_user),4),(CONCAT(NEW.id_user),4),(CONCAT(NEW.id_user),4),(CONCAT(NEW.id_user),4),(CONCAT(NEW.id_user),4),(CONCAT(NEW.id_user),4),(CONCAT(NEW.id_user),4),(CONCAT(NEW.id_user),4),(CONCAT(NEW.id_user),4),(CONCAT(NEW.id_user),4)
+ FOR EACH ROW Insert INTO tb_deck (id_user,kode_kartu) Values(CONCAT(NEW.id_user),1),(CONCAT(NEW.id_user),1),(CONCAT(NEW.id_user),1),(CONCAT(NEW.id_user),1),(CONCAT(NEW.id_user),1),(CONCAT(NEW.id_user),1),(CONCAT(NEW.id_user),2),(CONCAT(NEW.id_user),2),(CONCAT(NEW.id_user),2),(CONCAT(NEW.id_user),1),(CONCAT(NEW.id_user),1),(CONCAT(NEW.id_user),1),(CONCAT(NEW.id_user),7),(CONCAT(NEW.id_user),7),(CONCAT(NEW.id_user),7),(CONCAT(NEW.id_user),7),(CONCAT(NEW.id_user),7),(CONCAT(NEW.id_user),7),(CONCAT(NEW.id_user),7),(CONCAT(NEW.id_user),7),(CONCAT(NEW.id_user),7),(CONCAT(NEW.id_user),7),(CONCAT(NEW.id_user),7),(CONCAT(NEW.id_user),7),(CONCAT(NEW.id_user),13),(CONCAT(NEW.id_user),13),(CONCAT(NEW.id_user),13),(CONCAT(NEW.id_user),13),(CONCAT(NEW.id_user),13),(CONCAT(NEW.id_user),13),(CONCAT(NEW.id_user),13),(CONCAT(NEW.id_user),13)
 //
 DELIMITER ;
 
@@ -254,13 +202,13 @@ ALTER TABLE `tb_deck`
 -- Indexes for table `tb_kartu`
 --
 ALTER TABLE `tb_kartu`
- ADD PRIMARY KEY (`kode_kartu`), ADD UNIQUE KEY `kode_kartu` (`kode_kartu`), ADD KEY `kode_kartu_2` (`kode_kartu`);
+ ADD UNIQUE KEY `kode_kartu` (`kode_kartu`), ADD KEY `kode_kartu_2` (`kode_kartu`);
 
 --
 -- Indexes for table `tb_user`
 --
 ALTER TABLE `tb_user`
- ADD PRIMARY KEY (`id_user`), ADD UNIQUE KEY `id_user` (`id_user`), ADD UNIQUE KEY `passworrd` (`password`);
+ ADD UNIQUE KEY `id_user` (`id_user`), ADD UNIQUE KEY `passworrd` (`password`);
 
 --
 -- Indexes for table `tb_winrate`
@@ -276,12 +224,12 @@ ALTER TABLE `tb_winrate`
 -- AUTO_INCREMENT for table `tb_datamusuh`
 --
 ALTER TABLE `tb_datamusuh`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `tb_kartu`
 --
 ALTER TABLE `tb_kartu`
-MODIFY `kode_kartu` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
+MODIFY `kode_kartu` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=17;
 --
 -- Constraints for dumped tables
 --
